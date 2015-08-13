@@ -1,12 +1,14 @@
 package models;
 
+import com.avaje.ebean.Model;
+
 import javax.persistence.*;
-import javax.util.dd
+
 @Entity
 public class Estacion {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Long id;
 
     public int capacidad;
@@ -16,4 +18,7 @@ public class Estacion {
     public int longitud;
 
     public int disponibles;
+
+    public static Model.Finder<Long,Estacion> find = new Model.Finder<Long, Estacion>(Estacion.class);
+
 }

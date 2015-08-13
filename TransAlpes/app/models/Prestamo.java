@@ -14,4 +14,7 @@ public class Prestamo
 
     public Date linea;
 
+    public static Model.Finder<Long,Prestamo> find = new Model.Finder<Long, Prestamo>(Prestamo.class);
+
+
 }

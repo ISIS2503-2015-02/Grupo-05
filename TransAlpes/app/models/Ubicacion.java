@@ -3,6 +3,11 @@ package models;
 /**
  * Created by la.cortes10 on 12/08/2015.
  */
+
+import com.avaje.ebean.Model;
+
+import javax.persistence.*;
+
 @Entity
 public class Ubicacion {
 
@@ -20,5 +25,5 @@ public class Ubicacion {
 
     public int kilometraje;
 
-    public static Finder<Long,Ubicacion> find = new Finder<Long, Ubicacion>(Ubicacion.class);
+    public static Model.Finder<Long,Ubicacion> find = new Model.Finder<Long, Ubicacion>(Ubicacion.class);
 }
