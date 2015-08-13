@@ -22,4 +22,15 @@ public class VehiculoController extends Controller {
         return ok(json);
     }
 
+    @Transactional
+    public Result darVehiculo(Long id)
+    {
+
+        System.out.println("Recibido: idCliente="+id);
+
+        //TODO implementar
+
+        return ok("Ud ha solicitado el vehiculo: "+id);
+    }
+
 }

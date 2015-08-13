@@ -47,4 +47,19 @@ public class ClienteController extends Controller {
     }
 
    // devolverVcub(id: Long)
+   @Transactional
+   @BodyParser.Of(BodyParser.Json.class)
+   public Result devolverVcub(Long idCliente)
+   {
+
+       JsonNode json = request().body().asJson();
+       System.out.println("Recibido: idCliente="+idCliente+"\n"+json);
+
+       //TODO implementar
+
+       return ok("Ud ha devuelto el vcub con id="+json.get("vcub"));
+   }
+
+
+
 }
