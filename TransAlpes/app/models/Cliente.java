@@ -2,6 +2,7 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -16,6 +17,9 @@ public class Cliente extends Model{
     public int telefono;
 
     public String tarjetaBancaria;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<Reserva> reservas;
 
     public static Model.Finder<Long,Cliente> find = new Model.Finder<Long, Cliente>(Cliente.class);
 

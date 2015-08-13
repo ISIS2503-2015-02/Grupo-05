@@ -18,6 +18,12 @@ public class Reserva extends  Model{
 
     private Long fecha;
 
+    @ManyToOne
+    private Cliente cliente;
+
+    @ManyToOne
+    private Mobibus mobibus;
+
     public static Model.Finder<Long,Reserva> find = new Model.Finder<Long, Reserva>(Reserva.class);
 
 }

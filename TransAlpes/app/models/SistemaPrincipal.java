@@ -16,5 +16,9 @@ public class SistemaPrincipal {
 
     public String nombre;
 
+    //@OneToMany
     public List<Informe> informeList;
+
+    //@OneToMany(cascade = CascadeType.ALL)
+    public List<Vehiculo> vehiculos;
 }

@@ -3,6 +3,14 @@
 
 # --- !Ups
 
+create table cliente (
+  id                        bigint auto_increment not null,
+  name                      varchar(255),
+  telefono                  integer,
+  tarjeta_bancaria          varchar(255),
+  constraint pk_cliente primary key (id))
+;
+
 create table estacion (
   id                        bigint auto_increment not null,
   capacidad                 integer,
@@ -36,6 +44,8 @@ create table reserva (
   id                        bigint auto_increment not null,
   estado                    varchar(255),
   fecha                     bigint,
+  cliente_id                bigint,
+  mobibus_id                bigint,
   constraint pk_reserva primary key (id))
 ;
 
@@ -70,12 +80,18 @@ create table vehiculo (
 
 create sequence ubicacion_seq;
 
+alter table reserva add constraint fk_reserva_cliente_1 foreign key (cliente_id) references cliente (id) on delete restrict on update restrict;
+create index ix_reserva_cliente_1 on reserva (cliente_id);
+alter table reserva add constraint fk_reserva_mobibus_2 foreign key (mobibus_id) references vehiculo (id) on delete restrict on update restrict;
+create index ix_reserva_mobibus_2 on reserva (mobibus_id);
 
 
 
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;
+
+drop table if exists cliente;
 
 drop table if exists estacion;
 

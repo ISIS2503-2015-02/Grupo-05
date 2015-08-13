@@ -12,6 +12,8 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name="MOBIBUS_ID")
 public class Mobibus extends Vehiculo {
 
+    @OneToMany
+    public List<Reserva> reservas;
 
     public List listaEspera;
 
