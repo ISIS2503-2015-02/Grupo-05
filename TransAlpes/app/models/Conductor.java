@@ -9,7 +9,8 @@ import javax.persistence.Id;
 /**
  * Created by n.castro15 on 12/08/2015.
  */
-public class Conductor extends  Model{
+public class
+        Conductor extends  Model{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public long id;

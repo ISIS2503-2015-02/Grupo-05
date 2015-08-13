@@ -13,6 +13,7 @@ import java.util.List;
 
 import static play.libs.Json.*;
 
+@SuppressWarnings("ALL")
 public class Application extends Controller
 {
 
