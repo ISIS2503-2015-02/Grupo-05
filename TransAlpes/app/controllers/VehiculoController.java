@@ -33,4 +33,15 @@ public class VehiculoController extends Controller {
         return ok("Ud ha solicitado el vehiculo: "+id);
     }
 
+    @Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result agregarMobibus()
+    {
+        JsonNode json = request().body().asJson();
+        System.out.println("Agregando mobibus"+"\n"+json);
+
+        //TODO implementar
+
+        return ok("Ud ha agregado un mobibus: "+json);
+    }
 }
