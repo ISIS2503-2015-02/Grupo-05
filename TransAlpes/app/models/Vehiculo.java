@@ -25,6 +25,7 @@ public abstract class Vehiculo extends Model
 
     public String estado;
 
+
     public List<Ubicacion> posiciones;
 
 }
