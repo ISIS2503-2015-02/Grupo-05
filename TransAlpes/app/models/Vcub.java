@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Vcub extends Vehiculo{
 
 
-
+    private String color;
 
     public static Model.Finder<Long,Vcub> find = new Model.Finder<Long, Vcub>(Vcub.class);
 
