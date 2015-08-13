@@ -2,25 +2,20 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
 /**
- * Created by ss.salazar10 on 12/08/2015.
+ * Created by n.castro15 on 12/08/2015.
  */
-
-public abstract class Vehiculo
-{
-
+public class Conductor {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
-    private String tipo;
+    private String tipoTransporte;
 
-    private String estado;
+    public static Model.Finder<Long,Conductor> find = new Model.Finder<Long, Conductor>(Conductor.class);
 
 }

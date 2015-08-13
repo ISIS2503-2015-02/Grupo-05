@@ -2,13 +2,14 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Prestamo
 {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Long id;
 
     public Date linea;

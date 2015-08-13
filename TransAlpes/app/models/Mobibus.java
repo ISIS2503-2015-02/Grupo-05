@@ -1,16 +1,16 @@
 package models;
 
+import com.avaje.ebean.Model;
+
 import java.util.List;
+import javax.persistence.*;
 
 /**
  * Created by la.cortes10 on 12/08/2015.
  */
 @Entity
-public class Mobibus {
+public class Mobibus extends Vehiculo {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public Long id;
 
     public List listaEspera;
 
@@ -18,5 +18,5 @@ public class Mobibus {
 
     public int personasDiscapacitadas;
 
-    public static Finder<Long,Mobibus> find = new Finder<Long, Mobibus>(Mobibus.class);
+    public static Model.Finder<Long,Mobibus> find = new Model.Finder<Long, Mobibus>(Mobibus.class);
 }

@@ -2,18 +2,16 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 
 /**
  * Created by ai.mojica10
  */
 @Entity
-public class Tranvia
+public class Tranvia extends Vehiculo
 {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public Long id;
+
 
     public char linea;
 
