@@ -26,7 +26,11 @@ public abstract class Vehiculo extends Model
     public String estado;
 
 
-   // @OneToMany(cascade = CascadeType.ALL)
+   @OneToMany
     public List<Ubicacion> posiciones;
+
+
+
+
 
 }
