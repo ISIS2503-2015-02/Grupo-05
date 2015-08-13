@@ -5,7 +5,7 @@ import com.avaje.ebean.Model;
 import javax.persistence.*;
 
 @Entity
-public class openEstacion extends Model {
+public class Estacion extends Model {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
