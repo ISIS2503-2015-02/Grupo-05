@@ -9,6 +9,7 @@ import javax.persistence.*;
  * Created by la.cortes10 on 12/08/2015.
  */
 @Entity
+@PrimaryKeyJoinColumn(name="MOBIBUS_ID")
 public class Mobibus extends Vehiculo {
 
 

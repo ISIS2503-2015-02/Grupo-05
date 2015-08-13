@@ -3,6 +3,8 @@ package models;
 
 
 
+import com.avaje.ebean.Model;
+
 import java.util.List;
 import javax.persistence.*;
 /**

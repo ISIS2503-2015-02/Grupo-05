@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by n.castro15 on 12/08/2015.
  */
 @Entity
-public class Reserva {
+public class Reserva extends  Model{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;

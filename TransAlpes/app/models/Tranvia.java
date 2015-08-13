@@ -9,9 +9,9 @@ import javax.persistence.*;
  * Created by ai.mojica10
  */
 @Entity
+@PrimaryKeyJoinColumn(name="TRANVIA_ID")
 public class Tranvia extends Vehiculo
 {
-
 
     public char linea;
 

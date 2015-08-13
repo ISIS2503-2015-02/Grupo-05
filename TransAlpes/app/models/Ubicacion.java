@@ -9,7 +9,7 @@ import com.avaje.ebean.Model;
 import javax.persistence.*;
 
 @Entity
-public class Ubicacion {
+public class Ubicacion extends  Model {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

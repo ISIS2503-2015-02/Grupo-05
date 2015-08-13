@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Prestamo
+public class Prestamo extends  Model
 {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

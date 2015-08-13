@@ -5,7 +5,7 @@ import com.avaje.ebean.Model;
 import javax.persistence.*;
 
 @Entity
-public class Estacion {
+public class Estacion extends Model {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -13,9 +13,9 @@ public class Estacion {
 
     public int capacidad;
 
-    public int latitud;
+    public long latitud;
 
-    public int longitud;
+    public long longitud;
 
     public int disponibles;
 
