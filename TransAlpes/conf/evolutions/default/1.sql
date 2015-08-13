@@ -3,14 +3,6 @@
 
 # --- !Ups
 
-create table cliente (
-  id                        bigint auto_increment not null,
-  name                      varchar(255),
-  telefono                  integer,
-  tarjeta_bancaria          varchar(255),
-  constraint pk_cliente primary key (id))
-;
-
 create table estacion (
   id                        bigint auto_increment not null,
   capacidad                 integer,
@@ -43,7 +35,7 @@ create table prestamo (
 create table reserva (
   id                        bigint auto_increment not null,
   estado                    varchar(255),
-  fecha                     timestamp,
+  fecha                     bigint,
   constraint pk_reserva primary key (id))
 ;
 
@@ -53,8 +45,8 @@ create table sistema_principal (
 
 create table ubicacion (
   id                        bigint not null,
-  latitud                   integer,
-  longitud                  integer,
+  latitud                   bigint,
+  longitud                  bigint,
   hora                      bigint,
   estado                    varchar(255),
   kilometraje               integer,
@@ -84,8 +76,6 @@ create sequence ubicacion_seq;
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;
-
-drop table if exists cliente;
 
 drop table if exists estacion;
 

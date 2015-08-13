@@ -15,9 +15,9 @@ public class Ubicacion extends  Model {
     @GeneratedValue(strategy=GenerationType.AUTO)
     public Long id;
 
-    public int latitud;
+    public long latitud;
 
-    public int longitud;
+    public long longitud;
 
     public long hora;
 

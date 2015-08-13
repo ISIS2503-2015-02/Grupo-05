@@ -16,7 +16,7 @@ public class Reserva extends  Model{
 
     private String estado;
 
-    private Date fecha;
+    private Long fecha;
 
     public static Model.Finder<Long,Reserva> find = new Model.Finder<Long, Reserva>(Reserva.class);
 
