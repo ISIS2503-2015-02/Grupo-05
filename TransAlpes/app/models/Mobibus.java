@@ -17,4 +17,6 @@ public class Mobibus {
     public int personasPie;
 
     public int personasDiscapacitadas;
+
+    public static Finder<Long,Mobibus> find = new Finder<Long, Mobibus>(Mobibus.class);
 }

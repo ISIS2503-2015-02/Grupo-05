@@ -19,4 +19,6 @@ public class Ubicacion {
     public String estado;
 
     public int kilometraje;
+
+    public static Finder<Long,Ubicacion> find = new Finder<Long, Ubicacion>(Ubicacion.class);
 }

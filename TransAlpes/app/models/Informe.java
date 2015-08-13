@@ -14,4 +14,6 @@ public class Informe {
     public String tipo;
 
     public String contenido;
+
+    public static Finder<Long,Informe> find = new Finder<Long, Informe>(Informe.class);
 }
