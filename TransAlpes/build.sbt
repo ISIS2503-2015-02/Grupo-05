@@ -2,9 +2,10 @@ name := """play-java-intro"""
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayJava)
+lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
 
 libraryDependencies ++= Seq(
+  javaJdbc,
   javaJpa,
   "org.hibernate" % "hibernate-entitymanager" % "4.3.7.Final"
 )     

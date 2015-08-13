@@ -9,6 +9,6 @@ public class VehiculoController extends Controller {
 
     public void reportar(Long id)
     {
-        
+
     }
 }
