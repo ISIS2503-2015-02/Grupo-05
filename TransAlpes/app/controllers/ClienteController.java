@@ -18,7 +18,7 @@ public class ClienteController extends Controller {
 
         //TODO implementar
 
-        return ok(json);
+        return ok("Reserva creada: "+json);
     }
 
     @Transactional
@@ -31,4 +31,20 @@ public class ClienteController extends Controller {
 
         return ok("Reserva cancelada");
     }
+
+
+    @Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result alquilarVcub(Long idCliente)
+    {
+
+        JsonNode json = request().body().asJson();
+        System.out.println("Recibido: idCliente="+idCliente+"\n"+json);
+
+        //TODO implementar
+
+        return ok("Ud ha reservado el vcub con id="+json.get("vcub"));
+    }
+
+   // devolverVcub(id: Long)
 }
