@@ -66,7 +66,6 @@ create table ubicacion (
 create table vehiculo (
   dtype                     varchar(10) not null,
   id                        bigint auto_increment not null,
-  tipo                      varchar(255),
   estado                    varchar(255),
   color                     varchar(255),
   linea                     varchar(255),

@@ -21,12 +21,13 @@ public abstract class Vehiculo extends Model
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public long id;
 
-    public String tipo;
 
     public String estado;
 
 
-   // @OneToMany(cascade = CascadeType.ALL)
+   //@OneToMany(cascade = CascadeType.ALL)
     public List<Ubicacion> posiciones;
+
+    public static Model.Finder<Long,Vehiculo> find = new Model.Finder<Long, Vehiculo>(Vehiculo.class);
 
 }
