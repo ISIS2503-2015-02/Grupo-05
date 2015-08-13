@@ -1,12 +1,16 @@
 package models;
 
+import com.avaje.ebean.Model;
+
+import javax.persistence.*;
+
 /**
  * Created by la.cortes10 on 12/08/2015.
  */
 @Entity
 public class Informe {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Long id;
 
     public int numeroGravedad;
@@ -15,5 +19,5 @@ public class Informe {
 
     public String contenido;
 
-    public static Finder<Long,Informe> find = new Finder<Long, Informe>(Informe.class);
+    public static Model.Finder<Long,Informe> find = new Model.Finder<Long, Informe>(Informe.class);
 }
