@@ -13,6 +13,10 @@ DELETE /clientes/:idCliente/reservas/eliminar/:idReserva    controllers.ClienteC
 POST    /clientes/:idCliente/prestamos/alquilar                 controllers.ClienteController.alquilarVcub(idCliente: Long)
 PUT     /clientes/:id/prestamos/devolver                    controllers.ClienteController.devolverVcub(id: Long)
 GET     /vehiculos/:id                                      controllers.VehiculoController.darVehiculo(id: Long)
+GET    /estaciones/:id                               controllers.EstacionController.darDisponibilidadEstacion(id:Long)
+POST     /estaciones/:id/registrar                  controller.EstacionController.registrarVcub(id:Long)
+POST      /informes/agregar                          controller.InformeController.reportarInforme()
+GET      /informes/general                          controller.InformeController.darReporte()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
