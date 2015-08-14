@@ -21,7 +21,7 @@ public class VehiculoController extends Controller {
         JsonNode json = request().body().asJson();
         Vehiculo vehiculo = Vehiculo.find.byId(id);
         if(vehiculo==null)
-            throw new Exception("El vehiculo con id "+id+" no existe");
+            throw new Exception("El vehiculo con id "+ id+" no existe");
 
         //Obtener la ubicacion del JSON de entrada
         Ubicacion ubicacion = Json.fromJson(json, Ubicacion.class);
