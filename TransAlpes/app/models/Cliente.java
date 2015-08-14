@@ -18,8 +18,11 @@ public class Cliente extends Model{
 
     public String tarjetaBancaria;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     public List<Reserva> reservas;
+
+    @OneToMany
+    public List<Prestamo> prestamos;
 
     public static Model.Finder<Long,Cliente> find = new Model.Finder<Long, Cliente>(Cliente.class);
 

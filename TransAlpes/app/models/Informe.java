@@ -17,6 +17,7 @@ public class Informe extends Model {
 
     public String tipo;
 
+
     public String contenido;
 
     public static Model.Finder<Long,Informe> find = new Model.Finder<Long, Informe>(Informe.class);

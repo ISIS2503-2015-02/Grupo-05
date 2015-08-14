@@ -24,4 +24,5 @@ public class Tranvia extends Vehiculo
     public static Model.Finder<Long,Tranvia> find = new Model.Finder<Long, Tranvia>(Tranvia.class);
 
 
+
 }

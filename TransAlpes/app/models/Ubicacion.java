@@ -25,5 +25,8 @@ public class Ubicacion extends  Model {
 
     public int kilometraje;
 
+    @ManyToOne
+    public Vehiculo vehiculo;
+
     public static Model.Finder<Long,Ubicacion> find = new Model.Finder<Long, Ubicacion>(Ubicacion.class);
 }

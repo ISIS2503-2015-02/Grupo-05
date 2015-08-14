@@ -25,9 +25,18 @@ public abstract class Vehiculo extends Model
     public String estado;
 
 
+<<<<<<< HEAD
    //@OneToMany(cascade = CascadeType.ALL)
     public List<Ubicacion> posiciones;
 
     public static Model.Finder<Long,Vehiculo> find = new Model.Finder<Long, Vehiculo>(Vehiculo.class);
+=======
+   @OneToMany
+    public List<Ubicacion> posiciones;
+
+
+
+
+>>>>>>> origin/master
 
 }
