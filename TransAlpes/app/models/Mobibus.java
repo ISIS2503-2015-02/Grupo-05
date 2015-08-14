@@ -15,6 +15,7 @@ public class Mobibus extends Vehiculo {
     @OneToMany
     public List<Reserva> reservas;
 
+
     //public List<String> listaEspera;
 
     public int personasPie;

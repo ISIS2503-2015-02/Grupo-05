@@ -1,6 +1,8 @@
 package models;
 
 import com.avaje.ebean.Model;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
@@ -26,7 +28,10 @@ public abstract class Vehiculo extends Model
 
     public String tipo;
 
-   @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculo")
+   // @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "vehiculo")
+   @OneToMany(cascade = CascadeType.ALL)
+   @OnDelete(action= OnDeleteAction.CASCADE)
+   @JoinColumn(name="vehiculo_id")
     public List<Ubicacion> posiciones;
 
     public static Model.Finder<Long,Vehiculo> find = new Model.Finder<Long, Vehiculo>(Vehiculo.class);

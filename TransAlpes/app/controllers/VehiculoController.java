@@ -25,7 +25,8 @@ public class VehiculoController extends Controller {
 
         //Agregar la ubicacion a la tabla de ubicaciones
         Ubicacion ubicacion = Json.fromJson(json, Ubicacion.class);
-       // ubicacion.vehiculo = vehiculo;
+        ubicacion.vehiculo_id = vehiculo.id;
+        System.out.println("Intentando guardar ubicacion: "+Json.toJson(ubicacion));
 
 
         //Agregar la ubicacion al vehiculo
@@ -33,7 +34,7 @@ public class VehiculoController extends Controller {
 
         //Actualizar el vehiculo en la base de datos
         vehiculo.update();
-        ubicacion.save();
+
 
         return ok("Se ha agregado una nueva ubicacion\n"+Json.toJson(vehiculo));
     }

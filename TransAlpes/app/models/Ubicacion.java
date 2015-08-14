@@ -25,9 +25,13 @@ public class Ubicacion extends  Model {
 
     public int kilometraje;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "VEHICULO_ID")
-    public Vehiculo vehiculo;*/
+    //@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+    //@JoinColumn(name="vehiculo_id", insertable=false, updatable=false)
+    //public Vehiculo vehiculo;
+
+    @Transient
+    @JoinColumn(name="vehiculo_id")
+    public Long vehiculo_id;
 
     public static Model.Finder<Long,Ubicacion> find = new Model.Finder<Long, Ubicacion>(Ubicacion.class);
 }
