@@ -2,6 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Cliente;
+import models.Mobibus;
 import models.Prestamo;
 import models.Reserva;
 import play.libs.Json;
@@ -24,6 +25,11 @@ public class ClienteController extends Controller {
         Reserva reserva= Json.fromJson(json, Reserva.class);
         reserva.cliente_id=cliente.id;
 
+        //TODO verificar el mobibus que este disponible!
+
+        Mobibus mobibus= (Mobibus) Mobibus.find.byId(reserva.mobibus_id);
+        if(mobibus==null)
+            throw new Exception("No existe el mobibus con el Id: "+ reserva.mobibus_id);
         cliente.agregarReserva(reserva);
         cliente.update();
 
@@ -31,17 +37,25 @@ public class ClienteController extends Controller {
     }
 
     @Transactional
-    public Result cancelarReserva(Long idCliente, Long idReserva)
+    public Result cancelarReserva(Long idCliente, Long idReserva)throws Exception
     {
+        Cliente cliente= Cliente.find.byId(idCliente);
+        if(cliente==null)
+            throw new Exception("No existe el cliente con el Id: "+ idCliente);
 
-        System.out.println("Recibido: idCliente="+idCliente+"\tidReserva="+idReserva);
+        Reserva reserva= Reserva.find.byId(idReserva);
+        if(reserva==null)
+            throw new Exception("No existe la reserva con el Id: "+idReserva);
 
-        //TODO implementar
+        reserva.delete();
+
+        cliente.eliminarReserva(idReserva);
 
         return ok("Reserva cancelada");
     }
 
     @Transactional
+    @BodyParser.Of(BodyParser.Json.class)
     public Result actualizarReserva(Long idCliente, Long idReserva)
     {
 

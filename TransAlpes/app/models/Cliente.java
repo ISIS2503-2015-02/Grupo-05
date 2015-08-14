@@ -46,4 +46,13 @@ public class Cliente extends Model{
             prestamosVcubs = new ArrayList<>();
         prestamosVcubs.add(prestamo);
     }
+
+    public final void eliminarReserva(Long idReserva)
+    {
+        for(int i=0;i<reservasMobibus.size();i++)
+        {
+            if(reservasMobibus.get(i).id==idReserva)
+                reservasMobibus.get(i).delete();
+        }
+    }
 }
