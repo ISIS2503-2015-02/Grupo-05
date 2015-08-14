@@ -20,5 +20,13 @@ public class Estacion extends Model {
     public int disponibles;
 
     public static Model.Finder<Long,Estacion> find = new Model.Finder<Long, Estacion>(Estacion.class);
+public boolean verificarDisponicilidad()
+{
+	int porcentaje10= Math.po
+	if()
+	{
+
+	}
+}
 
 }

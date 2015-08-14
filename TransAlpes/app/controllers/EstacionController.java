@@ -1,9 +1,13 @@
 package controllers;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
+import models.Estacion;
 import play.db.ebean.Transactional;
+import play.mvc.BodyParser;
 import play.mvc.Result;
 
+import static play.mvc.Controller.request;
 import static play.mvc.Results.ok;
 
 /**
@@ -13,9 +17,20 @@ import static play.mvc.Results.ok;
 public class EstacionController {
 
 @Transactional
-public Result darDisponibilidadEstacion(Long id)
+@BodyParser.Of(BodyParser.Json.class)
+public Result darDisponibilidadEstacion(@org.jetbrains.annotations.NonNls Long id) throws Exception
 {
-	System.out.println("Recibido: id= ");
+	JsonNode json = request().body().asJson();
+	//Estacion que se pide
+	Estacion estacion = Estacion.find.byId(id);
+	System.out.println("Recibido: id= " + id +"esta estacion se pidio");
+
+	if(null == estacion){
+		String exception = String.format("%d La estacion con ese id no existe", id);
+		throw  new Exception(exception,null);
+	}
+	//Obtener la disponibilidad de la estacion
+	estacion.
 
 	//TODO implementar
 
