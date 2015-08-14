@@ -30,7 +30,7 @@ public class Ubicacion extends  Model {
     //public Vehiculo vehiculo;
 
     @Transient
-    @JoinColumn(name="vehiculo_id")
+    @JoinColumn(name="vehiculo_id", nullable = false)
     public Long vehiculo_id;
 
     public static Model.Finder<Long,Ubicacion> find = new Model.Finder<Long, Ubicacion>(Ubicacion.class);

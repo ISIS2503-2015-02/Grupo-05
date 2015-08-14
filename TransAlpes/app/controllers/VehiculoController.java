@@ -23,10 +23,11 @@ public class VehiculoController extends Controller {
         if(vehiculo==null)
             throw new Exception("El vehiculo con id "+id+" no existe");
 
-        //Agregar la ubicacion a la tabla de ubicaciones
+        //Obtener la ubicacion del JSON de entrada
         Ubicacion ubicacion = Json.fromJson(json, Ubicacion.class);
+
+        //Agregar el id del vehiculo a la ubicacion
         ubicacion.vehiculo_id = vehiculo.id;
-        System.out.println("Intentando guardar ubicacion: "+Json.toJson(ubicacion));
 
 
         //Agregar la ubicacion al vehiculo
