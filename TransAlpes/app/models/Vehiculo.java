@@ -15,7 +15,6 @@ import java.util.List;
  */
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@MappedSuperclass
 public abstract class Vehiculo extends Model
 {
 
@@ -27,7 +26,7 @@ public abstract class Vehiculo extends Model
 
     public String tipo;
 
-   @OneToMany(cascade = CascadeType.ALL)
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculo")
     public List<Ubicacion> posiciones;
 
     public static Model.Finder<Long,Vehiculo> find = new Model.Finder<Long, Vehiculo>(Vehiculo.class);

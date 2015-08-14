@@ -51,12 +51,12 @@ create table reserva (
 
 create table ubicacion (
   id                        bigint not null,
+  tranvia_id                bigint not null,
   latitud                   bigint,
   longitud                  bigint,
   hora                      bigint,
   estado                    varchar(255),
   kilometraje               integer,
-  ID_VEHICULO               bigint,
   constraint pk_ubicacion primary key (id))
 ;
 
@@ -81,8 +81,8 @@ alter table reserva add constraint fk_reserva_cliente_1 foreign key (cliente_id)
 create index ix_reserva_cliente_1 on reserva (cliente_id);
 alter table reserva add constraint fk_reserva_mobibus_2 foreign key (mobibus_id) references vehiculo (id) on delete restrict on update restrict;
 create index ix_reserva_mobibus_2 on reserva (mobibus_id);
-alter table ubicacion add constraint fk_ubicacion_vehiculo_3 foreign key (ID_VEHICULO) references vehiculo (id) on delete restrict on update restrict;
-create index ix_ubicacion_vehiculo_3 on ubicacion (ID_VEHICULO);
+alter table ubicacion add constraint fk_ubicacion_vehiculo_3 foreign key (tranvia_id) references vehiculo (id) on delete restrict on update restrict;
+create index ix_ubicacion_vehiculo_3 on ubicacion (tranvia_id);
 
 
 
