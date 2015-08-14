@@ -25,6 +25,7 @@ GET     /vehiculos/:id                                      controllers.Vehiculo
 ################################################
 POST    /clientes/:id/reservas/crear                    controllers.ClienteController.crearReserva(id: Long)
 DELETE /clientes/:idCliente/reservas/eliminar/:idReserva    controllers.ClienteController.cancelarReserva(idCliente: Long,idReserva: Long)
+PUT     /clientes/:idCliente/reservas/:idReserva           controllers.ClienteController.actualizarReserva(idCliente: Long, idReserva:Long)
 POST    /clientes/:idCliente/prestamos/alquilar                 controllers.ClienteController.alquilarVcub(idCliente: Long)
 PUT     /clientes/:id/prestamos/devolver                    controllers.ClienteController.devolverVcub(id: Long)
 

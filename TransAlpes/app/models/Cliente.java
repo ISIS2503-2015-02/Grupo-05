@@ -1,7 +1,10 @@
 package models;
 import com.avaje.ebean.Model;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,9 +22,28 @@ public class Cliente extends Model{
     public String tarjetaBancaria;
 
     @OneToMany(cascade = CascadeType.ALL)
-    public List<Reserva> reservas;
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JoinColumn(name="reservas")
+    public List<Reserva> reservasMobibus;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JoinColumn(name="prestamos")
+    public List<Prestamo> prestamosVcubs;
 
     public static Model.Finder<Long,Cliente> find = new Model.Finder<Long, Cliente>(Cliente.class);
 
+    public final void agregarReserva(Reserva reserva)
+    {
+        if(reservasMobibus==null)
+           reservasMobibus = new ArrayList<>();
+        reservasMobibus.add(reserva);
+    }
 
+    public final void agregarPrestamo(Prestamo prestamo)
+    {
+        if(prestamosVcubs==null)
+            prestamosVcubs = new ArrayList<>();
+        prestamosVcubs.add(prestamo);
+    }
 }
