@@ -26,6 +26,7 @@ public abstract class Vehiculo extends Model
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    //@OneToMany(cascade = CascadeType.ALL)
     public List<Ubicacion> posiciones;
 
@@ -33,10 +34,18 @@ public abstract class Vehiculo extends Model
 =======
    @OneToMany
     public List<Ubicacion> posiciones;
+=======
+   @OneToMany
+    public List<Ubicacion> posiciones;
+
+>>>>>>> ef08e8cfd3f808c0f79e004a22d0fde468a30457
 
 
 
 
+<<<<<<< HEAD
 >>>>>>> origin/master
 
+=======
+>>>>>>> ef08e8cfd3f808c0f79e004a22d0fde468a30457
 }
