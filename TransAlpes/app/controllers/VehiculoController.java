@@ -1,8 +1,13 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.databind.JsonNode;
+import models.*;
+import play.libs.Json;
 import play.db.ebean.Transactional;
 import play.mvc.*;
+
+import java.util.List;
 
 
 /**
@@ -12,36 +17,65 @@ public class VehiculoController extends Controller {
 
     @Transactional
     @BodyParser.Of(BodyParser.Json.class)
-    public Result agregarPosicion(Long id)
-    {
+    public Result agregarPosicion(Long id) throws Exception {
         JsonNode json = request().body().asJson();
-        System.out.println("Recibido: id="+id+"\n"+json);
+        Vehiculo vehiculo = Vehiculo.find.byId(id);
+        if(vehiculo==null)
+            throw new Exception("El vehiculo con id "+id+" no existe");
 
-        //TODO implementar
+        //Agregar la ubicacion a la tabla de ubicaciones
+        Ubicacion ubicacion = Json.fromJson(json, Ubicacion.class);
+        ubicacion.vehiculo = vehiculo;
 
-        return ok(json);
+
+        //Agregar la ubicacion al vehiculo
+        vehiculo.agregarPosicion(ubicacion);
+
+        //Actualizar el vehiculo en la base de datos
+        vehiculo.update();
+        ubicacion.save();
+
+        return ok("Se ha agregado una nueva ubicacion\n"+Json.toJson(vehiculo));
     }
 
     @Transactional
     public Result darVehiculo(Long id)
     {
 
-        System.out.println("Recibido: idCliente="+id);
-
-        //TODO implementar
-
-        return ok("Ud ha solicitado el vehiculo: "+id);
+       Vehiculo vehiculo = Vehiculo.find.byId(id);
+        return ok("Ud ha solicitado el vehiculo: "+Json.toJson(vehiculo));
     }
+
 
     @Transactional
     @BodyParser.Of(BodyParser.Json.class)
-    public Result agregarMobibus()
+    public Result agregarVehiculo()
     {
         JsonNode json = request().body().asJson();
-        System.out.println("Agregando mobibus"+"\n"+json);
+        Vehiculo vehiculo = null;
+        String tipo = json.get("tipo").asText();
+        switch (tipo)
+        {
+            case "Mobibus":
+                vehiculo=Json.fromJson(json, Mobibus.class);
+                break;
+            case "Vcub":
+                vehiculo=Json.fromJson(json, Vcub.class);
+                break;
+            case "Tranvia":
+                vehiculo=Json.fromJson(json, Tranvia.class);
+                break;
+            default: throw new IllegalStateException("El tipo \""+tipo+"\" no es valido");
+        }
 
-        //TODO implementar
+        vehiculo.save();
+        return ok("Ud ha agregado un vehiculo: "+Json.toJson(vehiculo));
+    }
 
-        return ok("Ud ha agregado un mobibus: "+json);
+    @Transactional
+    public Result darVehiculos()
+    {
+       List<Vehiculo> list = Vehiculo.find.all();
+        return ok(Json.toJson(list));
     }
 }

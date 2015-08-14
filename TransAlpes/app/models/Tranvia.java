@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by ai.mojica10
  */
 @Entity
-@PrimaryKeyJoinColumn(name="TRANVIA_ID")
+@DiscriminatorValue("T")
 public class Tranvia extends Vehiculo
 {
 
@@ -20,8 +20,5 @@ public class Tranvia extends Vehiculo
     public long hora;
 
     public boolean panico;
-
-    public static Model.Finder<Long,Tranvia> find = new Model.Finder<Long, Tranvia>(Tranvia.class);
-
 
 }

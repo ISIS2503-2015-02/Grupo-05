@@ -3,21 +3,46 @@
 # ~~~~
 
 # Home page
+
+################################################
+#              METODS DE PERSONAS
+################################################
 GET     /                                            controllers.Application.index()
 POST    /person                                     controllers.Application.addPerson()
 GET     /persons                                      controllers.Application.getPersons
 DELETE  /persons                                         controllers.Application.deletePersons()
+
+################################################
+#              METODS DE VEHICULOS
+################################################
 POST    /vehiculos/:id/posiciones/agregar               controllers.VehiculoController.agregarPosicion(id: Long)
+POST     /vehiculos/agregar                             controllers.VehiculoController.agregarVehiculo()
+GET     /vehiculos                               controllers.VehiculoController.darVehiculos()
+GET     /vehiculos/:id                                      controllers.VehiculoController.darVehiculo(id: Long)
+
+################################################
+#              METODS DE CLIENTES
+################################################
 POST    /clientes/:id/reservas/crear                    controllers.ClienteController.crearReserva(id: Long)
 DELETE /clientes/:idCliente/reservas/eliminar/:idReserva    controllers.ClienteController.cancelarReserva(idCliente: Long,idReserva: Long)
 POST    /clientes/:idCliente/prestamos/alquilar                 controllers.ClienteController.alquilarVcub(idCliente: Long)
 PUT     /clientes/:id/prestamos/devolver                    controllers.ClienteController.devolverVcub(id: Long)
-GET     /vehiculos/:id                                      controllers.VehiculoController.darVehiculo(id: Long)
+
+
+################################################
+#              METODS DE ESTACIONES
+################################################
 #GET    /estaciones/:id                               controllers.EstacionController.darDisponibilidadEstacion(id:Long)
 #POST     /estaciones/:id/registrar                  controllers.EstacionController.registrarVcub(id:Long)
+
+
+################################################
+#              METODS DE INFORMES
+################################################
 POST      /informes/agregar                          controllers.InformeController.reportarInforme()
 GET      /informes/general                          controllers.InformeController.darReporte()
 
-POST     /vehiculos/mobibus                             controllers.VehiculoController.agregarMobibus()
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
