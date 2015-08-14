@@ -10,7 +10,6 @@ import javax.persistence.*;
  */
 @Entity
 @PrimaryKeyJoinColumn(name="MOBIBUS_ID")
-@DiscriminatorValue("Mobibus")
 public class Mobibus extends Vehiculo {
 
     @OneToMany

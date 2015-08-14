@@ -21,31 +21,12 @@ public abstract class Vehiculo extends Model
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public long id;
 
+    public String tipo;
 
     public String estado;
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-   //@OneToMany(cascade = CascadeType.ALL)
+   // @OneToMany(cascade = CascadeType.ALL)
     public List<Ubicacion> posiciones;
 
-    public static Model.Finder<Long,Vehiculo> find = new Model.Finder<Long, Vehiculo>(Vehiculo.class);
-=======
-   @OneToMany
-    public List<Ubicacion> posiciones;
-=======
-   @OneToMany
-    public List<Ubicacion> posiciones;
-
->>>>>>> ef08e8cfd3f808c0f79e004a22d0fde468a30457
-
-
-
-
-<<<<<<< HEAD
->>>>>>> origin/master
-
-=======
->>>>>>> ef08e8cfd3f808c0f79e004a22d0fde468a30457
 }

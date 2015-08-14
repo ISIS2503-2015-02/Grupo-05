@@ -36,9 +36,6 @@ create table person (
 
 create table prestamo (
   id                        bigint auto_increment not null,
-  cliente_id                bigint,
-  estacion_id               bigint,
-  vcub_id                   bigint,
   linea                     timestamp,
   constraint pk_prestamo primary key (id))
 ;
@@ -52,6 +49,10 @@ create table reserva (
   constraint pk_reserva primary key (id))
 ;
 
+create table sistema_principal (
+  nombre                    varchar(255))
+;
+
 create table ubicacion (
   id                        bigint not null,
   latitud                   bigint,
@@ -59,16 +60,15 @@ create table ubicacion (
   hora                      bigint,
   estado                    varchar(255),
   kilometraje               integer,
-  vehiculo_id               bigint,
   constraint pk_ubicacion primary key (id))
 ;
 
 create table vehiculo (
   dtype                     varchar(10) not null,
   id                        bigint auto_increment not null,
+  tipo                      varchar(255),
   estado                    varchar(255),
   color                     varchar(255),
-  estacion_id               bigint,
   linea                     varchar(255),
   temperatura               integer,
   hora                      bigint,
@@ -80,20 +80,10 @@ create table vehiculo (
 
 create sequence ubicacion_seq;
 
-alter table prestamo add constraint fk_prestamo_cliente_1 foreign key (cliente_id) references cliente (id) on delete restrict on update restrict;
-create index ix_prestamo_cliente_1 on prestamo (cliente_id);
-alter table prestamo add constraint fk_prestamo_estacion_2 foreign key (estacion_id) references estacion (id) on delete restrict on update restrict;
-create index ix_prestamo_estacion_2 on prestamo (estacion_id);
-alter table prestamo add constraint fk_prestamo_vcub_3 foreign key (vcub_id) references vehiculo (id) on delete restrict on update restrict;
-create index ix_prestamo_vcub_3 on prestamo (vcub_id);
-alter table reserva add constraint fk_reserva_cliente_4 foreign key (cliente_id) references cliente (id) on delete restrict on update restrict;
-create index ix_reserva_cliente_4 on reserva (cliente_id);
-alter table reserva add constraint fk_reserva_mobibus_5 foreign key (mobibus_id) references vehiculo (id) on delete restrict on update restrict;
-create index ix_reserva_mobibus_5 on reserva (mobibus_id);
-alter table ubicacion add constraint fk_ubicacion_vehiculo_6 foreign key (vehiculo_id) references vehiculo (id) on delete restrict on update restrict;
-create index ix_ubicacion_vehiculo_6 on ubicacion (vehiculo_id);
-alter table vehiculo add constraint fk_vehiculo_estacion_7 foreign key (estacion_id) references estacion (id) on delete restrict on update restrict;
-create index ix_vehiculo_estacion_7 on vehiculo (estacion_id);
+alter table reserva add constraint fk_reserva_cliente_1 foreign key (cliente_id) references cliente (id) on delete restrict on update restrict;
+create index ix_reserva_cliente_1 on reserva (cliente_id);
+alter table reserva add constraint fk_reserva_mobibus_2 foreign key (mobibus_id) references vehiculo (id) on delete restrict on update restrict;
+create index ix_reserva_mobibus_2 on reserva (mobibus_id);
 
 
 
@@ -112,6 +102,8 @@ drop table if exists person;
 drop table if exists prestamo;
 
 drop table if exists reserva;
+
+drop table if exists sistema_principal;
 
 drop table if exists ubicacion;
 
