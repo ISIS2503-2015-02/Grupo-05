@@ -55,4 +55,26 @@ public class Cliente extends Model{
                 reservasMobibus.get(i).delete();
         }
     }
+
+    public final void actualizarReserva(Reserva reserva, Long idReserva)
+    {
+        for(int i=0;i<reservasMobibus.size();i++)
+        {
+            if(reservasMobibus.get(i).id==idReserva) {
+                reservasMobibus.get(i).delete();
+                reservasMobibus.add(i,reserva);
+            }
+        }
+    }
+
+    public final void actualizarPrestamo(Prestamo prestamo, Long idPrestamo)
+    {
+        for(int i=0;i<prestamosVcubs.size();i++)
+        {
+            if(prestamosVcubs.get(i).id==idPrestamo) {
+                prestamosVcubs.get(i).delete();
+                prestamosVcubs.add(i,prestamo);
+            }
+        }
+    }
 }

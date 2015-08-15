@@ -56,14 +56,26 @@ public class ClienteController extends Controller {
 
     @Transactional
     @BodyParser.Of(BodyParser.Json.class)
-    public Result actualizarReserva(Long idCliente, Long idReserva)
+    public Result actualizarReserva(Long idCliente)throws Exception
     {
+        JsonNode json = request().body().asJson();
+        Cliente cliente= Cliente.find.byId(idCliente);
+        if(cliente==null)
+            throw new Exception("No existe el cliente con el Id: "+ idCliente);
 
-        System.out.println("Recibido: idCliente="+idCliente+"\tidReserva="+idReserva);
+        Reserva reserva= Json.fromJson(json, Reserva.class);
 
-        //TODO implementar
+        Reserva reservax= Reserva.find.byId(reserva.id);
+        if(reservax==null)
+            throw new Exception("No existe la reserva con el Id: "+reserva.id);
 
-        return ok("Reserva cancelada");
+
+        reservax= reserva;
+        reservax.update();
+
+        cliente.actualizarReserva(reserva,reserva.id);
+
+        return ok("Reserva actualizada");
     }
 
     @Transactional
@@ -89,13 +101,24 @@ public class ClienteController extends Controller {
    // devolverVcub(id: Long)
    @Transactional
    @BodyParser.Of(BodyParser.Json.class)
-   public Result devolverVcub(Long idCliente)
+   public Result devolverVcub(Long idCliente)throws Exception
    {
-
        JsonNode json = request().body().asJson();
-       System.out.println("Recibido: idCliente="+idCliente+"\n"+json);
+       Cliente cliente= Cliente.find.byId(idCliente);
+       if(cliente==null)
+           throw new Exception("No existe el cliente con el Id: "+ idCliente);
 
-       //TODO implementar
+       Prestamo prestamo= Json.fromJson(json, Prestamo.class);
+
+       Prestamo prestamox= Prestamo.find.byId(prestamo.id);
+       if(prestamox==null)
+           throw new Exception("No existe la reserva con el Id: "+prestamo.id);
+
+
+       prestamox= prestamo;
+       prestamox.update();
+
+       cliente.actualizarPrestamo(prestamo, prestamo.id);
 
        return ok("Ud ha devuelto el vcub con id="+json.get("vcub"));
    }
