@@ -60,10 +60,12 @@ public Result registrarVcub(Long id)throws Exception
 }
 @Transactional
 @BodyParser.Of(BodyParser.Json.class)
-public Result crearEstacion()
+public Result crearEstacion(Long id)
 {
 
 	JsonNode json = request().body().asJson();
+	return ok();
+
 }
 
 }
