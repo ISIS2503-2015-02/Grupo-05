@@ -35,6 +35,7 @@ PUT     /clientes/:id/prestamos/devolver                    controllers.ClienteC
 ################################################
 GET    /estaciones/:id                               controllers.EstacionController.darDisponibilidadEstacion(id:Long)
 PUT     /estaciones/:id/registrar                  controllers.EstacionController.registrarVcub(id:Long)
+POST    /estaciones                                 controllers.EstacionController.crearEstacion(id:Long)
 
 
 ################################################

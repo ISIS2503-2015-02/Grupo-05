@@ -41,12 +41,29 @@ public Result darDisponibilidadEstacion(Long id) throws Exception
 }
 @Transactional
 @BodyParser.Of(BodyParser.Json.class)
-public Result registrarVcub(Long id)
+public Result registrarVcub(Long id)throws Exception
 {
+	JsonNode js = request().body().asJson();
+	//estacion buscada por id
+	Estacion esta = Estacion.find.byId(id);
 
+	if(null == esta){
+		String mensaje = String.format("La estacion buscada con id: %d no existe", id);
+		throw new Exception(mensaje);}
+
+	//aniade uno al numero disponible de Vcubs en la estacion
+	esta.registrarVcub();
+	//actualiza la estacion
+	esta.update();
 	//TODO implementar
 	return ok("usted ha solicitado regustro vcub");
 }
+@Transactional
+@BodyParser.Of(BodyParser.Json.class)
+public Result crearEstacion()
+{
 
+	JsonNode json = request().body().asJson();
+}
 
 }
