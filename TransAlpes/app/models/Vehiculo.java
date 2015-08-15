@@ -28,10 +28,10 @@ public abstract class Vehiculo extends Model
 
     public String tipo;
 
-   // @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "vehiculo")
+
    @OneToMany(cascade = CascadeType.ALL)
    @OnDelete(action= OnDeleteAction.CASCADE)
-   @JoinColumn(name="vehiculo_id")
+   @JoinColumn(name="vehiculo_id", nullable = false)
     public List<Ubicacion> posiciones;
 
     public static Model.Finder<Long,Vehiculo> find = new Model.Finder<Long, Vehiculo>(Vehiculo.class);

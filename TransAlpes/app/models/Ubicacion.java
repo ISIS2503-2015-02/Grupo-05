@@ -25,10 +25,6 @@ public class Ubicacion extends  Model {
 
     public int kilometraje;
 
-    //@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}
-    //@JoinColumn(name="vehiculo_id", insertable=false, updatable=false)
-    //public Vehiculo vehiculo;
-
     @Transient
     @JoinColumn(name="vehiculo_id", nullable = false)
     public Long vehiculo_id;
