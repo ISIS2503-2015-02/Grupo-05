@@ -1,13 +1,12 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import models.Cliente;
-import models.Mobibus;
-import models.Prestamo;
-import models.Reserva;
+import models.*;
 import play.libs.Json;
 import play.db.ebean.Transactional;
 import play.mvc.*;
+
+import java.util.List;
 
 
 public class ClienteController extends Controller {
@@ -73,7 +72,7 @@ public class ClienteController extends Controller {
         reservax= reserva;
         reservax.update();
 
-        cliente.actualizarReserva(reserva,reserva.id);
+        cliente.actualizarReserva(reserva, reserva.id);
 
         return ok("Reserva actualizada");
     }
@@ -123,6 +122,33 @@ public class ClienteController extends Controller {
        return ok("Ud ha devuelto el vcub con id="+json.get("vcub"));
    }
 
+    @Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result darClientes()
+    {
+        JsonNode json = request().body().asJson();
+        List<Cliente> list = Cliente.find.all();
+        return ok(Json.toJson(list));
+    }
 
+@Transactional
+@BodyParser.Of(BodyParser.Json.class)
+public Result agregarCliente()
+{
 
+	JsonNode json = request().body().asJson();
+	Cliente clt = Json.fromJson(json, Cliente.class);;
+	clt.save();
+	return ok();
+
+}
+public Result darCliente(Long id)throws Exception
+{
+	JsonNode json = request().body().asJson();
+	Cliente  cliente = Cliente.find.byId(id);
+
+	if(null == cliente){throw  new Exception("El cliente con el id: " + id +"no existe");};
+
+	return ok(Json.toJson(cliente));
+}
 }

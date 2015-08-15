@@ -23,19 +23,25 @@ GET     /vehiculos/:id                                      controllers.Vehiculo
 ################################################
 #              METODS DE CLIENTES
 ################################################
+GET /clientes                                              controllers.ClienteController.darClientes()
+GET /clientes/:id                                       controllers.ClienteController.darCliente(id:Long)
 POST    /clientes/:id/reservas/crear                    controllers.ClienteController.crearReserva(id: Long)
 DELETE /clientes/:idCliente/reservas/eliminar/:idReserva    controllers.ClienteController.cancelarReserva(idCliente: Long,idReserva: Long)
-PUT     /clientes/:idCliente/reservas/:idReserva           controllers.ClienteController.actualizarReserva(idCliente: Long, idReserva:Long)
+PUT     /clientes/:idCliente/reservas         controllers.ClienteController.actualizarReserva(idCliente: Long)
 POST    /clientes/:idCliente/prestamos/alquilar                 controllers.ClienteController.alquilarVcub(idCliente: Long)
 PUT     /clientes/:id/prestamos/devolver                    controllers.ClienteController.devolverVcub(id: Long)
+POST    /clientes                                       controllers.ClienteController.agregarCliente()
 
 
 ################################################
 #              METODS DE ESTACIONES
 ################################################
-GET    /estaciones/:id                               controllers.EstacionController.darDisponibilidadEstacion(id:Long)
+GET    /estaciones/:id/disponibilidad                  controllers.EstacionController.darDisponibilidadEstacion(id:Long)
+GET      /estaciones                                controllers.EstacionController.darEstaciones()
 PUT     /estaciones/:id/registrar                  controllers.EstacionController.registrarVcub(id:Long)
-POST    /estaciones                                 controllers.EstacionController.crearEstacion(id:Long)
+POST    /estaciones                                 controllers.EstacionController.crearEstacion()
+POST    /estaciones/:id                         controllers.EstacionController.darEstacion(id:Long)
+
 
 
 ################################################

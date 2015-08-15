@@ -89,5 +89,9 @@ public void registrarVcub()
 {
 	this.disponibles++;
 }
+public String darUbicacion()
+{
+	return String.format("La longitud es: %d y La latitud es: %d de la estacion.", this.longitud, this.latitud);
+}
 
 }

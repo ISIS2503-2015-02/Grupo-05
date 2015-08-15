@@ -2,10 +2,16 @@ package controllers;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
+import models.Cliente;
 import models.Estacion;
+import models.Mobibus;
+import models.Vehiculo;
 import play.db.ebean.Transactional;
+import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Result;
+
+import java.util.List;
 
 import static play.mvc.Controller.request;
 import static play.mvc.Results.ok;
@@ -23,7 +29,7 @@ public Result darDisponibilidadEstacion(Long id) throws Exception
 	JsonNode json = request().body().asJson();
 	//Estacion que se pide
 	Estacion estacion = Estacion.find.byId(id);
-	System.out.println("Recibido: id= " + id +"esta estacion se pidio");
+	System.out.println("Recibido: id= " + id + "esta estacion se pidio");
 
 	if(null == estacion){
 		String exception = String.format("%d La estacion con ese id no existe", id);
@@ -56,16 +62,37 @@ public Result registrarVcub(Long id)throws Exception
 	//actualiza la estacion
 	esta.update();
 	//TODO implementar
-	return ok("usted ha solicitado regustro vcub");
+	return ok("usted ha solicitado regustro vcub en la eatcion");
 }
-@Transactional
-@BodyParser.Of(BodyParser.Json.class)
-public Result crearEstacion(Long id)
+	@Transactional
+	 @BodyParser.Of(BodyParser.Json.class)
+	 public Result crearEstacion()
 {
 
 	JsonNode json = request().body().asJson();
+	Estacion esta = Json.fromJson(json, Estacion.class);;
+	esta.save();
 	return ok();
 
 }
+@Transactional
+@BodyParser.Of(BodyParser.Json.class)
+public Result darEstaciones()
+{
+	JsonNode json = request().body().asJson();
+	List<Estacion> list = Estacion.find.all();
+	return ok(Json.toJson(list));
+}
 
+@Transactional
+@BodyParser.Of(BodyParser.Json.class)
+public Result darEstacion(Long id)throws  Exception
+{
+	JsonNode json = request().body().asJson();
+	Estacion  est = Estacion.find.byId(id);
+
+	if(null == est){throw  new Exception("La estacion  con el id: " + id +"no existe");};
+
+	return ok(Json.toJson(est));
+}
 }
