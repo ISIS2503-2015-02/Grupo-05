@@ -49,6 +49,7 @@ POST    /estaciones/:id                         controllers.EstacionController.d
 ################################################
 POST      /informes/agregar                          controllers.InformeController.reportarInforme()
 GET      /informes/general                          controllers.InformeController.darReporte()
+GET     /informes                                    controllers.InformeController.darInformes()
 
 
 
