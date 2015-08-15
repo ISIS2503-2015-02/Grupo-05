@@ -18,7 +18,7 @@ public class EstacionController {
 
 @Transactional
 @BodyParser.Of(BodyParser.Json.class)
-public Result darDisponibilidadEstacion(@org.jetbrains.annotations.NonNls Long id) throws Exception
+public Result darDisponibilidadEstacion(Long id) throws Exception
 {
 	JsonNode json = request().body().asJson();
 	//Estacion que se pide
@@ -30,15 +30,20 @@ public Result darDisponibilidadEstacion(@org.jetbrains.annotations.NonNls Long i
 		throw  new Exception(exception,null);
 	}
 	//Obtener la disponibilidad de la estacion
-	estacion.
+	int numeroDisponible = estacion.darNumeroLLenar();
+
+	int disponible = estacion.getDisponibles();
 
 	//TODO implementar
 
-	return ok("usted ha reportado una estacion disponible");
+	String mensaje = String.format("la estacion con %d tiene %s cupos disponibles", id, disponible);
+	return ok(mensaje);
 }
 @Transactional
+@BodyParser.Of(BodyParser.Json.class)
 public Result registrarVcub(Long id)
 {
+
 	//TODO implementar
 	return ok("usted ha solicitado regustro vcub");
 }
