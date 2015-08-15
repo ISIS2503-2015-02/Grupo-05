@@ -87,8 +87,7 @@ public int darNumeroLLenar()
 }
 public void registrarVcub()
 {
-	int actualCap += 1;
-	this.setCapacidad(actualCap);
+	this.disponibles++;
 }
 
 }
