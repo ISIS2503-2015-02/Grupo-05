@@ -11,13 +11,13 @@ public class Estacion extends Model {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    private int capacidad;
+    public int capacidad;
 
-    private long latitud;
+	public long latitud;
 
-    private long longitud;
+	public long longitud;
 
-    private int disponibles;
+	public int disponibles;
 
     public static Model.Finder<Long,Estacion> find = new Model.Finder<Long, Estacion>(Estacion.class);
 

@@ -76,7 +76,6 @@ public Result registrarVcub(Long id)throws Exception
 
 }
 @Transactional
-@BodyParser.Of(BodyParser.Json.class)
 public Result darEstaciones()
 {
 	JsonNode json = request().body().asJson();
@@ -85,7 +84,6 @@ public Result darEstaciones()
 }
 
 @Transactional
-@BodyParser.Of(BodyParser.Json.class)
 public Result darEstacion(Long id)throws  Exception
 {
 	JsonNode json = request().body().asJson();

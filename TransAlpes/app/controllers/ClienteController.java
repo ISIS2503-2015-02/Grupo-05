@@ -150,4 +150,14 @@ public Result darCliente(Long id)throws Exception
 
 	return ok(Json.toJson(cliente));
 }
+@Transactional
+public Result darReservasCliente(Long id) throws Exception {
+    JsonNode json = request().body().asJson();
+    Cliente  cliente = Cliente.find.byId(id);
+
+    if(null == cliente){throw  new Exception(String.format("El cliente con el id: %dno existe", id));};
+
+    List<Reserva> reservas = cliente.reservasMobibus;
+    return ok(Json.toJson(reservas));
+}
 }
