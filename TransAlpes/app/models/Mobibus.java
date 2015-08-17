@@ -1,6 +1,8 @@
 package models;
 
 import com.avaje.ebean.Model;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 import javax.persistence.*;
@@ -12,7 +14,9 @@ import javax.persistence.*;
 @DiscriminatorValue("M")
 public class Mobibus extends Vehiculo {
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JoinColumn(name="vehiculo_id", nullable = false)
     public List<Reserva> reservas;
 
 
