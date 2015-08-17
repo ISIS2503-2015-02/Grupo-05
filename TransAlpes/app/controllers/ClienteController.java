@@ -123,7 +123,6 @@ public class ClienteController extends Controller {
    }
 
     @Transactional
-    @BodyParser.Of(BodyParser.Json.class)
     public Result darClientes()
     {
         JsonNode json = request().body().asJson();
@@ -137,7 +136,7 @@ public Result agregarCliente()
 {
 
 	JsonNode json = request().body().asJson();
-	Cliente clt = Json.fromJson(json, Cliente.class);;
+	Cliente clt = Json.fromJson(json, Cliente.class);
 	clt.save();
 	return ok();
 
