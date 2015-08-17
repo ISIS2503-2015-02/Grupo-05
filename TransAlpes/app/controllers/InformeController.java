@@ -30,13 +30,19 @@ public Result reportarInforme()
 @Transactional
 public Result darReporte()throws Exception
 {
-return null;
+	Informe inf = new Informe();
+	inf.contenido = "hola";
+	long x = 10;
+	inf.id = x;
+	return ok(Json.toJson(inf));
+
 }
 
 @Transactional
-//@BodyParser.Of(BodyParser.Json.class)
+@BodyParser.Of(BodyParser.Json.class)
 public Result darInformes()throws  Exception
 {
+	System.out.println("Recibido: id= reportarInforme");
 	JsonNode json = request().body().asJson();
 	List<Informe>  inf = Informe.find.all();
 
