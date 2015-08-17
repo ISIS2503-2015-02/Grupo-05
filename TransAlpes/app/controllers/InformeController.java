@@ -27,10 +27,14 @@ public Result reportarInforme()
 	return ok("usted ha reportado un informe");
 }
 @Transactional
-public Result darReporte()
+public Result darReporte(long id)throws Exception
 {
-	//TODO implementar
- return ok("usted ha solicitado los infomes");
+	JsonNode json = request().body().asJson();
+	List<Informe>  inf = Informe.find.all();
+
+	if(0 == inf.size()){throw  new Exception("No hay informes registrados");};
+
+	return ok(Json.toJson(inf));
 }
 
 @Transactional
