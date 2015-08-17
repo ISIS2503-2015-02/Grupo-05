@@ -18,31 +18,34 @@ public class InformeController extends Controller
 {
 
 @Transactional
+@BodyParser.Of(BodyParser.Json.class)
 public Result reportarInforme()
 {
 	System.out.println("Recibido: id= reportarInforme");
-
-	//TODO implementar
-
+	JsonNode json = request().body().asJson();
+	Informe inf = Json.fromJson(json, Informe.class);;
+	inf.save();
 	return ok("usted ha reportado un informe");
 }
 @Transactional
-public Result darReporte(long id)throws Exception
+public Result darReporte()throws Exception
+{
+return null;
+}
+
+@Transactional
+//@BodyParser.Of(BodyParser.Json.class)
+public Result darInformes()throws  Exception
 {
 	JsonNode json = request().body().asJson();
 	List<Informe>  inf = Informe.find.all();
 
-	if(0 == inf.size()){throw  new Exception("No hay informes registrados");};
+	if(0 == inf.size())
+	{
+		throw new Exception("No hay informes registrados");
+	}
 
 	return ok(Json.toJson(inf));
 }
 
-@Transactional
-@BodyParser.Of(BodyParser.Json.class)
-public Result darInformes()
-{
-	JsonNode json = request().body().asJson();
-	List<Informe> list = Informe.find.all();
-	return ok(Json.toJson(list));
-}
 }
