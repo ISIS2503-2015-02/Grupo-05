@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 public class Informe extends Model {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Long id;
 
     public int numeroGravedad;

@@ -48,7 +48,7 @@ GET    /estaciones/:id                         controllers.EstacionController.da
 ################################################
 #              METODS DE INFORMES
 ################################################
-POST      /informes/agregar                          controllers.InformeController.reportarInforme()
+POST      /informes                          controllers.InformeController.reportarInforme()
 GET      /informes/general                          controllers.InformeController.darReporte()
 GET     /informes                                    controllers.InformeController.darInformes()
 

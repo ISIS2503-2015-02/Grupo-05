@@ -39,11 +39,9 @@ public Result darReporte()throws Exception
 }
 
 @Transactional
-@BodyParser.Of(BodyParser.Json.class)
 public Result darInformes()throws  Exception
 {
 	System.out.println("Recibido: id= reportarInforme");
-	JsonNode json = request().body().asJson();
 	List<Informe>  inf = Informe.find.all();
 
 	if(0 == inf.size())
