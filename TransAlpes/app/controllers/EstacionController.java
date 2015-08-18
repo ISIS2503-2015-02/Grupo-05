@@ -23,14 +23,10 @@ import static play.mvc.Results.ok;
 public class EstacionController {
 
 @Transactional
-@BodyParser.Of(BodyParser.Json.class)
 public Result darDisponibilidadEstacion(Long id) throws Exception
 {
-	JsonNode json = request().body().asJson();
 	//Estacion que se pide
 	Estacion estacion = Estacion.find.byId(id);
-	System.out.println("Recibido: id= " + id + "esta estacion se pidio");
-
 	if(null == estacion){
 		String exception = String.format("%d La estacion con ese id no existe", id);
 		throw  new Exception(exception,null);
@@ -38,18 +34,17 @@ public Result darDisponibilidadEstacion(Long id) throws Exception
 	//Obtener la disponibilidad de la estacion
 	int numeroDisponible = estacion.darNumeroLLenar();
 
-	int disponible = estacion.getDisponibles();
+	int disponible = estacion.disponibles;
 
 	//TODO implementar
 
 	String mensaje = String.format("la estacion con %d tiene %s cupos disponibles", id, disponible);
 	return ok(mensaje);
 }
+
 @Transactional
-@BodyParser.Of(BodyParser.Json.class)
 public Result registrarVcub(Long id)throws Exception
 {
-	JsonNode js = request().body().asJson();
 	//estacion buscada por id
 	Estacion esta = Estacion.find.byId(id);
 
@@ -72,7 +67,7 @@ public Result registrarVcub(Long id)throws Exception
 	JsonNode json = request().body().asJson();
 	Estacion esta = Json.fromJson(json, Estacion.class);;
 	esta.save();
-	return ok();
+	return ok("Se ha agregado una estacion: "+Json.toJson(esta));
 
 }
 @Transactional
@@ -86,9 +81,7 @@ public Result darEstaciones()
 @Transactional
 public Result darEstacion(Long id)throws  Exception
 {
-	JsonNode json = request().body().asJson();
 	Estacion  est = Estacion.find.byId(id);
-
 	if(null == est){throw  new Exception("La estacion  con el id: " + id +"no existe");};
 
 	return ok(Json.toJson(est));

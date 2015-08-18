@@ -12,7 +12,7 @@ import java.util.Date;
 public class Reserva extends  Model{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public long id;
+    public Long id;
 
     public String estado;
 
@@ -21,12 +21,12 @@ public class Reserva extends  Model{
     //@ManyToOne
     @Transient
     @JoinColumn(name="cliente_id", nullable = false)
-    public long cliente_id;
+    public Long cliente_id;
 
    // @ManyToOne
    @Transient
-   @JoinColumn(name="mobibus_id", nullable = false)
-    public long mobibus_id;
+   @JoinColumn(name="vehiculo_id", nullable = false)
+    public Long vehiculo_id;
 
     public static Model.Finder<Long,Reserva> find = new Model.Finder<Long, Reserva>(Reserva.class);
 
