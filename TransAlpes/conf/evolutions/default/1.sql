@@ -38,6 +38,7 @@ create table prestamo (
   id                        bigint auto_increment not null,
   cliente_id                bigint not null,
   fecha                     timestamp,
+  vcub_id                   bigint,
   constraint pk_prestamo primary key (id))
 ;
 
