@@ -41,7 +41,7 @@ POST    /clientes                                       controllers.ClienteContr
 ################################################
 GET    /estaciones/:id/disponibilidad                  controllers.EstacionController.darDisponibilidadEstacion(id:Long)
 GET      /estaciones                                controllers.EstacionController.darEstaciones()
-PUT     /estaciones/:id/registrar                  controllers.EstacionController.registrarVcub(id:Long)
+PUT     /estaciones/:id/vcub                  controllers.EstacionController.registrarVcub(id:Long)
 POST    /estaciones                                 controllers.EstacionController.crearEstacion()
 GET    /estaciones/:id                         controllers.EstacionController.darEstacion(id:Long)
 
