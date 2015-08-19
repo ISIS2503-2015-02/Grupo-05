@@ -1,8 +1,10 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import models.Cliente;
 import models.Estacion;
 import models.Informe;
+import models.Vehiculo;
 import play.db.ebean.Transactional;
 import play.libs.Json;
 import play.mvc.BodyParser;
@@ -30,9 +32,19 @@ public Result reportarInforme()
 public Result darReporte()throws Exception
 {
 	Informe inf = new Informe();
-	inf.contenido = "hola";
-	long x = 10;
-	inf.id = x;
+	List<Estacion> listEst = Estacion.find.all();
+	List<Cliente> listClien = Cliente.find.all();
+	List<Informe> listInf = Informe.find.all();
+	List<Vehiculo> listVeh = Vehiculo.find.all();
+
+
+	inf.contenido = "Este es un reporte general de la empresa. La empresa tiene registrados "
+			+ listEst.size() + " Estaciones, " + listClien.size() + "Clientes, " + listInf.size() + " Informes, " + listVeh.size() + " vehiculos. " +
+			"Porfavor estar atento al numero necesario y estable para el funcionamiento de la empresa" ;
+
+
+	inf.numeroGravedad = 1;
+	inf.tipo = "General";
 	return ok(Json.toJson(inf));
 
 }
