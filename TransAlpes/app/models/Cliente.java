@@ -23,7 +23,7 @@ public class Cliente extends Model{
 
     @OneToMany(cascade = CascadeType.ALL)
     @OnDelete(action= OnDeleteAction.CASCADE)
-    @JoinColumn(name="cliente_id")
+    //@JoinColumn(name="cliente_id")
     public List<Reserva> reservasMobibus;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -55,13 +55,12 @@ public class Cliente extends Model{
         }
     }
 
-    public final void actualizarReserva(Reserva reserva, Long idReserva)
+    public final void actualizarReserva(Reserva reserva)
     {
         for(int i=0;i<reservasMobibus.size();i++)
         {
-            if(reservasMobibus.get(i).id==idReserva) {
-                reservasMobibus.get(i).delete();
-                reservasMobibus.add(i,reserva);
+            if(reservasMobibus.get(i).id==reserva.id) {
+                reservasMobibus.set(i,reserva);
             }
         }
     }
