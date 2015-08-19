@@ -84,7 +84,7 @@ public class ClienteController extends Controller {
 
     @Transactional
     @BodyParser.Of(BodyParser.Json.class)
-    public Result alquilarVcub(Long idCliente)throws Exception
+    public Result prestarVcub(Long idCliente)throws Exception
     {
 
         JsonNode json = request().body().asJson();
@@ -165,4 +165,15 @@ public Result darReservasCliente(Long id) throws Exception {
     List<Reserva> reservas = cliente.reservasMobibus;
     return ok(Json.toJson(reservas));
 }
+
+    @Transactional
+    public Result darPrestamosCliente(Long id) throws Exception {
+        JsonNode json = request().body().asJson();
+        Cliente  cliente = Cliente.find.byId(id);
+
+        if(null == cliente){throw  new Exception(String.format("El cliente con el id: %dno existe", id));};
+
+        List<Prestamo> prestamos = cliente.prestamosVcubs;
+        return ok(Json.toJson(prestamos));
+    }
 }

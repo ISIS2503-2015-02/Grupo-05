@@ -12,7 +12,7 @@ public class Prestamo extends  Model
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Long id;
 
-    public Date linea;
+    public Date fecha;
 
     @Transient
     @JoinColumn(name="cliente_id", nullable = false)
