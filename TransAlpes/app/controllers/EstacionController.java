@@ -63,11 +63,10 @@ public Result registrarVcub(Long id)throws Exception
 	 @BodyParser.Of(BodyParser.Json.class)
 	 public Result crearEstacion()
 {
-
 	JsonNode json = request().body().asJson();
 	Estacion esta = Json.fromJson(json, Estacion.class);;
 	esta.save();
-	return ok("Se ha agregado una estacion: "+Json.toJson(esta));
+	return ok("Se ha agregado una estacion: ");
 
 }
 @Transactional
