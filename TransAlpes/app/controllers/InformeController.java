@@ -21,7 +21,6 @@ public class InformeController extends Controller
 @BodyParser.Of(BodyParser.Json.class)
 public Result reportarInforme()
 {
-	System.out.println("Recibido: id= reportarInforme");
 	JsonNode json = request().body().asJson();
 	Informe inf = Json.fromJson(json, Informe.class);;
 	inf.save();
