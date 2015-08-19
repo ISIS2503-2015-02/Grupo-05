@@ -34,7 +34,7 @@ public class VehiculoController extends Controller {
         vehiculo.agregarPosicion(ubicacion);
 
         //Actualizar el vehiculo en la base de datos
-        vehiculo.update();
+       // vehiculo.update();
 
 
         return ok("Se ha agregado una nueva ubicacion\n"+Json.toJson(vehiculo));
