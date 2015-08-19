@@ -26,7 +26,7 @@ public class ClienteController extends Controller {
 
         //TODO verificar el mobibus que este disponible!
 
-	    String id_mob = json.get("mobibus_id").asText();
+	    String id_mob = json.get("vehiculo_id").asText();
 	    Long idM =  Long.valueOf(id_mob);
         Mobibus mobibus= (Mobibus) Mobibus.find.byId(idM);
         if(mobibus==null) {
