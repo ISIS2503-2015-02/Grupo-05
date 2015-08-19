@@ -66,13 +66,12 @@ public class Cliente extends Model{
         }
     }
 
-    public final void actualizarPrestamo(Prestamo prestamo, Long idPrestamo)
+    public final void actualizarPrestamo(Prestamo prestamo)
     {
         for(int i=0;i<prestamosVcubs.size();i++)
         {
-            if(prestamosVcubs.get(i).id==idPrestamo) {
-                prestamosVcubs.get(i).delete();
-                prestamosVcubs.add(i,prestamo);
+            if(prestamosVcubs.get(i).id==prestamo.id) {
+                    prestamosVcubs.set(i,prestamo);
             }
         }
     }

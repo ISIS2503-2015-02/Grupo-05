@@ -63,22 +63,17 @@ public class ClienteController extends Controller {
     public Result actualizarReserva(Long idCliente)throws Exception
     {
         JsonNode json = request().body().asJson();
-        Cliente cliente= Cliente.find.byId(idCliente);
-        if(cliente==null)
-            throw new Exception("No existe el cliente con el Id: "+ idCliente);
+        Cliente cliente = Cliente.find.byId(idCliente);
+        if (cliente == null)
+            throw new Exception("No existe el cliente con el Id: " + idCliente);
 
-        Reserva reserva= Json.fromJson(json, Reserva.class);
+        Reserva reservaActualizado = Json.fromJson(json, Reserva.class);
+        Reserva reservaAntiguo = Reserva.find.byId(reservaActualizado.id);
+        if (reservaAntiguo == null)
+            throw new Exception("No existe el prestamos con el Id:" + reservaActualizado.id);
 
-        Reserva reservax= Reserva.find.byId(reserva.id);
-        if(reservax==null)
-            throw new Exception("No existe la reserva con el Id: "+reserva.id);
-
-
-        reservax= reserva;
-        reservax.update();
-
-        cliente.actualizarReserva(reserva, reserva.id);
-
+        reservaAntiguo = reservaActualizado;
+        reservaAntiguo.update();
         return ok("Reserva actualizada");
     }
 
@@ -108,23 +103,20 @@ public class ClienteController extends Controller {
    public Result devolverVcub(Long idCliente)throws Exception
    {
        JsonNode json = request().body().asJson();
-       Cliente cliente= Cliente.find.byId(idCliente);
-       if(cliente==null)
-           throw new Exception("No existe el cliente con el Id: "+ idCliente);
+       Cliente cliente = Cliente.find.byId(idCliente);
+       if (cliente == null)
+           throw new Exception("No existe el cliente con el Id: " + idCliente);
 
-       Prestamo prestamo= Json.fromJson(json, Prestamo.class);
+       Prestamo prestamoActualizado = Json.fromJson(json, Prestamo.class);
+       Prestamo prestamoAntiguo = Prestamo.find.byId(prestamoActualizado.id);
+       if (prestamoAntiguo == null)
+           throw new Exception("No existe el prestamos con el Id:" + prestamoActualizado.id);
 
-       Prestamo prestamox= Prestamo.find.byId(prestamo.id);
-       if(prestamox==null)
-           throw new Exception("No existe la reserva con el Id: "+prestamo.id);
+       prestamoAntiguo = prestamoActualizado;
+       prestamoAntiguo.update();
 
-
-       prestamox= prestamo;
-       prestamox.update();
-
-       cliente.actualizarPrestamo(prestamo, prestamo.id);
-
-       return ok("Ud ha devuelto el vcub con id="+json.get("vcub"));
+        cliente.actualizarPrestamo(prestamoActualizado);
+       return ok("Prestamo actualizada");
    }
 
     @Transactional
