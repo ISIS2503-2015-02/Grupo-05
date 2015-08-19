@@ -74,6 +74,8 @@ public class ClienteController extends Controller {
 
         reservaAntiguo = reservaActualizado;
         reservaAntiguo.update();
+
+        cliente.actualizarReserva(reservaActualizado);
         return ok("Reserva actualizada");
     }
 
