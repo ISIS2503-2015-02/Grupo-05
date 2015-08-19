@@ -23,7 +23,6 @@ public class Cliente extends Model{
 
     @OneToMany(cascade = CascadeType.ALL)
     @OnDelete(action= OnDeleteAction.CASCADE)
-    @JoinColumn(name="reservas")
     public List<Reserva> reservasMobibus;
 
     @OneToMany(cascade = CascadeType.ALL)
