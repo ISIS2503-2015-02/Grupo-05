@@ -55,7 +55,7 @@ public Result registrarVcub(Long id)throws Exception
 	//aniade uno al numero disponible de Vcubs en la estacion
 	esta.registrarVcub();
 	//actualiza la estacion
-	esta.update();
+	//esta.update();
 	//TODO implementar
 	return ok("usted ha solicitado regustro vcub en la eatcion");
 }
