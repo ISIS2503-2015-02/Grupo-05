@@ -19,12 +19,12 @@ public class Reserva extends  Model{
     public Long fecha;
 
     //@ManyToOne
-   // @Transient
+   @Transient
     @JoinColumn(name="cliente_id", nullable = false)
     public Long cliente_id;
 
    // @ManyToOne
-   //@Transient
+  // @Transient
    @JoinColumn(name="vehiculo_id", nullable = false)
     public Long vehiculo_id;
 

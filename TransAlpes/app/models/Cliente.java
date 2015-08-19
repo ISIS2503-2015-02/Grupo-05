@@ -23,11 +23,11 @@ public class Cliente extends Model{
 
     @OneToMany(cascade = CascadeType.ALL)
     @OnDelete(action= OnDeleteAction.CASCADE)
+    @JoinColumn(name="cliente_id")
     public List<Reserva> reservasMobibus;
 
     @OneToMany(cascade = CascadeType.ALL)
     @OnDelete(action= OnDeleteAction.CASCADE)
-    @JoinColumn(name="prestamos")
     public List<Prestamo> prestamosVcubs;
 
     public static Model.Finder<Long,Cliente> find = new Model.Finder<Long, Cliente>(Cliente.class);
