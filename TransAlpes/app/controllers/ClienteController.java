@@ -35,7 +35,7 @@ public class ClienteController extends Controller {
         }
 	    reserva.vehiculo_id = idM;
         cliente.agregarReserva(reserva);
-        cliente.update();
+        //cliente.update();
 
         return ok("Ud ha reservado el Mobibus con id="+Json.toJson(reserva.vehiculo_id));
     }
@@ -92,7 +92,7 @@ public class ClienteController extends Controller {
         prestamo.cliente_id= cliente.id;
 
         cliente.agregarPrestamo(prestamo);
-        cliente.update();
+        //cliente.update();
 
         return ok("Ud ha reservado el vcub con id="+Json.toJson(prestamo.vcub_id));
     }
