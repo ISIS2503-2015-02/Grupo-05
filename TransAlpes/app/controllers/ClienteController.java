@@ -6,6 +6,7 @@ import play.libs.Json;
 import play.db.ebean.Transactional;
 import play.mvc.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,7 +23,7 @@ public class ClienteController extends Controller {
             throw new Exception("No existe el cliente con el Id: "+ idCliente);
 
         Reserva reserva= Json.fromJson(json, Reserva.class);
-        reserva.cliente_id=cliente.id;
+        //reserva.cliente_id=cliente.id;
 
         //TODO verificar el mobibus que este disponible!
 
@@ -34,6 +35,7 @@ public class ClienteController extends Controller {
 	        throw new Exception(exepcion);
         }
 	    reserva.vehiculo_id = idM;
+        //reserva.cliente_id= idCliente;
         cliente.agregarReserva(reserva);
         //cliente.update();
 
@@ -41,19 +43,22 @@ public class ClienteController extends Controller {
     }
 
     @Transactional
+    @BodyParser.Of(BodyParser.Json.class)
     public Result cancelarReserva(Long idCliente, Long idReserva)throws Exception
     {
         Cliente cliente= Cliente.find.byId(idCliente);
         if(cliente==null)
             throw new Exception("No existe el cliente con el Id: "+ idCliente);
 
-        Reserva reserva= Reserva.find.byId(idReserva);
-        if(reserva==null)
-            throw new Exception("No existe la reserva con el Id: "+idReserva);
+        //Reserva reserva= Reserva.find.byId(idReserva);
+        //if(reserva==null)
+          //  throw new Exception("No existe la reserva con el Id: "+idReserva);
 
-        reserva.delete();
+       // reserva.delete();
 
-        cliente.eliminarReserva(idReserva);
+        //cliente.eliminarReserva(idReserva);
+        cliente.reservasMobibus = new ArrayList<>();
+        cliente.update();
 
         return ok("Reserva cancelada");
     }

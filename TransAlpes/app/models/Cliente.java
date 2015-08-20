@@ -53,6 +53,7 @@ public class Cliente extends Model{
             if(reservasMobibus.get(i).id==idReserva)
                 reservasMobibus.get(i).delete();
         }
+        reservasMobibus = new ArrayList<>();
     }
 
     public final void actualizarReserva(Reserva reserva)
