@@ -106,13 +106,13 @@ public class ClienteController extends Controller {
    {
        JsonNode json = request().body().asJson();
        Cliente cliente = Cliente.find.byId(idCliente);
-       if (cliente == null)
-           throw new Exception("No existe el cliente con el Id: " + idCliente);
+      if (cliente == null)
+          throw new Exception("No existe el cliente con el Id: " + idCliente);
 
        Prestamo prestamoActualizado = Json.fromJson(json, Prestamo.class);
        Prestamo prestamoAntiguo = Prestamo.find.byId(prestamoActualizado.id);
-       if (prestamoAntiguo == null)
-           throw new Exception("No existe el prestamos con el Id:" + prestamoActualizado.id);
+      if (prestamoAntiguo == null)
+        throw new Exception("No existe el prestamos con el Id:" + prestamoActualizado.id);
 
        prestamoAntiguo = prestamoActualizado;
        prestamoAntiguo.update();
