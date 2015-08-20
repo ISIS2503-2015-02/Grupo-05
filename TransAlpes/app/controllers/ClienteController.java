@@ -48,12 +48,12 @@ public class ClienteController extends Controller {
             throw new Exception("No existe el cliente con el Id: "+ idCliente);
 
         Reserva reserva= Reserva.find.byId(idReserva);
-        if(reserva==null)
-            throw new Exception("No existe la reserva con el Id: "+idReserva);
+       // if(reserva==null)
+         //   throw new Exception("No existe la reserva con el Id: "+idReserva);
 
-        reserva.delete();
+        //reserva.delete();
 
-        cliente.eliminarReserva(idReserva);
+        //cliente.eliminarReserva(idReserva);
 
         return ok("Reserva cancelada");
     }
