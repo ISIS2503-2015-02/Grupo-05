@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,13 +19,13 @@ public class Reserva extends  Model{
 
     public Long fecha;
 
-    @Transient
-    @JoinColumn(name="cliente_id", nullable = false)
-    public Long cliente_id;
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JsonIgnore
+    public Cliente cliente;
 
-   //@Transient
-   @JoinColumn(name="vehiculo_id", nullable = false)
-    public Long vehiculo_id;
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JsonIgnore
+    public Vehiculo vehiculo;
 
     public static Model.Finder<Long,Reserva> find = new Model.Finder<Long, Reserva>(Reserva.class);
 

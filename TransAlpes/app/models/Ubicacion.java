@@ -5,6 +5,7 @@ package models;
  */
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -25,9 +26,10 @@ public class Ubicacion extends  Model {
 
     public int kilometraje;
 
-    @Transient
-    @JoinColumn(name="vehiculo_id", nullable = false)
-    public Long vehiculo_id;
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JsonIgnore
+    public Vehiculo vehiculo;
+
 
     public static Model.Finder<Long,Ubicacion> find = new Model.Finder<Long, Ubicacion>(Ubicacion.class);
 }

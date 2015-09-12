@@ -14,9 +14,7 @@ import javax.persistence.*;
 @DiscriminatorValue("M")
 public class Mobibus extends Vehiculo {
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @OnDelete(action= OnDeleteAction.CASCADE)
-    @JoinColumn(name="vehiculo_id", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculo")
     public List<Reserva> reservas;
 
 

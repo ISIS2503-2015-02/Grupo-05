@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 
 /**
@@ -28,18 +30,15 @@ public abstract class Vehiculo extends Model
 
     public String tipo;
 
-
-   @OneToMany(cascade = CascadeType.ALL)
-   @OnDelete(action= OnDeleteAction.CASCADE)
-   @JoinColumn(name="vehiculo_id", nullable = false)
-    public List<Ubicacion> posiciones;
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="vehiculo")
+    public Set<Ubicacion> posiciones;
 
     public static Model.Finder<Long,Vehiculo> find = new Model.Finder<Long, Vehiculo>(Vehiculo.class);
 
     public final void agregarPosicion(Ubicacion ubicacion)
     {
         if(posiciones==null)
-            posiciones = new ArrayList<>();
+            posiciones = new TreeSet<>();
         posiciones.add(ubicacion);
     }
 

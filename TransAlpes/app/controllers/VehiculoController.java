@@ -27,14 +27,14 @@ public class VehiculoController extends Controller {
         Ubicacion ubicacion = Json.fromJson(json, Ubicacion.class);
 
         //Agregar el id del vehiculo a la ubicacion
-        ubicacion.vehiculo_id = vehiculo.id;
+       // ubicacion.vehiculo_id = vehiculo.id;
 
 
         //Agregar la ubicacion al vehiculo
         vehiculo.agregarPosicion(ubicacion);
 
         //Actualizar el vehiculo en la base de datos
-       // vehiculo.update();
+        vehiculo.update();
 
 
         return ok("Se ha agregado una nueva ubicacion\n"+Json.toJson(vehiculo));
@@ -70,8 +70,9 @@ public class VehiculoController extends Controller {
             default: throw new IllegalStateException("El tipo \""+tipo+"\" no es valido");
         }
 
+        assert vehiculo != null;
         vehiculo.save();
-        return ok("Ud ha agregado un vehiculo: "+Json.toJson(vehiculo));
+        return ok("Ud ha agregado un vehiculo: ");
     }
 
     @Transactional

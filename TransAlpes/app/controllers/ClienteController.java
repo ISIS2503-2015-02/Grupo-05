@@ -31,15 +31,15 @@ public class ClienteController extends Controller {
 	    Long idM =  Long.valueOf(id_mob);
         Mobibus mobibus= (Mobibus) Mobibus.find.byId(idM);
         if(mobibus==null) {
-	        String exepcion = String.format("No existe el mobibus con el Id: %d", reserva.vehiculo_id);
+	        String exepcion = String.format("No existe el mobibus con el Id: %d", reserva.vehiculo.id);
 	        throw new Exception(exepcion);
         }
-	    reserva.vehiculo_id = idM;
+	    //reserva.vehiculo_id = idM;
         //reserva.cliente_id= idCliente;
         cliente.agregarReserva(reserva);
-        //cliente.update();
+        cliente.update();
 
-        return ok("Ud ha reservado el Mobibus con id="+Json.toJson(reserva.vehiculo_id));
+        return ok("Ud ha reservado el Mobibus con id="+Json.toJson(reserva.vehiculo.id));
     }
 
     @Transactional
@@ -96,12 +96,12 @@ public class ClienteController extends Controller {
             throw new Exception("No existe el cliente con el Id: "+ idCliente);
 
         Prestamo prestamo= Json.fromJson(json, Prestamo.class);
-        prestamo.cliente_id= cliente.id;
+       // prestamo.cliente_id= cliente.id;
 
         cliente.agregarPrestamo(prestamo);
         //cliente.update();
 
-        return ok("Ud ha reservado el vcub con id="+Json.toJson(prestamo.vcub_id));
+        return ok("Ud ha reservado el vcub con id="+Json.toJson(prestamo.vehiculo.id));
     }
 
    // devolverVcub(id: Long)
