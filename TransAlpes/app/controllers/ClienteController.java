@@ -99,7 +99,7 @@ public class ClienteController extends Controller {
        // prestamo.cliente_id= cliente.id;
 
         cliente.agregarPrestamo(prestamo);
-        cliente.update();
+        //cliente.update();
 
         return ok("Ud ha reservado el vcub con id="+Json.toJson(prestamo.vehiculo.id));
     }
