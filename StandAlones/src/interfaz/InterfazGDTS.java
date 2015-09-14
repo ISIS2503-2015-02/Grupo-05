@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTabbedPane;
@@ -43,7 +44,7 @@ public class InterfazGDTS extends JFrame {
 			public void run() {
 				try {
 					String ans = null;
-					while( (ans= JOptionPane.showInputDialog(null, "Id","Iniciar sesión", JOptionPane.INFORMATION_MESSAGE) ) !=null && ans.isEmpty()) ;
+					while( (ans= JOptionPane.showInputDialog(null, "Id","Iniciar sesion", JOptionPane.INFORMATION_MESSAGE) ) !=null && ans.isEmpty()) ;
 					if(ans==null)
 						return;
 					TBC.getInstance().login(ans);
@@ -77,10 +78,13 @@ public class InterfazGDTS extends JFrame {
 		
 		txtOut = new JTextArea();
 		txtOut.setEditable(false);
+		JScrollPane sp = new JScrollPane(txtOut);
+		sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		JPanel output = new JPanel();
 		output.setLayout(new BorderLayout());
-		output.add(txtOut, BorderLayout.CENTER);
+		output.add(sp, BorderLayout.CENTER);
 		JButton btnClear = new JButton("Clear");
 		btnClear.addActionListener(new ActionListener() {
 			
