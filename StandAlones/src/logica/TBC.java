@@ -6,10 +6,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
+
+
+
 import javax.net.ssl.HttpsURLConnection;
 
 import com.google.code.geocoder.model.LatLng;
 import com.google.gson.JsonObject;
+
 
 
 public class TBC 
@@ -50,8 +55,8 @@ public class TBC
 	public String reportarUbicacion(LatLng pos, String estado, int km) throws Exception
 	{
 		JsonObject json = new JsonObject();
-		json.addProperty("latitud", pos.getLat().longValue());
-		json.addProperty("longitud", pos.getLat().longValue());
+		json.addProperty("latitud", pos.getLat().doubleValue());
+		json.addProperty("longitud", pos.getLat().doubleValue());
 		json.addProperty("hora", System.currentTimeMillis());
 		json.addProperty("estado", estado);
 		json.addProperty("kilometraje", km);
@@ -59,9 +64,10 @@ public class TBC
 
 		String url = "http://localhost:9000/vehiculos/"+id+"/posiciones/agregar";
 		URL obj = new URL(url);
-		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+		sun.net.www.protocol.http.HttpURLConnection con = (sun.net.www.protocol.http.HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("POST");
-
+		con.setRequestProperty("Content-Type", "application/json");
+		
 		String params = json.toString();
 
 		con.setDoOutput(true);

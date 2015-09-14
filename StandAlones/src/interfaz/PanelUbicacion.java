@@ -266,7 +266,8 @@ public class PanelUbicacion extends JPanel implements Observer{
 			public void actionPerformed(ActionEvent e) 
 			{
 				try {
-					TBC.getInstance().reportarUbicacion(actual, (String)comboBox.getSelectedItem(), (Integer)spKm.getValue());
+					String resp = TBC.getInstance().reportarUbicacion(actual, (String)comboBox.getSelectedItem(), (Integer)spKm.getValue());
+					principal.append(resp);
 					txtCiudad.setText("");
 					txtDir.setText("");
 					txtPais.setText("");
