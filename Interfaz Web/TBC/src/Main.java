@@ -19,9 +19,9 @@ import com.google.gson.JsonObject;
  */
 @WebServlet("/Main")
 public class Main extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
-	private static final String BASE_URL ="http://localhost:9000/";
+	private static final String BASE_URL ="https://arqui201326232.herokuapp.com/";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -37,17 +37,17 @@ public class Main extends HttpServlet {
 	{
 		PrintWriter pw = response.getWriter();
 		String uri = request.getParameter("URI");
-		
+
 		Pattern pat = Pattern.compile("\\{\\w+\\}");
 		for(int i=indexOf(pat, uri) ; i!=-1 ; i = indexOf(pat, uri))
 		{
 			String name = uri.substring(i+1, uri.indexOf("}"));
 			uri = uri.replaceFirst("\\{\\w+\\}", request.getParameter(name));
 		}
-		
-		pw.println("Enviando GET a: " + BASE_URL+uri);
-		
-		/*
+
+		//pw.println("Enviando GET a: " + BASE_URL+uri);
+		System.out.println("Enviando GET a: " + BASE_URL+uri);
+
 		//ENVVIAR PETICION GET
 		try
 		{
@@ -56,7 +56,7 @@ public class Main extends HttpServlet {
 		catch (Exception e) {
 			pw.println("ERROR: "+e.getMessage());
 		}
-		*/
+
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class Main extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		Map<String,String[]> params = request.getParameterMap();
 		String uri = request.getParameter("URI");
-		
+
 		Pattern pat = Pattern.compile("\\{\\w+\\}");
 		for(int i=indexOf(pat, uri) ; i!=-1 ; i = indexOf(pat, uri))
 		{
@@ -74,30 +74,31 @@ public class Main extends HttpServlet {
 			request.removeAttribute(name); //Borrar el parametro para que no se vaya en el JSON
 			uri = uri.replaceFirst("\\{\\w+\\}", name);
 		}
-		
-		pw.println("Enviando POST a: " + BASE_URL+uri);
 
+		//	pw.println("Enviando POST a: " + BASE_URL+uri);
+		System.out.println("Enviando POST a: " + BASE_URL+uri);
 		//CONSTRUIR JSON CON PARAMETROS
 		JsonObject json = new JsonObject();
 		for(String key: params.keySet())
 			if(!key.equalsIgnoreCase("URI"))
 				json.addProperty(key, request.getParameter(key));
-		pw.println("Parametros: "+json.toString());
-		
-		/*
+		//pw.println("Parametros: "+json.toString());
+		System.out.println("Parametros: "+json.toString());
+
 		//ENVIAR EL POST
 		try {
 			REST.POST(BASE_URL+uri, json);
+			response.sendRedirect("index.html");
 		} catch (Exception e) {
 			e.printStackTrace();
 			pw.println(e.getMessage());
 		}
-		*/
+
 	}
-	
+
 	public static int indexOf(Pattern pattern, String s) {
-	    Matcher matcher = pattern.matcher(s);
-	    return matcher.find() ? matcher.start() : -1;
+		Matcher matcher = pattern.matcher(s);
+		return matcher.find() ? matcher.start() : -1;
 	}
 
 }

@@ -34,25 +34,25 @@
       <div class="sidebar">
         <!-- insert your sidebar items here -->
         <h3>Registar cliente</h3>
-        <form method="post" action="http://localhost:8080/TBC/Main">
+        <form method="POST" action="http://localhost:8080/TBC/Main">
         <input type="hidden" name="URI" value="clientes">
         <p><input type="text" name="name" value="" placeholder="nombre"></p>        
         <p><input type="number" name="telefono" value="" placeholder="646512154"></p>
         <p><input type="text" name="tarjetaBancaria" value="" placeholder="tarjetabancaria"></p>
-        <p class="submit"><input type="submit" name="commit" value="Registrar"></p>
+        <p class="submit"><input type="submit"></p>
       </form>
         
         <h4>Pedir clientes</h4>
         <form method="get" action="http://localhost:8080/TBC/Main ">
         <input type="hidden" name="URI" value="clientes">
-        <p class="submit"><input type="submit" name="commit" value="Dar clientes"></p>
+        <p class="submit"><input type="submit" ></p>
       </form>
         <p></p>
         <h4>Pedir cliente:</h4>
         <form method="get" action="http://localhost:8080/TBC/Main ">
         <input type="hidden" name="URI" value="clientes/{id}">
         <p>Id cliente:  <input type="text" name="id" value="" placeholder="56"></p>
-     <p class="submit"><input type="submit" name="commit" value="dar cliente"></p>
+     <p class="submit"><input type="submit" ></p>
       </form>
       
       </div>
@@ -65,14 +65,14 @@
         <p>Fecha:  <input type="number" name="fecha" value="" placeholder=""></p>
         <p>IdCliente:  <input type="number" name="idCliente" value="" placeholder=""></p>
         <p>Vehiculo:  <input type="number" name="vehiculo_id" value="" placeholder=""></p>
-        <p class="submit"><input type="submit" name="commit" value="crear reservas"></p>
+        <p class="submit"><input type="submit"></p>
       </form>
         <p></p>
         <h1>Busca tus reservas</h1>
         <form method="get" action="http://localhost:8080/TBC/Main">
         <input type="hidden" name="URI" value="clientes/{idCliente}/reservas">
-        <p>Id cliente:  <input type="number" name="idCliente2" value="" placeholder="56"></p>
-     <p class="submit"><input type="submit" name="commit" value="dar reservas"></p>
+        <p>Id cliente:  <input type="number" name="idCliente" value="" placeholder="56"></p>
+     <p class="submit"><input type="submit" ></p>
       </form>
         <p></p>
          <h2>Aca crearas tus prestamos</h2>
@@ -81,7 +81,7 @@
         <p>Fecha <input type="date" name="fecha" value="" ></p>
         <p>IdCliente <input type="number" name="idCliente" value="" placeholder=""></p>
         <p>Vehiculo <input type="number" name="vehiculo_id" value="" placeholder=""></p>
-        <p class="submit"><input type="submit" name="commit" value="crear prestamo"></p>
+        <p class="submit"><input type="submit"></p>
       </form>
          <p></p>
         <h1>Busca tus prestamos</h1>
@@ -90,7 +90,7 @@
         <p>Fecha <input type="date" name="fecha" value="" ></p>
         <p>IdCliente <input type="number" name="idCliente" value="" placeholder=""></p>
         <p>Vehiculo <input type="number" name="vehiculo_id" value="" placeholder=""></p>
-        <p class="submit"><input type="submit" name="commit" value="crear prestamo"></p>
+        <p class="submit"><input type="submit" ></p>
       </form>
   
       </div>

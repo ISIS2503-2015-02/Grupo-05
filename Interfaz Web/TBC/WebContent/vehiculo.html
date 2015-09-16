@@ -41,16 +41,16 @@
         <p></p>
         <form method="get" action="http://localhost:8080/TBC/Main">
         <input type="hidden" name="URI" value="vehiculos">
-        <p class="submit"><input type="submit"  value="Dar vehiculos"></p>
+        <p class="submit"><input type="submit" ></p>
       </form>
          -----------------------------------
 
         <h4>Dar vehiculo</h4>
         <p></p>
         <form method="get" action="http://localhost:8080/TBC/Main">
-        <input type="hidden" name="URI" value="clientes/{id}">
+        <input type="hidden" name="URI" value="vehiculos/{id}">
         <p>Id Vehiculo  <input type="text" name="id" value="" placeholder="56"></p>
-     <p class="submit"><input type="submit"  value="Dar vehiculo"></p>
+     <p class="submit"><input type="submit" ></p>
       </form>
         
       </div>
@@ -63,20 +63,34 @@
         <form method="post" action="http://localhost:8080/TBC/Main">
         <input type="hidden" name="URI" value="vehiculos">
         <select name="tipo">
-        <option value="tipo">tipo</option>
-        <option value="Mobibus">Mobibus </option>
         <option value="Vcub">Vcub</option>
-        <option value="Tranvia">Tranvia</option>
         </select>
             <p></p>
         <p>Estado:  <input type="text" name="estado" value="" placeholder="Alquilado/ libre"></p>
+
          <h5> Vcubs</h5>
         <p>Color (Vcub):  <input type="text" name="color" value="" placeholder="rojo,azul..."></p>
+            <p class="submit"><input type="submit"></p>
+    
+       </form>
+       <form method="post" action="http://localhost:8080/TBC/Main">
        <h5> Mobibus: </h5>
+       <input type="hidden" name="URI" value="vehiculos">
+        <select name="tipo">
+        <option value="Mobibus">Mobibus </option>
+        </select>
         <p>Num Personas de pie:  <input type="text" name="personasPie" value="" placeholder="15"></p>
         <p>Num Personas discapacitadas:  <input type="text" name="personasDiscapacitadas" value="" placeholder="2"></p>
+            <p class="submit"><input type="submit"></p>
+    
+     </form>
+       <form method="post" action="http://localhost:8080/TBC/Main">
        <h5> Tranvia </h5>
-       
+       <input type="hidden" name="URI" value="vehiculos">
+        <select name="tipo">
+        <option value="Tranvia">Tranvia</option>
+        </select>
+        <p></p>
          <select name="linea">
         <option value="linea">linea</option>
         <option value="A">A </option>
@@ -93,7 +107,7 @@
         <option value="false">Desactivado</option>
         </select>
        <p></p>
-        <p class="submit"><input type="submit" name="commit" value="Registrar vehiculos"></p>
+        <p class="submit"><input type="submit"></p>
         </form>
         <p></p>
         

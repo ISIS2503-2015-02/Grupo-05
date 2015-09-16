@@ -41,8 +41,9 @@
         <p></p>
            <h2>Dar  reporte </h2>
        <form method="get" action="http://localhost:8080/TBC/Main">
-       <input type="hidden" name="URI" value="informes">
-        <p class="submit"><input type="submit" name="commit" value="Dar reportes"></p>
+       <input type="hidden" name="URI" value="informes/{id}">
+       <p>Id informe: <input type="number" name="id" value="" placeholder="4"></p>
+        <p class="submit"><input type="submit" value="Dar reportes"></p>
       </form>
       </div>
       <div id="content">

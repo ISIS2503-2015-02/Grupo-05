@@ -35,24 +35,24 @@
         <!-- insert your sidebar items here -->
          <h3>Pedir estacion</h3>
         <form method="get" action="http://localhost:8080/TBC/Main ">
-        <input type="hidden" name="URI" value="estaciones/[id}">
+        <input type="hidden" name="URI" value="estaciones/{id}">
         <p>Id estacion<input type="number" name="id" value="" placeholder=""></p>
-        <p class="submit"><input type="submit" name="commit" value="Go"></p>
+        <p class="submit"><input type="submit"></p>
       </form>
          <p></p>
          
         <h4>Pedir estaciones</h4>
         <form method="get" action="http://localhost:8080/TBC/Main">
         <input type="hidden" name="URI" value="estaciones">
-        <p class="submit"><input type="submit" name="commit" value="Dar estaciones"></p>
+        <p class="submit"><input type="submit" ></p>
       </form>
         
         <p></p>
          <h4>Dar disponibilidad estación</h4>  
         <form method="get" action="http://localhost:8080/TBC/Main">
-        <input type="hidden" name="URI" value="estaciones/{id]/disponibilidad">
+        <input type="hidden" name="URI" value="estaciones/{id}/disponibilidad">
         <p>Id estacion<input type="number" name="id" value="" placeholder=""></p>
-        <p class="submit"><input type="submit" name="commit" value="Go"></p>
+        <p class="submit"><input type="submit" ></p>
       </form>
 
       </div>
@@ -69,14 +69,14 @@
         <p>Capacidad: <input type="number" name="capacidad" value="" placeholder=""></p>
         <p>Latitud: <input type="number" name="latitud" value="" placeholder="-12"></p>
         <p>Longitud: <input type="number" name="longitud" value="" placeholder="64" align="center"></p>
-        <p class="submit"><input type="submit" name="commit" value="Crear"></p>
+        <p class="submit"><input type="submit"></p>
       </form>
         
          <h2>Registrar VCubs</h2>
         <form method="post" action="http://localhost:8080/Main/TBC ">
         <input type="hidden" name="URI" value="estaciones/[id]/vcub">
         <p>Id estación:   <input type="number" name="id" value="" placeholder=""></p>
-        <p class="submit"><input type="submit" name="commit" value="Actualizar"></p>
+        <p class="submit"><input type="submit"></p>
       </form>
         
       </div>
