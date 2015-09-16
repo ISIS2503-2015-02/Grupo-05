@@ -1,10 +1,15 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import models.*;
-import play.libs.Json;
+import models.Cliente;
+import models.Mobibus;
+import models.Prestamo;
+import models.Reserva;
 import play.db.ebean.Transactional;
-import play.mvc.*;
+import play.libs.Json;
+import play.mvc.BodyParser;
+import play.mvc.Controller;
+import play.mvc.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +21,8 @@ public class ClienteController extends Controller {
     @BodyParser.Of(BodyParser.Json.class)
     public Result crearReserva(Long idCliente)throws Exception
     {
+
+
         JsonNode json = request().body().asJson();
 
         Cliente cliente= Cliente.find.byId(idCliente);
