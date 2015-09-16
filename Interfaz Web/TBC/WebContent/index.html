@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html"><span class="logo_colour"></span></a></h1>
+          <h2></h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li class="selected"><a href="index.html">Cliente</a></li>
+          <li><a href="estacion.html">Estaciones</a></li>
+          <li><a href="Informes.html">Informe</a></li>
+          <li><a href="vehiculo.html">Vehiculo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="content_header"></div>
+    <div id="site_content">
+      <div class="sidebar">
+        <!-- insert your sidebar items here -->
+        <h3>Registar cliente</h3>
+        <form method="post" action="http://localhost:8080/TBC/Main">
+        <input type="hidden" name="URI" value="clientes">
+        <p><input type="text" name="name" value="" placeholder="nombre"></p>        
+        <p><input type="number" name="telefono" value="" placeholder="646512154"></p>
+        <p><input type="text" name="tarjetaBancaria" value="" placeholder="tarjetabancaria"></p>
+        <p class="submit"><input type="submit" name="commit" value="Registrar"></p>
+      </form>
+        
+        <h4>Pedir clientes</h4>
+        <form method="get" action="http://localhost:8080/TBC/Main ">
+        <input type="hidden" name="URI" value="clientes">
+        <p class="submit"><input type="submit" name="commit" value="Dar clientes"></p>
+      </form>
+        <p></p>
+        <h4>Pedir cliente:</h4>
+        <form method="get" action="http://localhost:8080/TBC/Main ">
+        <input type="hidden" name="URI" value="clientes/{id}">
+        <p>Id cliente:  <input type="text" name="id" value="" placeholder="56"></p>
+     <p class="submit"><input type="submit" name="commit" value="dar cliente"></p>
+      </form>
+      
+      </div>
+      <div id="content">
+        <!-- insert the page content here -->
+        <h1>Aca crearas tus reservas</h1>
+        <form method="post" action="http://localhost:8080/TBC/Main ">
+        <input type="hidden" name="URI" value="clientes/{idCliente}/reservas">
+        <p>Estado:  <input type="text" name="estado" value="" placeholder="Aciva/Cancelada"></p>
+        <p>Fecha:  <input type="number" name="fecha" value="" placeholder=""></p>
+        <p>IdCliente:  <input type="number" name="idCliente" value="" placeholder=""></p>
+        <p>Vehiculo:  <input type="number" name="vehiculo_id" value="" placeholder=""></p>
+        <p class="submit"><input type="submit" name="commit" value="crear reservas"></p>
+      </form>
+        <p></p>
+        <h1>Busca tus reservas</h1>
+        <form method="get" action="http://localhost:8080/TBC/Main">
+        <input type="hidden" name="URI" value="clientes/{idCliente}/reservas">
+        <p>Id cliente:  <input type="number" name="idCliente2" value="" placeholder="56"></p>
+     <p class="submit"><input type="submit" name="commit" value="dar reservas"></p>
+      </form>
+        <p></p>
+         <h2>Aca crearas tus prestamos</h2>
+        <form method="post" action="http://localhost:8080/TBC/Main ">
+        <input type="hidden" name="URI" value="clientes/{idCliente}/prestamos">
+        <p>Fecha <input type="date" name="fecha" value="" ></p>
+        <p>IdCliente <input type="number" name="idCliente" value="" placeholder=""></p>
+        <p>Vehiculo <input type="number" name="vehiculo_id" value="" placeholder=""></p>
+        <p class="submit"><input type="submit" name="commit" value="crear prestamo"></p>
+      </form>
+         <p></p>
+        <h1>Busca tus prestamos</h1>
+        <form method="post" action="http://localhost:8080/TBC/Main ">
+        <input type="hidden" name="URI" value="clientes/{idCliente}/prestamos">
+        <p>Fecha <input type="date" name="fecha" value="" ></p>
+        <p>IdCliente <input type="number" name="idCliente" value="" placeholder=""></p>
+        <p>Vehiculo <input type="number" name="vehiculo_id" value="" placeholder=""></p>
+        <p class="submit"><input type="submit" name="commit" value="crear prestamo"></p>
+      </form>
+  
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+   </div>
+  </div>
+</body>
+</html>
