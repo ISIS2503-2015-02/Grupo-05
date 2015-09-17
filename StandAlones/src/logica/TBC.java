@@ -31,7 +31,7 @@ public class TBC
 
 	public boolean login(String id) throws Exception
 	{
-		String url = "http://localhost:9000/vehiculos/"+id;
+		String url = "https://arqui201326232.herokuapp.com/vehiculos/"+id;
 
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -58,7 +58,7 @@ public class TBC
 		json.addProperty("kilometraje", km);
 
 
-		String url = "http://localhost:9000/vehiculos/"+id+"/posiciones/agregar";
+		String url = "https://arqui201326232.herokuapp.com/vehiculos/"+id+"/posiciones/agregar";
 		URL obj = new URL(url);
 		sun.net.www.protocol.http.HttpURLConnection con = (sun.net.www.protocol.http.HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("POST");
