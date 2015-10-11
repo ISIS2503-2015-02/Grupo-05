@@ -34,16 +34,13 @@
       <div class="sidebar">
         <!-- insert your sidebar items here -->
         <h2>Dar  reporte general</h2>
-       <form method="get" action="http://localhost:8080/TBC/Main">
-       <input type="hidden" name="URI" value="informes/general">
+       <form method="get" action="http://localhost:9090/informes/general">
         <p class="submit"><input type="submit" name="commit" value="Dar reporte general"></p>
       </form>
         <p></p>
            <h2>Dar  reporte </h2>
-       <form method="get" action="http://localhost:8080/TBC/Main">
-       <input type="hidden" name="URI" value="informes/{id}">
-       <p>Id informe: <input type="number" name="id" value="" placeholder="4"></p>
-        <p class="submit"><input type="submit" value="Dar reportes"></p>
+       <form method="get" action="http://localhost:9090/informes">
+        <p class="submit"><input type="submit" name="commit" value="Dar reportes"></p>
       </form>
       </div>
       <div id="content">
@@ -52,8 +49,7 @@
         <p> Aca puedes generar informes, dependiendo de las especificaciones </p>
         
         <h2>Crear informes</h2>
-       <form method="post" action="http://localhost:8080/TBC/Main ">
-       <input type="hidden" name="URI" value="informes">
+       <form method="post" action="http://localhost:9090/informes ">
         <p>Gravedad: <input type="number" name="numeroGravedad" value="" placeholder="numero de gravedad"></p>
         <p>Tipo de informe: <input type="text" name="tipo" value="" placeholder=""></p>
         <p>Id estación: <input type="text" name="contenido" value="" placeholder=""></p>

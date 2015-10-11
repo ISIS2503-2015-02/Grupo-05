@@ -34,7 +34,7 @@ public class TBC
 		String url = "https://arqui201326232.herokuapp.com/vehiculos/"+id;
 
 		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		sun.net.www.protocol.https.HttpsURLConnectionImpl con = (sun.net.www.protocol.https.HttpsURLConnectionImpl) obj.openConnection();
 
 		BufferedReader in = new BufferedReader( new InputStreamReader(con.getInputStream()));
 		String linea;
@@ -59,8 +59,9 @@ public class TBC
 
 
 		String url = "https://arqui201326232.herokuapp.com/vehiculos/"+id+"/posiciones/agregar";
+		System.out.println(url);
 		URL obj = new URL(url);
-		sun.net.www.protocol.http.HttpURLConnection con = (sun.net.www.protocol.http.HttpURLConnection) obj.openConnection();
+		sun.net.www.protocol.https.HttpsURLConnectionImpl con = (sun.net.www.protocol.https.HttpsURLConnectionImpl) obj.openConnection();
 		con.setRequestMethod("POST");
 		con.setRequestProperty("Content-Type", "application/json");
 		
