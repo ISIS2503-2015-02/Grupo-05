@@ -9,7 +9,7 @@ app.controller('vehiculoCtrl', ['$scope', '$http', '$window', function ($scope, 
 
 
         $scope.darVehiculo = function () {
-              $window.location.href = base_url + '/vehiculos/' + $scope.vehiculo.idVehiculo;
+              $window.location.href = base_url + '/vehiculos/' + $scope.idVehiculo;
         };
 
         $scope.darVehiculos = function () {
@@ -17,12 +17,12 @@ app.controller('vehiculoCtrl', ['$scope', '$http', '$window', function ($scope, 
 
         };
 
-        $scope.vehiculo.estado = '';
-        $scope.vehiculo.tipo = '';
-        $scope.vehiculo.personasPie = '';
-        $scope.vehiculo.personasDiscapacitadas = '';
-        $scope.vehiculo.linea = '';
-        $scope.vehiculo.temperatura = '';
+        $scope.vehiculo.estado = 'Activo';
+        $scope.vehiculo.tipo = 'Vcub';
+        $scope.vehiculo.personasPie = '50';
+        $scope.vehiculo.personasDiscapacitadas = '10';
+        $scope.vehiculo.linea = 'A';
+        $scope.vehiculo.temperatura = 20;
         $scope.vehiculo.hora = 0;
         $scope.vehiculo.panico = false;
         $scope.crearVehiculo = function ()

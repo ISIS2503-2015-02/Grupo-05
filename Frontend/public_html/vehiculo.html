@@ -64,22 +64,22 @@
                     <h2>Crear vehiculo</h2>
                     <form method="post" ng-controller="vehiculoCtrl" ng-submit="crearVehiculo()">
 
-                        <select name="tipo" ng-model="tipo">
-                            <option value="tipo">tipo</option>
+                        <select name="tipo" ng-model="vehiculo.tipo">
+           
                             <option value="Mobibus">Mobibus </option>
                             <option value="Vcub">Vcub</option>
                             <option value="Tranvia">Tranvia</option>
                         </select>
                         <p></p>
-                        <p>Estado:  <input type="text" name="estado" value="" placeholder="Alquilado/ libre" ng-model="estado"></p>
+                        <p>Estado:  <input type="text" name="estado" value="" placeholder="Alquilado/ libre" ng-model="vehiculo.estado"></p>
                         <h5> Vcubs</h5>
-                        <p>Color (Vcub):  <input type="text" name="color" value="" placeholder="rojo,azul..." ng-model="color"></p>
+                        <p>Color (Vcub):  <input type="text" name="color" value="" placeholder="rojo,azul..." ng-model="vehiculo.color"></p>
                         <h5> Mobibus: </h5>
-                        <p>Num Personas de pie:  <input ng-model="personasPie"type="text" name="personasPie" value="" placeholder="15"></p>
-                        <p>Num Personas discapacitadas:  <input  ng-model="personasDiscapacitadas"type="text" name="personasDiscapacitadas" value="" placeholder="2"></p>
+                        <p>Num Personas de pie:  <input ng-model="vehiculo.personasPie"type="text" name="personasPie" value="" placeholder="15"></p>
+                        <p>Num Personas discapacitadas:  <input  ng-model="vehiculo.personasDiscapacitadas"type="text" name="personasDiscapacitadas" value="" placeholder="2"></p>
                         <h5> Tranvia </h5>
 
-                        <select name="linea" ng-model="linea">
+                        <select name="linea" ng-model="vehiculo.linea">
                             <option value="linea">linea</option>
                             <option value="A">A </option>
                             <option value="B">B</option>
@@ -87,11 +87,11 @@
                             <option value="otra">otra</option>
                         </select>
                         <p></p>
-                        <p>Temperatura:  <input ng-model="temperatura" type="number" name="temperatura" value="" placeholder="27"></p>
-                        <p>Hora:   <input ng-model="hora" type="number" name="hora" value="" placeholder="3.00"></p>
-                        <select name="panico" ng-model="panico">
-                            <option value="panico">panico</option>
-                            <option value="true">Activar </option>
+                        <p>Temperatura:  <input ng-model="vehiculo.temperatura" type="number" name="temperatura" value="" placeholder="27"></p>
+                        <p>Hora:   <input ng-model="vehiculo.hora" type="number" name="hora" value="" placeholder="3.00"></p>
+                        <select name="panico" ng-model="vehiculo.panico">
+               
+                            <option value="true">Activado </option>
                             <option value="false">Desactivado</option>
                         </select>
                         <p></p>

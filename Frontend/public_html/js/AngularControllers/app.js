@@ -9,13 +9,16 @@
     var app = angular.module('Transalpes', []);
 
 
+    var base_url = 'http://arqui201326232.herokuapp.com';
+
+
     /*
      * 
      * CLIENTE CONTROLLER
      * 
      */
     app.controller('clienteCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
-            var base_url = 'http://arqui201326232.herokuapp.com';
+            // var base_url = 'http://arqui201326232.herokuapp.com';
 
             $scope.cliente = {};
             $scope.idCliente = '1';
@@ -71,7 +74,7 @@
 
     app.controller('reservaCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window)
         {
-            var base_url = 'http://arqui201326232.herokuapp.com';
+            //var base_url = 'http://arqui201326232.herokuapp.com';
 
             $scope.reserva = {};
             $scope.idReserva = '1';
@@ -92,7 +95,7 @@
 
     app.controller('estacionCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window)
         {
-            var base_url = 'http://arqui201326232.herokuapp.com';
+            //var base_url = 'http://arqui201326232.herokuapp.com';
 
             $scope.estacion = {};
             $scope.idEstacion = '1';
@@ -123,7 +126,7 @@
 
     app.controller('informeCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window)
         {
-            var base_url = 'http://arqui201326232.herokuapp.com';
+            //var base_url = 'http://arqui201326232.herokuapp.com';
 
 
             $scope.darReportes = function () {
