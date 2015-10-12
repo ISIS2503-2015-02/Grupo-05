@@ -8,10 +8,12 @@
         <script type="text/javascript" src="js/Angularcontrollers/vehiculoCtrl.js"></script>    
 
 
-        <div ng-controller="vehiculoCtrl"> 
-             respuesta:
-            <ul>
-                <li> {{contenido}}</li>
+        <div> 
+            respuesta:
+            <ul ng-controller="mainCtrl">
+                <li ng-repeat="x in darContenido()">
+                    {{ x}}
+                </li>
             </ul>
 
         </div>
