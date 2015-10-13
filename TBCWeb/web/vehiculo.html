@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>simplestyle_1 - another page</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html"><span class="logo_colour"></span></a></h1>
+          <h2></h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+           <li><a href="index.html">Cliente</a></li> 
+          <li><a href="estacion.html">Reservas</a></li>
+          <li><a href="Informes.html">Informes</a></li>
+          <li class="selected"><a href="vehiculo.html">Vehiculo</a></li>
+                           
+        </ul>
+      </div>
+    </div>
+    <div id="content_header"></div>
+    <div id="site_content">
+      <div class="sidebar">
+        <!-- insert your sidebar items here -->
+        <h3>Pedir vehiculo/ vehiculos: </h3>
+         -----------------------------------
+
+        <h4>Dar vehiculos</h4>
+        <p></p>
+        <form method="get" action="Main">
+        <input type="hidden" name="URI" value="vehiculos">
+        <p class="submit"><input type="submit" ></p>
+      </form>
+         -----------------------------------
+
+        <h4>Dar vehiculo</h4>
+        <p></p>
+        <form method="get" action="Main">
+        <input type="hidden" name="URI" value="vehiculos/{id}">
+        <p>Id Vehiculo  <input type="text" name="id" value="" placeholder="56"></p>
+     <p class="submit"><input type="submit" ></p>
+      </form>
+        
+      </div>
+      <div id="content">
+        <!-- insert the page content here -->
+        <h1>Vehiculo</h1>
+        <p>Aca se pueden registar los vehiculos, dar un resumen de los mismos ymirar sus posciciones </p>
+         
+         <h2>Crear vehiculo</h2>
+        <form method="post" action="Main">
+        <input type="hidden" name="URI" value="vehiculos">
+        <select name="tipo">
+        <option value="Vcub">Vcub</option>
+        </select>
+            <p></p>
+        <p>Estado:  <input type="text" name="estado" value="" placeholder="Alquilado/ libre"></p>
+
+         <h5> Vcubs</h5>
+        <p>Color (Vcub):  <input type="text" name="color" value="" placeholder="rojo,azul..."></p>
+            <p class="submit"><input type="submit"></p>
+    
+       </form>
+       <form method="post" action="Main">
+       <h5> Mobibus: </h5>
+       <input type="hidden" name="URI" value="vehiculos">
+        <select name="tipo">
+        <option value="Mobibus">Mobibus </option>
+        </select>
+        <p>Num Personas de pie:  <input type="text" name="personasPie" value="" placeholder="15"></p>
+        <p>Num Personas discapacitadas:  <input type="text" name="personasDiscapacitadas" value="" placeholder="2"></p>
+            <p class="submit"><input type="submit"></p>
+    
+     </form>
+       <form method="post" action="Main">
+       <h5> Tranvia </h5>
+       <input type="hidden" name="URI" value="vehiculos">
+        <select name="tipo">
+        <option value="Tranvia">Tranvia</option>
+        </select>
+        <p></p>
+         <select name="linea">
+        <option value="linea">linea</option>
+        <option value="A">A </option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="otra">otra</option>
+        </select>
+       <p></p>
+       <p>Temperatura:  <input type="number" name="temperatura" value="" placeholder="27"></p>
+       <p>Hora:   <input type="number" name="hora" value="" placeholder="3.00"></p>
+        <select name="panico">
+        <option value="panico">panico</option>
+        <option value="true">Activar </option>
+        <option value="false">Desactivado</option>
+        </select>
+       <p></p>
+        <p class="submit"><input type="submit"></p>
+        </form>
+        <p></p>
+        
+         </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+    </div>
+  </div>
+</body>
+</html>
