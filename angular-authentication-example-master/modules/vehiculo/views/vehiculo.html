@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html ng-app="vehiculo">
+
+    <head>
+        <title> Vehiculo </title>
+        <meta name="description" content="website description" />
+        <meta name="keywords" content="website keywords, website keywords" />
+        <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+        <link rel="stylesheet" type="text/css" href="style/style.css" />
+    </head>
+
+    <body>
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/Angularcontrollers/app.js"></script>
+        <script type="text/javascript" src="modules/vehiculo/vehiculoCtrl.js"></script>
+        <div id="main">
+            <div id="header">
+                <div id="logo">
+                    <div id="logo_text">
+                        <!-- class="logo_colour", allows you to change the colour of the text -->
+                        <h1><a href="index.html"><span class="logo_colour"></span></a></h1>
+                        <h2></h2>
+                    </div>
+                </div>
+                <div id="menubar">
+                    <ul id="menu">
+                        <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+                        <li><a href="index.html">Cliente</a></li> 
+                        <li><a href="estacion.html">Reservas</a></li>
+                        <li><a href="Informes.html">Informes</a></li>
+                        <li class="selected"><a href="vehiculo.html">Vehiculo</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            <div id="content_header"></div>
+            <div id="site_content">
+                <div class="sidebar">
+                    <!-- insert your sidebar items here -->
+                    <h3>Pedir vehiculo/ vehiculos: </h3>
+                    -----------------------------------
+
+                    <h4>Dar vehiculos</h4>
+                    <p></p>
+                    <form ng-submit="darVehiculos()" ng-controller="vehiculoCtrl">
+
+                        <input type="submit"  value="Dar vehiculos">
+                    </form>
+                    -----------------------------------
+
+                    <h4>Dar vehiculo</h4>
+                    <p></p>
+                    <form ng-controller="vehiculoCtrl" ng-submit="darVehiculo()" >
+                        <p>Id Vehiculo  <input type="text" name="id" value="" placeholder="1" ng-model="idVehiculo"></p>
+                        <p class="submit"><input type="submit"  value="Dar vehiculo"></p>
+                    </form>
+
+                </div>
+                <div id="content">
+                    <!-- insert the page content here -->
+                    <h1>Vehiculo</h1>
+                    <p>Aca se pueden registar los vehiculos, dar un resumen de los mismos ymirar sus posciciones </p>
+
+                    <h2>Crear vehiculo</h2>
+                    <form method="post" ng-controller="vehiculoCtrl" ng-submit="crearVehiculo()">
+
+                        <select name="tipo" ng-model="vehiculo.tipo">
+           
+                            <option value="Mobibus">Mobibus </option>
+                            <option value="Vcub">Vcub</option>
+                            <option value="Tranvia">Tranvia</option>
+                        </select>
+                        <p></p>
+                        <p>Estado:  <input type="text" name="estado" value="" placeholder="Alquilado/ libre" ng-model="vehiculo.estado"></p>
+                        <h5> Vcubs</h5>
+                        <p>Color (Vcub):  <input type="text" name="color" value="" placeholder="rojo,azul..." ng-model="vehiculo.color"></p>
+                        <h5> Mobibus: </h5>
+                        <p>Num Personas de pie:  <input ng-model="vehiculo.personasPie"type="text" name="personasPie" value="" placeholder="15"></p>
+                        <p>Num Personas discapacitadas:  <input  ng-model="vehiculo.personasDiscapacitadas"type="text" name="personasDiscapacitadas" value="" placeholder="2"></p>
+                        <h5> Tranvia </h5>
+
+                        <select name="linea" ng-model="vehiculo.linea">
+                            <option value="linea">linea</option>
+                            <option value="A">A </option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="otra">otra</option>
+                        </select>
+                        <p></p>
+                        <p>Temperatura:  <input ng-model="vehiculo.temperatura" type="number" name="temperatura" value="" placeholder="27"></p>
+                        <p>Hora:   <input ng-model="vehiculo.hora" type="number" name="hora" value="" placeholder="3.00"></p>
+                        <select name="panico" ng-model="vehiculo.panico">
+               
+                            <option value="true">Activado </option>
+                            <option value="false">Desactivado</option>
+                        </select>
+                        <p></p>
+                        <p class="submit"><input type="submit" name="commit" value="Registrar vehiculos"></p>
+                    </form>
+                    <p></p>
+
+                </div>
+            </div>
+            <div id="content_footer"></div>
+            <div id="footer">
+            </div>
+        </div>
+    </body>
+</html>

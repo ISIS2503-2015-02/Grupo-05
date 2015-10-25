@@ -3,6 +3,7 @@
 // declare modules
 angular.module('Authentication', []);
 angular.module('Home', []);
+angular.module('vehiculo', []);
 
 angular.module('BasicHttpAuthExample', [
     'Authentication',
@@ -24,9 +25,9 @@ angular.module('BasicHttpAuthExample', [
                             templateUrl: 'modules/home/views/home.html'
                         })
 
-                        .when('/estacion', {
-                            controller: 'HomeController',
-                            templateUrl: 'modules/vehiculo/views/estacion.html'
+                        .when('/vehiculo', {
+                            controller: 'vehiculoCtrl',
+                            templateUrl: 'modules/vehiculo/views/vehiculo.html'
                         })
 
                         .otherwise({redirectTo: '/login'});
