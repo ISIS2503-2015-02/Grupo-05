@@ -18,7 +18,7 @@ DELETE  /persons                                         controllers.Application
 POST    /vehiculos/:id/posiciones/agregar               controllers.VehiculoController.agregarPosicion(id: Long)
 POST     /vehiculos                             controllers.VehiculoController.agregarVehiculo()
 GET     /vehiculos                               controllers.VehiculoController.darVehiculos()
-GET     /vehiculos/:id                                      controllers.VehiculoController.darVehiculo(id: Long)
+GET     /vehiculos/:id                                      controlClientelers.VehiculoController.darVehiculo(id: Long)
 
 ################################################
 #              METODS DE CLIENTES

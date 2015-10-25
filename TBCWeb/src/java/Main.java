@@ -21,7 +21,7 @@ import com.google.gson.JsonObject;
 public class Main extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final String BASE_URL ="http://localhost:9000/";
+	private static final String BASE_URL ="http://172.24.100.46:90/";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
