@@ -10,7 +10,8 @@ import java.util.Date;
  * Created by n.castro15 on 12/08/2015.
  */
 @Entity
-public  class Reserva {
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public  abstract class Reserva {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public long id;
@@ -18,7 +19,18 @@ public  class Reserva {
     public String estado;
 
     public long fecha;
+    
+    public String tipo;
 
+    @ManyToOne
+    @JsonIgnore
+    public Cliente cliente;
+    
+    @ManyToOne
+    @JsonIgnore
+    public Vehiculo vehiculo;
+    
+    
     public long getId() {
         return id;
     }
@@ -50,9 +62,23 @@ public  class Reserva {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
-    @ManyToOne
-    public Cliente cliente;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+ 
 
 
 
