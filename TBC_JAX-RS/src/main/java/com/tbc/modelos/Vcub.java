@@ -14,8 +14,8 @@ public class Vcub extends Vehiculo
 
     public String color;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculo")
-    public List<Prestamo> prestamos;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculo")
+   // public List<Prestamo> prestamos;
     
     public Vcub()
     {
@@ -29,13 +29,4 @@ public class Vcub extends Vehiculo
     public void setColor(String color) {
         this.color = color;
     }
-
-    public List<Prestamo> getPrestamos() {
-        return prestamos;
-    }
-
-    public void setPrestamos(List<Prestamo> prestamos) {
-        this.prestamos = prestamos;
-    }
-    
 }

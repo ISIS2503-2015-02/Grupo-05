@@ -7,7 +7,6 @@
     <class>com.tbc.modelos.Estacion</class>
     <class>com.tbc.modelos.Informe</class>
     <class>com.tbc.modelos.Mobibus</class>
-    <class>com.tbc.modelos.Prestamo</class>
     <class>com.tbc.modelos.Reserva</class>
     <class>com.tbc.modelos.Tranvia</class>
     <class>com.tbc.modelos.Ubicacion</class>
@@ -31,7 +30,7 @@
       <property name="javax.persistence.jdbc.password" value="APP"/>
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="eclipselink.logging.parameters" value="true"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

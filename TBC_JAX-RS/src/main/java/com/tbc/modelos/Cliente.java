@@ -18,15 +18,24 @@ public class Cliente {
 
     public String name;
 
-    public int telefono;
+    public String telefono;
 
     public String tarjetaBancaria;
+    
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    public List<Reserva> reservas;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
-    public List<Reserva> reservasMobibus;
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
-    public List<Prestamo> prestamosVcubs;
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
+
+   // @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+   // public List<Prestamo> prestamosVcubs;
 
     //public static Model.Finder<Long,Cliente> find = new Model.Finder<Long, Cliente>(Cliente.class);
 
@@ -51,11 +60,11 @@ public class Cliente {
         this.name = name;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -66,67 +75,4 @@ public class Cliente {
     public void setTarjetaBancaria(String tarjetaBancaria) {
         this.tarjetaBancaria = tarjetaBancaria;
     }
-
-    public List<Reserva> getReservasMobibus() {
-        return reservasMobibus;
-    }
-
-    public void setReservasMobibus(List<Reserva> reservasMobibus) {
-        this.reservasMobibus = reservasMobibus;
-    }
-
-    public List<Prestamo> getPrestamosVcubs() {
-        return prestamosVcubs;
-    }
-
-    public void setPrestamosVcubs(List<Prestamo> prestamosVcubs) {
-        this.prestamosVcubs = prestamosVcubs;
-    }
-    
-    public final void agregarReserva(Reserva reserva)
-    {
-        if(reservasMobibus==null)
-           reservasMobibus = new ArrayList<Reserva>();
-        reservasMobibus.add(reserva);
-    }
-
-    public final void agregarPrestamo(Prestamo prestamo)
-    {
-        if(prestamosVcubs==null)
-            prestamosVcubs = new ArrayList<Prestamo>();
-        prestamosVcubs.add(prestamo);
-    }
-
-    public final void eliminarReserva(Long idReserva)
-    {
-        for(Reserva r: reservasMobibus)
-            if(r.id == idReserva)
-            {
-                reservasMobibus.remove(r);
-                break;
-            }
-            
-       // reservasMobibus = new ArrayList<Prestamo>();
-    }
-
-    public final void actualizarReserva(Reserva reserva)
-    {
-        for(int i=0;i<reservasMobibus.size();i++)
-        {
-            if(reservasMobibus.get(i).id==reserva.id) {
-                reservasMobibus.set(i,reserva);
-            }
-        }
-    }
-
-    public final void actualizarPrestamo(Prestamo prestamo)
-    {
-        for(int i=0;i<prestamosVcubs.size();i++)
-        {
-            if(prestamosVcubs.get(i).id==prestamo.id) {
-                    prestamosVcubs.set(i,prestamo);
-            }
-        }
-    }
-
 }

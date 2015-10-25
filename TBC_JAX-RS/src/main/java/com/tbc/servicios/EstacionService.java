@@ -6,6 +6,8 @@
 package com.tbc.servicios;
 
 import com.tbc.modelos.Vcub;
+import com.tbc.persistence.PersistenceManager;
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
@@ -29,6 +31,15 @@ public class EstacionService {
     @PersistenceContext(unitName = "AplicacionMundialPU")
     private EntityManager entityManager;
 
+     @PostConstruct
+    public void init() {
+        try {
+            entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     @GET
     @Path("{id}/disponibilidad")
     public Response darDisponibilidadEstacion(@PathParam("id") long id)  {

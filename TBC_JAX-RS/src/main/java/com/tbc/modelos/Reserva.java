@@ -10,36 +10,20 @@ import java.util.Date;
  * Created by n.castro15 on 12/08/2015.
  */
 @Entity
-public class Reserva {
+public  class Reserva {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Long id;
+    public long id;
 
     public String estado;
 
-    public Long fecha;
+    public long fecha;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JsonIgnore
-    public Cliente cliente;
-
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JsonIgnore
-    public Vehiculo vehiculo;
-
-    public Reserva()
-    {
-        super();
-    }
-    
-    
-    //public static Model.Finder<Long,Reserva> find = new Model.Finder<Long, Reserva>(Reserva.class);
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -51,11 +35,11 @@ public class Reserva {
         this.estado = estado;
     }
 
-    public Long getFecha() {
+    public long getFecha() {
         return fecha;
     }
 
-    public void setFecha(Long fecha) {
+    public void setFecha(long fecha) {
         this.fecha = fecha;
     }
 
@@ -66,13 +50,16 @@ public class Reserva {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+    
+    @ManyToOne
+    public Cliente cliente;
 
-    public Vehiculo getVehiculo() {
-        return vehiculo;
+
+
+    public Reserva()
+    {
+        super();
     }
-
-    public void setVehiculo(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
-    }
-
+ 
+    
 }

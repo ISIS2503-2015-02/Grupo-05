@@ -6,6 +6,8 @@
 package com.tbc.servicios;
 
 import com.tbc.modelos.Informe;
+import com.tbc.persistence.PersistenceManager;
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
@@ -27,6 +29,15 @@ public class InformeService {
     @PersistenceContext(unitName = "AplicacionMundialPU")
     private EntityManager entityManager;
 
+     @PostConstruct
+    public void init() {
+        try {
+            entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     @POST
     public Response reportarInforme(Informe informe) {
         JSONObject rta = new JSONObject();

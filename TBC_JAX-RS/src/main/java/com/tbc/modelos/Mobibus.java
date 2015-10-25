@@ -12,11 +12,6 @@ import javax.persistence.*;
 @DiscriminatorValue("M")
 public class Mobibus extends Vehiculo
 {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculo")
-    public List<Reserva> reservas;
-
-
     //public List<String> listaEspera;
 
     public int personasPie;
@@ -27,15 +22,7 @@ public class Mobibus extends Vehiculo
     {
         super();
     }
-
-    public List<Reserva> getReservas() {
-        return reservas;
-    }
-
-    public void setReservas(List<Reserva> reservas) {
-        this.reservas = reservas;
-    }
-
+    
     public int getPersonasPie() {
         return personasPie;
     }

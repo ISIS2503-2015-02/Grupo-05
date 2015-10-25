@@ -118,8 +118,8 @@ public class VehiculoService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response darVehiculos() {
         Query q = entityManager.createQuery("select u from Vehiculo u");
-        List<Vehiculo> competitors = q.getResultList();
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(competitors).build();
+        List<Vehiculo> rta = q.getResultList();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
     }
 
     @GET
