@@ -22,13 +22,10 @@ public  abstract class Reserva {
     
     public String tipo;
 
-    @ManyToOne
-    @JsonIgnore
-    public Cliente cliente;
+    public long cliente_id;
     
-    @ManyToOne
-    @JsonIgnore
-    public Vehiculo vehiculo;
+    
+    public long vehiculo_id;
     
     
     public long getId() {
@@ -55,13 +52,15 @@ public  abstract class Reserva {
         this.fecha = fecha;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public long getCliente_id() {
+        return cliente_id;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente_id(long cliente_id) {
+        this.cliente_id = cliente_id;
     }
+
+   
 
     public String getTipo() {
         return tipo;
@@ -71,13 +70,15 @@ public  abstract class Reserva {
         this.tipo = tipo;
     }
 
-    public Vehiculo getVehiculo() {
-        return vehiculo;
+    public long getVehiculo_id() {
+        return vehiculo_id;
     }
 
-    public void setVehiculo(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
+    public void setVehiculo_id(long vehiculo_id) {
+        this.vehiculo_id = vehiculo_id;
     }
+
+
  
 
 

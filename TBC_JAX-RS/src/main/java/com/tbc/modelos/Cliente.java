@@ -22,7 +22,7 @@ public class Cliente {
 
     public String tarjetaBancaria;
     
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @Transient
     public List<Reserva> reservas;
 
     public List<Reserva> getReservas() {
@@ -43,6 +43,7 @@ public class Cliente {
     {
         
     }
+    
 
     public Long getId() {
         return id;

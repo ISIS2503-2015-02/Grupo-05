@@ -6,9 +6,13 @@
 package com.tbc.servicios;
 
 
+import com.google.gson.Gson;
 import com.tbc.modelos.Cliente;
+import com.tbc.modelos.Prestamo;
 import com.tbc.modelos.Reserva;
+import com.tbc.modelos.Vehiculo;
 import com.tbc.persistence.PersistenceManager;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
@@ -51,7 +55,20 @@ public class ClienteService
     @Produces(MediaType.APPLICATION_JSON)
     public Response darCliente(@PathParam("id") long id)
     {
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(entityManager.find(Cliente.class, id)).build();
+        Cliente c = entityManager.find(Cliente.class, id);
+       // cargarReservas(c);
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(c).build();
+    }
+    
+    
+    private void cargarReservas(Cliente c)
+    {
+        Query q = entityManager.createQuery("select u from Prestamo u WHERE u.cliente_id = "+c.id);
+        List<Prestamo> prestamos = q.getResultList();
+        if(c.reservas == null)
+            c.reservas = new ArrayList<Reserva>();
+        for(Prestamo p: prestamos)
+            c.reservas.add(p);
     }
     
     @GET
@@ -59,27 +76,38 @@ public class ClienteService
     @Produces(MediaType.APPLICATION_JSON)
     public Response darReservasCliente(@PathParam("id") long id)
     {
-      JSONObject rta = new JSONObject();
-      
-       return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
+      Cliente c = entityManager.find(Cliente.class, id);
+        cargarReservas(c);
+       return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(c.getReservas()).build();
     }
     
     
     @POST
     @Path("{id}/reservas")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response crearReserva(@PathParam("id") long id, Reserva reserva)
+    public Response crearReserva(@PathParam("id") long id, JSONObject json)
     {
         JSONObject rta = new JSONObject();
+        Reserva reserva= null;
+        if(json.get("tipo").toString().equalsIgnoreCase("prestamo"))
+            reserva = new Gson().fromJson(json.toJSONString(), Prestamo.class);
 
+        if(reserva ==null)
+        {
+            
+        }
+        else
+        {
         try {
             entityManager.getTransaction().begin();
             Cliente cliente = entityManager.find(Cliente.class, id);
-           // posicion.vehiculo = vehiculo;
-           //cliente.agregarReserva(reserva);
+           reserva.cliente_id = cliente.id;
+           //reserva.vehiculo = entityManager.find(Vehiculo.class, reserva.vehiculo.id);
+           entityManager.persist(reserva);
             entityManager.getTransaction().commit();
-            entityManager.refresh(reserva);
-            rta.put("reserva_id", reserva.id);
+            entityManager.refresh(cliente);
+           rta.put("Cliente_id", reserva.cliente_id);
+         
         } catch (Exception t) {
             t.printStackTrace();
             rta.put("Error", t.getMessage());
@@ -91,7 +119,7 @@ public class ClienteService
             entityManager.clear();
             entityManager.close();
         }
-
+        }
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
     }
     

@@ -17,26 +17,27 @@ import javax.persistence.OneToOne;
 @DiscriminatorValue("P")
 public class Prestamo extends Reserva
 {
-    public int idSalida, idLlegada;
+    public long idSalida, idLlegada;
     
     public Prestamo()
     {
         super();
+        idLlegada = -1;
     }
 
-    public int getIdSalida() {
+    public long getIdSalida() {
         return idSalida;
     }
 
-    public void setIdSalida(int idSalida) {
+    public void setIdSalida(long idSalida) {
         this.idSalida = idSalida;
     }
 
-    public int getIdLlegada() {
+    public long getIdLlegada() {
         return idLlegada;
     }
 
-    public void setIdLlegada(int idLlegada) {
+    public void setIdLlegada(long idLlegada) {
         this.idLlegada = idLlegada;
     }
     
