@@ -154,26 +154,7 @@ public class ClienteService
         List<Cliente> clientes = q.getResultList();
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(clientes).build();
     }
-    
-    @POST
-    @Path("{id}/prestamos")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response crearPrestamo(@PathParam("id") long idCliente, Reserva prestamo)
-    {
-         JSONObject rta = new JSONObject();
-        
-         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
-    }
-    
-    @GET
-    @Path("{id}/prestamos")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response darPrestamos(@PathParam("id") long idCliente)
-    {
-         JSONObject rta = new JSONObject();
-        
-         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
-    }
+   
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)
