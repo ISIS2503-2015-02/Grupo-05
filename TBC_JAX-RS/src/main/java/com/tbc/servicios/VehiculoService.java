@@ -52,7 +52,7 @@ public class VehiculoService {
         try {
             entityManager.getTransaction().begin();
             Vehiculo vehiculo = entityManager.find(Vehiculo.class, id);
-           // posicion.vehiculo = vehiculo;
+           //posicion.vehiculo = vehiculo;
             vehiculo.agregarPosicion(posicion);
             entityManager.getTransaction().commit();
             entityManager.refresh(vehiculo);
@@ -83,7 +83,8 @@ public class VehiculoService {
         if (tipo.equals("Mobibus")) {
             vehiculo = new Gson().fromJson(json.toJSONString(), Mobibus.class);
         } else if (tipo.equals("Vcub")) {
-            vehiculo = new Gson().fromJson(json.toJSONString(), Vcub.class);
+            //vehiculo = new Gson().fromJson(json.toJSONString(), Vcub.class);
+            rta.put("Respuesta", "Para agregar un vcub hagalo desde una estacion");
         } else if (tipo.equals("Tranvia")) {
             vehiculo = new Gson().fromJson(json.toJSONString(), Tranvia.class);
         } else {

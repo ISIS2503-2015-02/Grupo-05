@@ -1,5 +1,6 @@
 package com.tbc.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,6 +14,10 @@ public class Vcub extends Vehiculo
 
 
     public String color;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+     @JsonIgnore
+    public Estacion estacion;
 
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculo")
    // public List<Prestamo> prestamos;
