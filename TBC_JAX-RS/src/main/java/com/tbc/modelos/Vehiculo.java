@@ -28,7 +28,7 @@ public abstract class Vehiculo
 
     public String tipo;
 
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="vehiculo")
+    @OneToMany(cascade=CascadeType.ALL)
     public List<Ubicacion> posiciones;
 
    // public static Model.Finder<Long,Vehiculo> find = new Model.Finder<Long, Vehiculo>(Vehiculo.class);

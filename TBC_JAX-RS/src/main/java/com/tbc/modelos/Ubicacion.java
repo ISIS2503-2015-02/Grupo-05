@@ -20,10 +20,6 @@ public class Ubicacion {
 
     public int kilometraje;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JsonIgnore
-    public Vehiculo vehiculo;
-
     public Ubicacion()
     {
         
@@ -81,11 +77,4 @@ public class Ubicacion {
         this.kilometraje = kilometraje;
     }
 
-    public Vehiculo getVehiculo() {
-        return vehiculo;
-    }
-
-    public void setVehiculo(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
-    }
 }

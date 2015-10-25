@@ -5,7 +5,6 @@
  */
 package com.tbc.servicios;
 
-
 import com.google.gson.Gson;
 import com.tbc.modelos.Mobibus;
 import com.tbc.modelos.Tranvia;
@@ -32,44 +31,40 @@ import org.json.simple.JSONObject;
 //@Produces(MediaType.APPLICATION_JSON)
 public class VehiculoService {
 
-    
     @PersistenceContext(unitName = "AplicacionMundialPU")
     private EntityManager entityManager;
-    
-        @PostConstruct
+
+    @PostConstruct
     public void init() {
         try {
             entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    } 
+    }
 
     @POST
     @Path("{id}/posiciones")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response agregarPosicion(@PathParam("id") long id, Ubicacion posicion) 
-    {
+    public Response agregarPosicion(@PathParam("id") long id, Ubicacion posicion) {
         JSONObject rta = new JSONObject();
-        Vehiculo vehiculo = entityManager.find(Vehiculo.class, id);
-        vehiculo.agregarPosicion(posicion);
-        
-                     try {
+
+        try {
             entityManager.getTransaction().begin();
-            entityManager.refresh(vehiculo);
+            Vehiculo vehiculo = entityManager.find(Vehiculo.class, id);
+           // posicion.vehiculo = vehiculo;
+            vehiculo.agregarPosicion(posicion);
             entityManager.getTransaction().commit();
-            
+            entityManager.refresh(vehiculo);
             rta.put("ubicacion_id", vehiculo.darUltimaPosicion().id);
         } catch (Exception t) {
             t.printStackTrace();
-            rta.put("Error", t.getMessage() );
-            if (entityManager.getTransaction().isActive()) 
-            {
+            rta.put("Error", t.getMessage());
+            if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
-            vehiculo = null;
-        } 
-             finally {
+          
+        } finally {
             entityManager.clear();
             entityManager.close();
         }
@@ -85,39 +80,35 @@ public class VehiculoService {
         Vehiculo vehiculo = null;
         String tipo = json.get("tipo").toString();
         int status = 200;
-        if (tipo.equals("Mobibus")) 
+        if (tipo.equals("Mobibus")) {
             vehiculo = new Gson().fromJson(json.toJSONString(), Mobibus.class);
-        
-        else if (tipo.equals("Vcub")) 
+        } else if (tipo.equals("Vcub")) {
             vehiculo = new Gson().fromJson(json.toJSONString(), Vcub.class);
-        
-        else if(tipo.equals("Tranvia"))
+        } else if (tipo.equals("Tranvia")) {
             vehiculo = new Gson().fromJson(json.toJSONString(), Tranvia.class);
-        else rta.put("Respuesta", "El tipo '"+tipo+"' no es un tipo valido");
-        
-        if (vehiculo == null) 
-        {
-            rta.put("Respuesta", "No se ha podido agregar el vehiculos");
-        } 
-        else
-        {
-             try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(vehiculo);
-            entityManager.getTransaction().commit();
-            entityManager.refresh(vehiculo);
-            rta.put("vehiculo_id", vehiculo.getId());
-        } catch (Throwable t) {
-            t.printStackTrace();
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
-            vehiculo = null;
-        } 
-             finally {
-            entityManager.clear();
-            entityManager.close();
+        } else {
+            rta.put("Respuesta", "El tipo '" + tipo + "' no es un tipo valido");
         }
+
+        if (vehiculo == null) {
+            rta.put("Respuesta", "No se ha podido agregar el vehiculos");
+        } else {
+            try {
+                entityManager.getTransaction().begin();
+                entityManager.persist(vehiculo);
+                entityManager.getTransaction().commit();
+                entityManager.refresh(vehiculo);
+                rta.put("vehiculo_id", vehiculo.getId());
+            } catch (Throwable t) {
+                t.printStackTrace();
+                if (entityManager.getTransaction().isActive()) {
+                    entityManager.getTransaction().rollback();
+                }
+                vehiculo = null;
+            } finally {
+                entityManager.clear();
+                entityManager.close();
+            }
 
         }
         return Response.status(status).header("Access-Control-Allow-Origin", "*").entity(rta).build();
