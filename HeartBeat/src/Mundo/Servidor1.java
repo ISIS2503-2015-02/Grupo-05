@@ -13,11 +13,11 @@ public class Servidor1
     
 	public static void main(String[] args)
 	{
-		port=80;
+		port=8888;
 		try 
 		{
 			Csock= new MulticastSocket(port);			
-			maddr = InetAddress.getByName("127.0.0.1");
+			maddr = InetAddress.getByName("224.0.0.3");
 			Csock.connect(maddr, port);
 			HeartBeat h= new HeartBeat(Csock, maddr, port);
 			System.out.println("Inicio"+maddr.getHostAddress());

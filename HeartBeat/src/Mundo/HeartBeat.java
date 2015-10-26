@@ -15,7 +15,7 @@ public class HeartBeat extends Thread
     }
     
 
-    public static MulticastSocket Csock;
+    public static DatagramSocket Csock;
     public static InetAddress maddr;
     public static int port;
     private DatagramPacket hbMsg ;
@@ -39,7 +39,7 @@ public class HeartBeat extends Thread
             {
                 Csock.send(hbMsg);
                 
-                System.out.println("envío");
+                System.out.println("envío"+maddr.getHostAddress());
                 sleep(TmHB);
               }
             catch (IOException e){System.err.println("Server can't send heartbeat");

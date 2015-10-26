@@ -14,20 +14,22 @@ public class Servidor2
     
 	public static void main(String[] args)
 	{
-		port=80;
+		port= 8888;
 		try 
 		{
 			Csock= new MulticastSocket(port);			
-			maddr = InetAddress.getByName("127.0.0.1");
-			Csock.connect(maddr, port);
+			maddr = InetAddress.getByName("224.0.0.3");
+			
+			Csock.joinGroup(maddr);
 			System.out.println("Inicio"+maddr.getHostAddress());
 			Csock.setSoTimeout(120001);
-			String n="";
-			DatagramPacket hbMsg= new DatagramPacket(n.getBytes(), n.length());
-			Csock.receive(hbMsg);
-			if(!hbMsg.getData().toString().equals("EstoyVivo"))
+			String n="EstoyVivo";
+			while(true)
 			{
-				System.exit(0);
+				DatagramPacket hbMsg= new DatagramPacket(n.getBytes(), n.length());
+				
+				Csock.receive(hbMsg);
+				
 			}
 		} catch (IOException e) 
 		{
