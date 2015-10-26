@@ -90,6 +90,7 @@ public class EstacionService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response crearEstacion(Estacion estacion) {
         JSONObject rta = new JSONObject();
+        System.out.println("Agregando estacion...");
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(estacion);

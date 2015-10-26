@@ -6,7 +6,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 @ApplicationPath("/webresources")
 public class WebApp extends ResourceConfig {
 	public WebApp(){
-        packages("co.edu.uniandes.isis2503.competitors.service");
+       // packages("co.edu.uniandes.isis2503.competitors.service");
          packages("com.tbc.servicios");
+         packages("co.edu.uniandes");
     }
 }
