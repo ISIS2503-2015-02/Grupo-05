@@ -27,6 +27,14 @@ app.controller('clienteCtrl', ['$scope', '$http', '$window', function ($scope, $
             $scope.darReservasCliente=function(){
               $window.location.href = base_url + '/clientes'+$scope.idCliente+"/reservas";    
             };
+            
+            $scope.reservar=function(){
+                 $window.location.href = base_url + '/clientes'+$scope.idCliente+"/reservas";
+            };
+            
+            $scope.eliminarReservar=function(){
+                 $window.location.href = base_url + '/clientes'+$scope.idCliente+"/reservas"/$scope.idReserva;
+            };
             $scope.cliente.tarjetaBancaria = '12345789';
             $scope.cliente.telefono = 0;
             $scope.cliente.name = 'nombre';
