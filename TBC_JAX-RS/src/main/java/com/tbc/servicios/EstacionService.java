@@ -22,6 +22,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.eclipse.jetty.util.ajax.JSON;
 import org.json.simple.JSONObject;
 
@@ -47,6 +48,7 @@ public class EstacionService {
 
     @GET
     @Path("{id}/disponibilidad")
+    @RequiresRoles( "Estacion" )
     public Response darDisponibilidadEstacion(@PathParam("id") long id) {
         JSONObject rta = new JSONObject();
         Estacion estacion = entityManager.find(Estacion.class, id);
@@ -61,6 +63,7 @@ public class EstacionService {
 
     @POST
     @Path("{id}/vcubs")
+    @RequiresRoles( "Estacion" )
     public Response registrarVcub(@PathParam("id") long id, Vcub vcub) {
         JSONObject rta = new JSONObject();
         try {
@@ -88,6 +91,7 @@ public class EstacionService {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
+    @RequiresRoles( "Estacion" )
     public Response crearEstacion(Estacion estacion) {
         JSONObject rta = new JSONObject();
         System.out.println("Agregando estacion...");
@@ -112,6 +116,7 @@ public class EstacionService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @RequiresRoles( "Estacion" )
     public Response darEstaciones() {
         Query q = entityManager.createQuery("select u from Estacion u");
         List<Estacion> rta = q.getResultList();
@@ -121,6 +126,7 @@ public class EstacionService {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RequiresRoles( "Estacion" )
     public Response darEstacion(@PathParam("id") long id) {
         Estacion rta = entityManager.find(Estacion.class, id);
 

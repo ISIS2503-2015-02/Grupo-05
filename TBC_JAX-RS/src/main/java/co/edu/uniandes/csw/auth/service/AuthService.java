@@ -10,8 +10,10 @@ import com.stormpath.sdk.application.Application;
 import com.stormpath.sdk.client.Client;
 import com.stormpath.sdk.group.Group;
 import com.stormpath.sdk.group.GroupList;
+import com.stormpath.sdk.oauth.AccessTokenResult;
 import com.stormpath.sdk.resource.ResourceException;
 import com.stormpath.shiro.realm.ApplicationRealm;
+
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,11 +45,21 @@ public class AuthService {
         Subject currentUser = SecurityUtils.getSubject();
         try {
             currentUser.login(token);
-            if(currentUser.isAuthenticated())
-                System.out.println("Autenticado...");
-            else System.out.println("Failed...");
-            
-            return Response.ok(token).build();
+
+            Map<String, String> userAttributes = (Map<String, String>) currentUser.getPrincipals().oneByType(java.util.Map.class
+            );
+            user.setName(userAttributes.get("givenName") + " " + userAttributes.get("surname"));
+            user.setEmail(userAttributes.get("email"));
+            user.setUserName(userAttributes.get("username"));
+            String role = "Estacion";
+            if (currentUser.hasRole(role)); else if (currentUser.hasRole("Vehiculo")) {
+                role = "Vehiculo";
+            } else {
+                role = "Cliente";
+            }
+            user.setRole(role);
+            return Response.ok(user)
+                    .build();
         } catch (AuthenticationException e) {
             Logger.getLogger(AuthService.class.getName()).log(Level.WARNING, e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST)
@@ -75,12 +87,20 @@ public class AuthService {
     public Response getCurrentUser() {
         UserDTO user = new UserDTO();
         Subject currentUser = SecurityUtils.getSubject();
+
         if (currentUser != null) {
             Map<String, String> userAttributes = (Map<String, String>) currentUser.getPrincipals().oneByType(java.util.Map.class
             );
             user.setName(userAttributes.get("givenName") + " " + userAttributes.get("surname"));
             user.setEmail(userAttributes.get("email"));
             user.setUserName(userAttributes.get("username"));
+            String role = "Estacion";
+            if (currentUser.hasRole(role)); else if (currentUser.hasRole("Vehiculo")) {
+                role = "Vehiculo";
+            } else {
+                role = "Cliente";
+            }
+            user.setRole(role);
             return Response.ok(user)
                     .build();
         } else {
