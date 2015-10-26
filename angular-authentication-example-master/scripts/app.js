@@ -30,6 +30,10 @@ angular.module('BasicHttpAuthExample', [
                             templateUrl: 'modules/vehiculo/views/vehiculo.html'
                         })
 
+                        .when('/cliente', {
+                            controller: 'clienteCtrl',
+                            templateUrl: 'modules/cliente/views/cliente.html'
+                        })
                         .otherwise({redirectTo: '/login'});
             }])
 

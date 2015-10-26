@@ -6,13 +6,13 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-10-25T11:02:12")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-10-25T19:23:00")
 @StaticMetamodel(Vehiculo.class)
 public abstract class Vehiculo_ { 
 
+    public static volatile SingularAttribute<Vehiculo, Long> id;
     public static volatile SingularAttribute<Vehiculo, String> estado;
     public static volatile SingularAttribute<Vehiculo, String> tipo;
     public static volatile ListAttribute<Vehiculo, Ubicacion> posiciones;
-    public static volatile SingularAttribute<Vehiculo, Long> id;
 
 }
