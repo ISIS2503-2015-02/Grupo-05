@@ -1,11 +1,12 @@
 package Mundo;
 
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-//Manda el heartbeat
-public class Servidor1
+//Recibe
+public class Servidor2 
 {
 	public static MulticastSocket Csock;
     public static InetAddress maddr;
@@ -19,9 +20,15 @@ public class Servidor1
 			Csock= new MulticastSocket(port);			
 			maddr = InetAddress.getByName("127.0.0.1");
 			Csock.connect(maddr, port);
-			HeartBeat h= new HeartBeat(Csock, maddr, port);
 			System.out.println("Inicio"+maddr.getHostAddress());
-			h.run();
+			Csock.setSoTimeout(120001);
+			String n="";
+			DatagramPacket hbMsg= new DatagramPacket(n.getBytes(), n.length());
+			Csock.receive(hbMsg);
+			if(!hbMsg.getData().toString().equals("EstoyVivo"))
+			{
+				System.exit(0);
+			}
 		} catch (IOException e) 
 		{
 			// TODO Auto-generated catch block

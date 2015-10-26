@@ -24,7 +24,7 @@ public class HeartBeat extends Thread
     public void run(){
         // setup the hb datagram packet then run forever
         // setup the line to ignore the loopback we want to get it too
-        String line = "5|";
+        String line = "EstoyVivo";
         
         hbMsg = new DatagramPacket(line.getBytes(),
                                    line.length(),
@@ -38,6 +38,8 @@ public class HeartBeat extends Thread
             try
             {
                 Csock.send(hbMsg);
+                
+                System.out.println("envío");
                 sleep(TmHB);
               }
             catch (IOException e){System.err.println("Server can't send heartbeat");
