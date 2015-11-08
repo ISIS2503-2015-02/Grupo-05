@@ -1,0 +1,28 @@
+ <div id="site_content">
+                <div class="sidebar">
+                    <!-- insert your sidebar items here -->
+                    <h2>Dar  reporte general</h2>
+                    <form ng-controller="informeCtrl" ng-submit="darReporteGeneral()">
+                        <p class="submit"><input type="submit" name="commit" value="Dar reporte general"></p>
+                    </form>
+                    <p></p>
+                    <h2>Dar  reportes </h2>
+                    <form ng-controller="informeCtrl" ng-submit="darReportes()">
+                        <p class="submit"><input type="submit" name="commit" value="Dar reportes"></p>
+                    </form>
+                </div>
+                <div id="content">
+                    <!-- insert the page content here -->
+                    <h1>Informes</h1>
+                    <p> Aca puedes generar informes, dependiendo de las especificaciones </p>
+
+                    <h2>Crear informes</h2>
+                    <form method="post" action="http://localhost:9090/informes ">
+                        <p>Gravedad: <input type="number" name="numeroGravedad" value="" placeholder="numero de gravedad"></p>
+                        <p>Tipo de informe: <input type="text" name="tipo" value="" placeholder=""></p>
+                        <p>Id estación: <input type="text" name="contenido" value="" placeholder=""></p>
+                        <p class="submit"><input type="submit" name="commit" value="Crear"></p>
+                    </form>
+                    <p></p>
+                </div>
+            </div>

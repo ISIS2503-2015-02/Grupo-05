@@ -1,7 +1,0 @@
-New log file opened at Wed Aug 12 14:30:19 COT 2015 by 3416@ECOS5402-28
-Taking next connection to: 51350
-New client attempting to connect on port: 51351-51350
-  Address = /172.24.100.63:51350
-This client on port 51351 has uuid ee64afed-fa34-4a01-86e7-e41d203dcf59 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-ee64afed-fa34-4a01-86e7-e41d203dcf59
-Taking next connection to: 51350

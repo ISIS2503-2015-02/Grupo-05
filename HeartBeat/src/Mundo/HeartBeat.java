@@ -7,29 +7,19 @@ public class HeartBeat extends Thread
 {
 	// sends a heartbeat message to the multicast group every 120 seconds
 	
-    public HeartBeat (MulticastSocket Csock, InetAddress maddr,int port)
+    public HeartBeat (PrintStream p)
     { 
-        this.Csock = Csock;
-        this.maddr= maddr;
-        this.port = port;
+       this.p=p;
     }
     
 
-    public static DatagramSocket Csock;
-    public static InetAddress maddr;
-    public static int port;
-    private DatagramPacket hbMsg ;
+    public static PrintStream p;
     static private long TmHB = 120000;  //heartbeat frequency in milliseconds
     
     public void run(){
         // setup the hb datagram packet then run forever
         // setup the line to ignore the loopback we want to get it too
         String line = "EstoyVivo";
-        
-        hbMsg = new DatagramPacket(line.getBytes(),
-                                   line.length(),
-                                   maddr,
-                                   port);
                                   
                                   
         // continually loop and send this packet every TmHB seconds
@@ -37,14 +27,9 @@ public class HeartBeat extends Thread
         {
             try
             {
-                Csock.send(hbMsg);
-                
-                System.out.println("envío"+maddr.getHostAddress());
+                p.println(line);
                 sleep(TmHB);
-              }
-            catch (IOException e){System.err.println("Server can't send heartbeat");
-                                  System.exit(-1);
-            }
+             }
             catch (InterruptedException e){}
         }
     }// end run

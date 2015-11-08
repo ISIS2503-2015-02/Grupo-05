@@ -4,13 +4,56 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html ng-app="aplicacionMundial">
     <head>
-        <title>Aplicacion Mundial</title>
+        <title>TBC</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/app.css">
     </head>
     <body>
-        <h1>Aplicación Mundial</h1>
+        <div class="container theme-showcase" role="main">
+
+            <div class="row featurette">
+                <div class="col-md-5">
+                    <img src="images/logo.png" class="img-responsive" alt="500x500" data-holder-rendered="true">
+                </div>
+
+            </div>
+            <hr>
+            <toolbar></toolbar>
+            <div ng-if="toolbar.isSelected(0)">
+                <login-form></login-form>
+            </div>
+            <div ng-if="toolbar.isSelected(1)">
+                <estacion competitorInfo></estacion>
+            </div>
+            <div ng-if="toolbar.isSelected(2)">
+                <competitor-info></competitor-info>
+            </div>
+
+            <div ng-if="toolbar.isSelected(3)">
+                <cliente></cliente>
+            </div>
+            <div ng-if="toolbar.isSelected(4)">
+                <vehiculo></vehiculo>
+            </div>
+            <div ng-if="toolbar.isSelected(5)">
+                <informe></informe>
+            </div>
+
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
+
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/AngularControllers/vehiculoCtrl.js"></script>
+        <script type="text/javascript" src="js/AngularControllers/reservaCtrl.js"></script>
+        <script type="text/javascript" src="js/AngularControllers/informeCtrl.js"></script>
+        <script type="text/javascript" src="js/AngularControllers/estacionCtrl.js"></script>
+        <script type="text/javascript" src="js/AngularControllers/clienteCtrl.js"></script>
+        <script type="text/javascript" src="js/AngularControllers/loginCtrl.js"></script>
+
     </body>
 </html>
