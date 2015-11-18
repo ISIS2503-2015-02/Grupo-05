@@ -145,7 +145,7 @@
 
     <!-- PAGINA DE VEHICULO -->
     <div>
-        <!-- ESTACIONES -->
+        <!-- VEHICULOS -->
         <section id="vehiculos" class="text-center">
             <h2>Vehiculos</h2>
             <p></p>
@@ -178,7 +178,7 @@
                                                 <th>Id</th>
                                                 <th>tipo</th>
                                                 <th>estado</th>
-                                         
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -186,7 +186,7 @@
                                                 <td> {{ vehiculo.id}} </td> 
                                                 <td> {{ vehiculo.tipo}} </td> 
                                                 <td> {{ vehiculo.estado}} </td> 
-                             
+
                                             </tr>
                                         </tbody>
                                     </table>
@@ -205,6 +205,41 @@
                 </div>
             </div>
 
+        </section>
+
+        <!-- AGREGAR VEHICULO -->
+        <section id="agregarVehiculo" lass="text-center" ng-controller="vehiculoCtrl">
+            <div class="text-center">
+                <h2>Agregar vehiculo</h2>
+                <p></p>
+                <form>
+                    <p>Tipo: 
+                        <select ng-model="vehiculo.tipo">
+                            <option value="Vcub">Vcub</option>
+                            <option value="Mobibus">Mobibus</option>
+                            <option value="Tranvia">Tranvia</option>
+                        </select>
+                    </p>
+                    <p>Estado: <input type="text" ng-model="vehiculo.estado"></p>
+                    <div ng-if="vehiculo.tipo === 'Vcub'">
+                        <p>Color: <input type="text"></p>
+                    </div>
+                    <div ng-if="vehiculo.tipo === 'Mobibus'">
+                        <p>personas pie: <input type="number" ng-model="vehiculo.personasPie" min="1"></p>
+                        <p>personas discapacitadas: <input type="number" ng-model="vehiculo.personasDiscapacitadas" min="1"></p>
+                    </div>
+                    <div ng-if="vehiculo.tipo === 'Tranvia'">
+                        <p>Linea: 
+                            <select ng-model="vehiculo.linea">
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                        </p>
+                    </div>
+                    <input type="submit" value="Agregar" class="btn btn-primary"></p>
+                </form>
+            </div>
         </section>
 
     </div>

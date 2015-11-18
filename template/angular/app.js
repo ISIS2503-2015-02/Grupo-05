@@ -153,7 +153,13 @@
 
     app.controller('vehiculoCtrl', ['$scope', '$http', '$window', '$rootScope', function ($scope, $http, $window, $rootScope)
         {
-            $scope.vehiculo = {};
+            $scope.vehiculo = {
+                tipo: "Vcub",
+                estado: "",
+                personasPie: 1,
+                personasDiscapacitadas: 1,
+                linea: "A"
+            };
             $scope.idVehiculo = '1';
             $scope.currentPage = 1;
             $scope.pageSize = 10;
@@ -162,7 +168,10 @@
                         {
                             id: 1,
                             tipo: "Vcub",
-                            estado: "Activo"
+                            estado: "Activo",
+                            personasPie: 1,
+                            personasDiscapacitadas: 1,
+                            linea: "A"
                         }
                     ];
 
