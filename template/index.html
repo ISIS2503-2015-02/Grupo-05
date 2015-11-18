@@ -33,7 +33,7 @@
 
     </head>
 
-    <body id="page-top" class="index">
+    <body id="page-top" class="index" ng-controller="navbarCtrl" >
 
 
         <!-- NAVEGACION -->
@@ -41,13 +41,13 @@
 
     <header><p></p></header>
     <!-- LOGIN -->
-    <section id="login" lass="text-center">
+    <section id="login" lass="text-center" ng-if="!logged()">
         <login-form></login-form>
     </section>
 
 
     <!-- PAGINA DE ESTACION -->
-    <div ng-hide="true">
+    <div ng-if="show('Estacion')">
         <!-- ESTACIONES -->
         <section id="estaciones" class="text-center">
             <h2>Estaciones</h2>
@@ -144,7 +144,7 @@
 
 
     <!-- PAGINA DE VEHICULO -->
-    <div>
+    <div ng-if="show('Vehiculo')" >
         <!-- VEHICULOS -->
         <section id="vehiculos" class="text-center">
             <h2>Vehiculos</h2>
@@ -243,7 +243,7 @@
         </section>
 
     </div>
-    <!-- FIN PAGINA ESTACION -->
+    <!-- FIN PAGINA VEHICULO -->
 
 
     <!-- Footer -->

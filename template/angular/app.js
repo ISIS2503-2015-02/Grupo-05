@@ -8,6 +8,8 @@
 (function () {
     var app = angular.module('app', ['angularUtils.directives.dirPagination']);
     var BASE_URL = 'http://localhost:8083/webresources/';
+
+
     app.directive('navbar', function () {
         return{
             restrict: 'E',
@@ -26,63 +28,39 @@
         };
     });
 
-
-
-    app.directive('competitorInfo', function () {
-        return{
-            restrict: 'E',
-            templateUrl: 'partials/competitor-info.html',
-            controller: 'getCompetitors'
-        };
-    });
-
-    app.controller("getCompetitors", function ($http, $scope) {
-        $http.get('http://localhost:8080/competitors/get').
-                success(function (data, status, headers, config) {
-                    $scope.competitors = data;
-                }).
-                error(function (data, status, headers, config) {
-                    // log error
-                });
-    });
-
-    app.directive('competitorForm', function () {
-        return{
-            restrict: 'E',
-            templateUrl: 'partials/competitor-form.html',
-            controller: 'competitorCtrl'
-        };
-    });
-
-    app.controller("competitorCtrl", function ($http, $scope) {
-
-        $scope.addCompetitor = function () {
-            console.log('name');
-            $http.post('http://localhost:8080/competitors/add', JSON.stringify($scope.competitor)).success(function (data, headers) {
-                $scope.competitor = {};
-                $scope.toolbar.selectTab(2);
-            });
-        };
-
-        $scope.login = function () {
-            console.log('name');
-            $http.post('http://localhost:8080/competitors/login', JSON.stringify($scope.competitor)).success(function (data, headers) {
-                $scope.toolbar.selectTab(2);
-            });
-        };
-    });
-
     app.directive('loginForm', function () {
         return{
             restrict: 'E',
             templateUrl: 'partials/login-form.html',
-            controller: 'competitorCtrl'
+            controller: 'loginCtrl'
         };
     });
 
+
+    app.controller('navbarCtrl', ['$scope', '$http', '$window', '$rootScope', '$location', 'AuthenticationService',
+        function ($scope, $http, $window, $rootScope, $location, AuthenticationService) {
+
+            $scope.show = function (role)
+            {
+                var user = AuthenticationService.currentUser();
+                return user ? user.role === role : false;
+            };
+
+            $scope.cerrarSesion = function ()
+            {
+
+            };
+            
+            $scope.logged = function()
+            {
+                return AuthenticationService.currentUser();
+            };
+
+        }]);
+
+
     app.controller('loginCtrl', ['$scope', '$http', '$window', '$rootScope', '$location', 'AuthenticationService',
         function ($scope, $http, $window, $rootScope, $location, AuthenticationService) {
-            var base_url = 'http://localhost:8083/webresources';
 
             $scope.currentUser = {
                 user: 'user',
@@ -313,6 +291,12 @@
                         $rootScope.globals = {};
                         $http.defaults.headers.common.Authorization = 'Basic ';
                     };
+
+                    service.currentUser = function ()
+                    {
+                        return $rootScope.globals && $rootScope.globals.currentUser;
+                    };
+
                     return service;
                 }]);
 

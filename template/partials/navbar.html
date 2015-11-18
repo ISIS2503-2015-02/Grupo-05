@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top" ng-controller="navbarCtrl">
     <div class="container">
 
         <!--a class="navbar-brand">
@@ -51,7 +51,7 @@
 
 
         <!-- NAVEGACION DE ESTACION -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="show('Estacion')">
             <ul class="nav navbar-nav navbar-right">
                 <li class="hidden">
                     <a href="#page-top"></a>
@@ -74,7 +74,7 @@
 
 
         <!-- NAVEGACION DE VEHICULO -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="show('Vehiculo')">
             <ul class="nav navbar-nav navbar-right">
                 <li class="hidden">
                     <a href="#page-top"></a>
@@ -83,7 +83,7 @@
                     <a href="#vehiculos">Vehiculos</a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#about">Agregar vehiculo</a>
+                    <a href="#agregarVehiculo">Agregar vehiculo</a>
                 </li>
                 <li class="page-scroll">
                     <a href="#contact"> Cerrar sesion</a>
