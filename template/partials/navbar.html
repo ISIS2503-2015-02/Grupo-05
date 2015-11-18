@@ -17,16 +17,6 @@
             </button>
             <a class="navbar-brand" href="#page-top">TransAlpes</a>
         </div>
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-        </div>
 
         <!-- Collect the nav links, forms, and other content for toggling 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -46,9 +36,6 @@
             </ul>
         </div>
         <!-- /.navbar-collapse -->
-
-
-
 
         <!-- NAVEGACION DE ESTACION -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="show('Estacion')">
@@ -92,8 +79,27 @@
         </div>
         <!-- /.navbar-collapse -->
 
-
-
+        <!-- NAVEGACION DE CLIENTE -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="show('Cliente')">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#clientes">Clientes</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#agregarCliente">Agregar Cliente</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#reservas">Reservas</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#contact"> Cerrar sesion</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
-</nav>   
+</nav>

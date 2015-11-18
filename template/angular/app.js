@@ -10,20 +10,15 @@
     var BASE_URL = 'http://localhost:8083/webresources/';
 
 
+    //------------------------------------------------------------------------
+    // DIRECTIVAS
+    //------------------------------------------------------------------------
+
     app.directive('navbar', function () {
         return{
             restrict: 'E',
             templateUrl: 'partials/navbar.html',
-            controller: function ()
-            {
-                this.tab = 0;
-                this.selectTab = function (setTab) {
-                    this.tab = setTab;
-                };
-                this.isSelected = function (tabParam) {
-                    return this.tab === tabParam;
-                };
-            },
+            controller: 'navbarCtrl',
             controllerAs: 'toolbar'
         };
     });
@@ -36,7 +31,31 @@
         };
     });
 
+    app.directive('estacion', function () {
+        return{
+            restrict: 'E',
+            templateUrl: 'partials/estacion.html',
+            controller: 'estacionCtrl'
+        };
+    });
 
+    app.directive('vehiculo', function () {
+        return{
+            restrict: 'E',
+            templateUrl: 'partials/vehiculo.html'
+        };
+    });
+    app.directive('cliente', function () {
+        return{
+            restrict: 'E',
+            templateUrl: 'partials/cliente.html'
+        };
+    });
+
+    //------------------------------------------------------------------------
+    // CONTROLADORES
+    //------------------------------------------------------------------------
+    
     app.controller('navbarCtrl', ['$scope', '$http', '$window', '$rootScope', '$location', 'AuthenticationService',
         function ($scope, $http, $window, $rootScope, $location, AuthenticationService) {
 
@@ -50,8 +69,8 @@
             {
 
             };
-            
-            $scope.logged = function()
+
+            $scope.logged = function ()
             {
                 return AuthenticationService.currentUser();
             };
@@ -96,7 +115,13 @@
 
     app.controller('estacionCtrl', ['$scope', '$http', '$window', '$rootScope', function ($scope, $http, $window, $rootScope)
         {
-            $scope.estacion = {};
+            $scope.estacion =
+                    {
+                        capacidad: "1",
+                        latitud: 0,
+                        longitud: 0,
+                        disponibilidad: 0
+                    };
             $scope.idEstacion = '1';
             $scope.currentPage = 1;
             $scope.pageSize = 10;
@@ -106,14 +131,15 @@
                             id: 1,
                             capacidad: "10",
                             latitud: 1234,
-                            longitud: 5678
+                            longitud: 5678,
+                            disponibilidad: 0
                         }
                     ];
 
 
             $http({
                 method: 'GET',
-                url: BASE_URL + '/estaciones'
+                url: BASE_URL + 'estaciones'
             }).then(function successCallback(response)
             {
                 // this callback will be called asynchronously
@@ -125,6 +151,26 @@
                 // or server returns response with an error status.
                 alert(JSON.stringify(response));
             });
+
+
+            $scope.agregarEstacion = function ()
+            {
+                console.log("Agregando estacion: " + JSON.stringify($scope.estacion));
+                $http({
+                    method: 'POST',
+                    url: BASE_URL + 'estaciones',
+                    data: $scope.estacion
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    alert(JSON.stringify(response.data));
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    alert(JSON.stringify(response));
+                });
+            };
 
 
         }]);
@@ -156,7 +202,7 @@
 
             $http({
                 method: 'GET',
-                url: BASE_URL + '/vehiculos'
+                url: BASE_URL + 'vehiculos'
             }).then(function successCallback(response)
             {
                 // this callback will be called asynchronously
@@ -171,6 +217,54 @@
 
 
         }]);
+    
+    
+        app.controller('clienteCtrl', ['$scope', '$http', '$window', '$rootScope', function ($scope, $http, $window, $rootScope)
+        {
+            $scope.cliente = {
+                id: "1",
+                user: "user",
+                password: "",
+                nombre: "nombre",
+                telefono: "12345",
+                tarjetaBancaria: "67890"
+            };
+ 
+            $scope.currentPage = 1;
+            $scope.pageSize = 10;
+            $scope.clientes =
+                    [
+                        $scope.cliente
+                    ];
+            $scope.reservas = [
+                {
+                    id:1,
+                    estado:"En espera",
+                    fecha: 12345,
+                    tipo: "Prestamo",
+                    cliente_id: 1,
+                    vehiculo_id: 2
+                }
+            ];
+
+            $http({
+                method: 'GET',
+                url: BASE_URL + 'vehiculos'
+            }).then(function successCallback(response)
+            {
+                // this callback will be called asynchronously
+                // when the response is available
+                alert(JSON.stringify(response.data));
+                $scope.clientes = response.data;
+            }, function errorCallback(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                alert(JSON.stringify(response));
+            });
+
+
+        }]);
+
 
 
     app.factory('Base64', function () {
