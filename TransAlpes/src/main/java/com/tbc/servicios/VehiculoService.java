@@ -91,10 +91,11 @@ public class VehiculoService {
             rta.put("Respuesta", "El tipo '" + tipo + "' no es un tipo valido");
         }
 
-        if (vehiculo == null) {
+        if (vehiculo == null && rta.isEmpty()) {
             rta.put("Respuesta", "No se ha podido agregar el vehiculos");
         } else {
             try {
+                System.out.println("Agregando: "+ JSON.toString(vehiculo));
                 entityManager.getTransaction().begin();
                 entityManager.persist(vehiculo);
                 entityManager.getTransaction().commit();

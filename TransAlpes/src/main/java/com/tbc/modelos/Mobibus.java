@@ -2,6 +2,7 @@ package com.tbc.modelos;
 //import org.hibernate.annotations.OnDelete;
 //import org.hibernate.annotations.OnDeleteAction;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @DiscriminatorValue("M")
-public class Mobibus extends Vehiculo
+public class Mobibus extends Vehiculo implements Serializable
 {
     //public List<String> listaEspera;
 

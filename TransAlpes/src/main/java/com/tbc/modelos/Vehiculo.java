@@ -2,6 +2,7 @@ package com.tbc.modelos;
 //import org.hibernate.annotations.OnDelete;
 //import org.hibernate.annotations.OnDeleteAction;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  */
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public abstract class Vehiculo 
+public abstract class Vehiculo implements Serializable
 {
 
     @Id
