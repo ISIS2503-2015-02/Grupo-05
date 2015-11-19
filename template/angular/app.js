@@ -52,10 +52,16 @@
         };
     });
 
+    app.directive('admin', function () {
+        return{
+            restrict: 'E',
+            templateUrl: 'partials/admin.html'
+        };
+    });
     //------------------------------------------------------------------------
     // CONTROLADORES
     //------------------------------------------------------------------------
-    
+
     app.controller('navbarCtrl', ['$scope', '$http', '$window', '$rootScope', '$location', 'AuthenticationService',
         function ($scope, $http, $window, $rootScope, $location, AuthenticationService) {
 
@@ -73,6 +79,11 @@
             $scope.logged = function ()
             {
                 return AuthenticationService.currentUser();
+            };
+
+            $scope.logout = function ()
+            {
+                alert("Logged out");
             };
 
         }]);
@@ -104,7 +115,13 @@
                 AuthenticationService.login($scope.currentUser.user, $scope.currentUser.password,
                         function (response)
                         {
-
+                            if (response.success)
+                            {
+                                console.log("Data: "+JSON.stringify(response.data));
+                                $scope.currentUser.role = response.data.role;
+                                console.log("Current user in loginCtrl: "+ JSON.stringify($scope.currentUser));
+                                AuthenticationService.SetCredentials($scope.currentUser.user, $scope.currentUser.password, $scope.currentUser.role);
+                            }
                         });
 
 
@@ -217,9 +234,9 @@
 
 
         }]);
-    
-    
-        app.controller('clienteCtrl', ['$scope', '$http', '$window', '$rootScope', function ($scope, $http, $window, $rootScope)
+
+
+    app.controller('clienteCtrl', ['$scope', '$http', '$window', '$rootScope', function ($scope, $http, $window, $rootScope)
         {
             $scope.cliente = {
                 id: "1",
@@ -229,7 +246,7 @@
                 telefono: "12345",
                 tarjetaBancaria: "67890"
             };
- 
+
             $scope.currentPage = 1;
             $scope.pageSize = 10;
             $scope.clientes =
@@ -238,8 +255,8 @@
                     ];
             $scope.reservas = [
                 {
-                    id:1,
-                    estado:"En espera",
+                    id: 1,
+                    estado: "En espera",
                     fecha: 12345,
                     tipo: "Prestamo",
                     cliente_id: 1,
@@ -249,7 +266,7 @@
 
             $http({
                 method: 'GET',
-                url: BASE_URL + 'vehiculos'
+                url: BASE_URL + 'clientes'
             }).then(function successCallback(response)
             {
                 // this callback will be called asynchronously
@@ -355,7 +372,6 @@
                         {
                             response.success = true;
                             console.log(JSON.stringify(response));
-                            AuthenticationService.SetCredentials($scope.currentUser.user, $scope.currentUser.password, $scope.currentUser.role);
                             callback(response);
                         }, function errorCallback(response)
                         {
@@ -377,7 +393,7 @@
                             }
                         };
 
-                        console.log("Setting credentials..." + JSON.stringify($rootScope.globals));
+                        console.log("Setting credentials..." + JSON.stringify($rootScope.globals.currentUser));
                         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
 
                     };
