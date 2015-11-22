@@ -45,6 +45,7 @@
             templateUrl: 'partials/vehiculo.html'
         };
     });
+
     app.directive('cliente', function () {
         return{
             restrict: 'E',
@@ -69,6 +70,7 @@
             {
                 var user = AuthenticationService.currentUser();
                 return user ? user.role === role : false;
+                // return true;
             };
 
             $scope.cerrarSesion = function ()
@@ -117,9 +119,9 @@
                         {
                             if (response.success)
                             {
-                                console.log("Data: "+JSON.stringify(response.data));
+                                console.log("Data: " + JSON.stringify(response.data));
                                 $scope.currentUser.role = response.data.role;
-                                console.log("Current user in loginCtrl: "+ JSON.stringify($scope.currentUser));
+                                console.log("Current user in loginCtrl: " + JSON.stringify($scope.currentUser));
                                 AuthenticationService.SetCredentials($scope.currentUser.user, $scope.currentUser.password, $scope.currentUser.role);
                             }
                         });
@@ -181,13 +183,14 @@
                 {
                     // this callback will be called asynchronously
                     // when the response is available
-                    alert(JSON.stringify(response.data));
+                    console.log(JSON.stringify(response.data));
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
-                    alert(JSON.stringify(response));
+                    console.log(JSON.stringify(response));
                 });
             };
+
 
 
         }]);
@@ -196,7 +199,8 @@
         {
             $scope.vehiculo = {
                 tipo: "Vcub",
-                estado: "",
+                estado: "estado",
+                color: "color",
                 personasPie: 1,
                 personasDiscapacitadas: 1,
                 linea: "A"
@@ -232,6 +236,25 @@
                 alert(JSON.stringify(response));
             });
 
+
+            $scope.agregarVehiculo = function ()
+            {
+                console.log("Agregando Vehiculo: " + JSON.stringify($scope.vehiculo));
+                $http({
+                    method: 'POST',
+                    url: BASE_URL + 'vehiculos',
+                    data: $scope.vehiculo
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    console.log(JSON.stringify(response.data));
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log(JSON.stringify(response));
+                });
+            };
 
         }]);
 
@@ -278,6 +301,25 @@
                 // or server returns response with an error status.
                 alert(JSON.stringify(response));
             });
+
+            $scope.agregarCliente = function ()
+            {
+                console.log("Agregando Cliente: " + JSON.stringify($scope.cliente));
+                $http({
+                    method: 'POST',
+                    url: BASE_URL + 'clientes',
+                    data: $scope.cliente
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    console.log(JSON.stringify(response.data));
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log(JSON.stringify(response));
+                });
+            };
 
 
         }]);
