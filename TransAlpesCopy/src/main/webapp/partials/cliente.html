@@ -1,0 +1,65 @@
+<!-- RESERVAS -->
+<section id="reservas" class="text-center">
+    <h2>Reservas</h2>
+    <p></p>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div ng-controller="clienteCtrl">
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h3>Pagina: {{ currentPage}}</h3>
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="search">Search:</label>
+                            <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="search">items per page:</label>
+                            <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <table class="table table-striped" align="center">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Estado</th>
+                                        <th>Fecha</th>
+                                        <th>Tipo</th>
+                                        <th>Id Cliente</th>
+                                        <th>Id Vehiculo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr dir-paginate="reserva in reservas | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                                        <td align="left"> {{ reserva.id}} </td>
+                                        <td align="left"> {{ reserva.estado}} </td>
+                                        <td align="left"> {{ reserva.fecha}} </td>
+                                        <td align="left"> {{ reserva.tipo}} </td>
+                                        <td align="left"> {{reserva.cliente_id}}</td>
+                                        <td align="left"> {{reserva.vehiculo_id}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="text-center">
+                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="./partials/dirPagination.tpl.html"></dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

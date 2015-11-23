@@ -273,11 +273,11 @@
 
 
 <!-- AGREGAR ESTACION -->
-<section id="AgregarEstacion" class="text-center">
+<section id="AgregarEstacion" class="text-center" ng-controller="estacionCtrl">
     <div id="content">
 
         <h2>Crear estación</h2>
-        <form >
+        <form name="Agregar estacion" ng-submit="agregarEstacion()" >
             <p>Diponibles Vcubs:  <input type="number"></p>
             <p>Capacidad: <input type="number" ></p>
             <p>Latitud: <input type="number"></p>

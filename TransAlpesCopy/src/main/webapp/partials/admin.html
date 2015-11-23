@@ -1,0 +1,288 @@
+
+
+<!-- CLIENTES -->
+<section id="clientes" class="text-center">
+    <p></p>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>Clientes</h1>
+            <hr class="star-primary">
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div ng-controller="clienteCtrl">
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h3>Pagina: {{ currentPage}}</h3>
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="search">Search:</label>
+                            <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="search">items per page:</label>
+                            <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <table class="table table-striped" align="center">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Usuario</th>
+                                        <th>Nombre</th>
+                                        <th>Telefono</th>
+                                        <th>Tarjeta Bancaria</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr dir-paginate="cliente in clientes | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                                        <td align="left"> {{ cliente.id}} </td>
+                                        <td align="left"> {{ cliente.user}} </td>
+                                        <td align="left"> {{ cliente.nombre}} </td>
+                                        <td align="left"> {{ cliente.telefono}} </td>
+                                        <td align="left"> {{cliente.tarjetaBancaria}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="text-center">
+                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="./partials/dirPagination.tpl.html"></dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- AGREGAR CLIENTE -->
+<section id="agregarCliente" class="text-center">
+    <div id="content">
+        <h2>Agregar cliente</h2>
+        <form>
+            <p>Usuario
+                <input type="text">
+            </p>
+            <p>Contraseña:
+                <input type="number">
+            </p>
+            <p>Nombre:
+                <input type="number">
+            </p>
+            <p>Telefono:
+                <input type="text">
+            </p>
+            <p>Tarjeta Bancaria:
+                <input type="number">
+            </p>
+
+            <input type="submit" value="Agregar" class="btn btn-primary">
+            </p>
+        </form>
+    </div>
+</section>
+
+<!-- VEHICULOS -->
+<section id="vehiculos" class="text-center">
+    <p></p>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>Vehiculos</h1>
+            <hr class="star-primary">
+        </div>
+    </div>
+
+    <div class="container" >
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div ng-controller="vehiculoCtrl">
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h3>Pagina: {{ currentPage}}</h3>
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="search">Search:</label>
+                            <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="search">items per page:</label>
+                            <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <table class="table table-striped" align="center">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>tipo</th>
+                                        <th>estado</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr  dir-paginate="vehiculo in vehiculos | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                                        <td> {{ vehiculo.id}} </td> 
+                                        <td> {{ vehiculo.tipo}} </td> 
+                                        <td> {{ vehiculo.estado}} </td> 
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="text-center">
+                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="./partials/dirPagination.tpl.html"></dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- AGREGAR VEHICULO -->
+<section id="agregarVehiculo" lass="text-center" ng-controller="vehiculoCtrl">
+    <div class="text-center">
+        <h2>Agregar vehiculo</h2>
+        <p></p>
+        <form>
+            <p>Tipo: 
+                <select ng-model="vehiculo.tipo">
+                    <option value="Vcub">Vcub</option>
+                    <option value="Mobibus">Mobibus</option>
+                    <option value="Tranvia">Tranvia</option>
+                </select>
+            </p>
+            <p>Estado: <input type="text" ng-model="vehiculo.estado"></p>
+            <div ng-if="vehiculo.tipo === 'Vcub'">
+                <p>Color: <input type="text"></p>
+            </div>
+            <div ng-if="vehiculo.tipo === 'Mobibus'">
+                <p>personas pie: <input type="number" ng-model="vehiculo.personasPie" min="1"></p>
+                <p>personas discapacitadas: <input type="number" ng-model="vehiculo.personasDiscapacitadas" min="1"></p>
+            </div>
+            <div ng-if="vehiculo.tipo === 'Tranvia'">
+                <p>Linea: 
+                    <select ng-model="vehiculo.linea">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                </p>
+            </div>
+            <input type="submit" value="Agregar" class="btn btn-primary"></p>
+        </form>
+    </div>
+</section>
+
+
+<!-- ESTACIONES -->
+<section id="estaciones" class="text-center">
+    <p></p>
+    <div class="row">
+    <div class="col-lg-12 text-center">
+        <h1>Estaciones</h1>
+        <hr class="star-primary">
+    </div>
+</div>
+    <div class="container" >
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div ng-controller="estacionCtrl">
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h3>Pagina: {{ currentPage}}</h3>
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="search">Search:</label>
+                            <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="search">items per page:</label>
+                            <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <table class="table table-striped" align="center">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Capacidad</th>
+                                        <th>Latitud</th>
+                                        <th>Longitud</th>
+                                        <th>Disponibilidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr  dir-paginate="estacion in estaciones | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                                        <td> {{ estacion.id}} </td> 
+                                        <td> {{ estacion.capacidad}} </td> 
+                                        <td> {{ estacion.latitud}} </td> 
+                                        <td> {{ estacion.longitud}} </td> 
+                                        <td> {{estacion.disponibilidad}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="text-center">
+                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="./partials/dirPagination.tpl.html"></dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- AGREGAR ESTACION -->
+<section id="AgregarEstacion" class="text-center">
+    <div id="content">
+
+        <h2>Crear estación</h2>
+        <form >
+            <p>Diponibles Vcubs:  <input type="number"></p>
+            <p>Capacidad: <input type="number" ></p>
+            <p>Latitud: <input type="number"></p>
+            <p>Longitud: <input type="number"></p>
+            <input type="submit" value="Agregar" class="btn btn-primary"></p>
+        </form>
+    </div>
+</section>

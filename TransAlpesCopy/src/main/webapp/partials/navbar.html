@@ -1,0 +1,104 @@
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" ng-controller="navbarCtrl">
+    <div class="container">
+
+        <!--a class="navbar-brand">
+            <img src="img/logo.png">
+        </a>
+
+        
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#page-top">TransAlpes</a>
+        </div>
+
+        <!-- NAVEGACION DE ESTACION -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="show('Estacion')">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#RegistrarVcub">Registrar vcub</a>
+                </li>
+                <li class="page-scroll">
+                    <a ng-click="logout()"> Cerrar sesion</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+
+
+        <!-- NAVEGACION DE VEHICULO -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="show('Vehiculo')">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+
+                <li class="page-scroll">
+                    <a ng-click="logout()"> Cerrar sesion</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+
+        <!-- NAVEGACION DE CLIENTE -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="show('Cliente')">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#reservas">Reservas</a>
+                </li>
+                <li class="page-scroll">
+                    <a ng-click="logout()"> Cerrar sesion</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+
+        <!-- NAVEGACION DE ADMINISTRADOR -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="show('Admin')">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#clientes">Clientes</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#agregarCliente">Agregar Cliente</a>
+                </li>
+
+                <li class="page-scroll">
+                    <a href="#vehiculos">Vehiculos</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#agregarVehiculo">Agregar vehiculo</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#estaciones">Estaciones</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#AgregarEstacion">Agregar estacion</a>
+                </li>
+                <li class="page-scroll">
+                    <a ng-click="logout()"> Cerrar sesion</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+
+
+
+    </div>
+    <!-- /.container-fluid -->
+</nav>
