@@ -3,28 +3,52 @@ package com.tbc.modelos;
 //import org.hibernate.annotations.OnDelete;
 //import org.hibernate.annotations.OnDeleteAction;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
 
 
 @Entity
-public class Cliente {
+public class Cliente implements Serializable{
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
-    public String name;
+    private String email;
+    
+    private String name;
 
-    public String telefono;
+    private String telefono;
 
-    public String tarjetaBancaria;
+    private String tarjetaBancaria;
+    
+    private String password;
     
     @Transient
     public List<Reserva> reservas;
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+
+    
+    
     public List<Reserva> getReservas() {
         return reservas;
     }

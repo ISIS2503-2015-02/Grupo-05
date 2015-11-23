@@ -46,8 +46,8 @@
                                 <tbody>
                                     <tr dir-paginate="cliente in clientes | filter:q | itemsPerPage: pageSize" current-page="currentPage">
                                         <td align="left"> {{ cliente.id}} </td>
-                                        <td align="left"> {{ cliente.user}} </td>
-                                        <td align="left"> {{ cliente.nombre}} </td>
+                                        <td align="left"> {{ cliente.email}} </td>
+                                        <td align="left"> {{ cliente.name}} </td>
                                         <td align="left"> {{ cliente.telefono}} </td>
                                         <td align="left"> {{cliente.tarjetaBancaria}}</td>
                                     </tr>
@@ -72,24 +72,24 @@
 
 
 <!-- AGREGAR CLIENTE -->
-<section id="agregarCliente" class="text-center">
+<section id="agregarCliente" class="text-center" ng-controller="clienteCtrl">
     <div id="content">
         <h2>Agregar cliente</h2>
-        <form>
-            <p>Usuario
-                <input type="text">
+        <form name="Agregar Cliente" ng-submit="agregarCliente()">
+            <p>Email
+                <input type="email" ng-model="cliente.email">
             </p>
             <p>Contraseña:
-                <input type="number">
+                <input type="password" ng-model="cliente.password">
             </p>
             <p>Nombre:
-                <input type="number">
+                <input type="text" ng-model="cliente.name">
             </p>
             <p>Telefono:
-                <input type="text">
+                <input type="text" ng-model="cliente.telefono">
             </p>
             <p>Tarjeta Bancaria:
-                <input type="number">
+                <input type="text" ng-model="cliente.tarjetaBancaria">
             </p>
 
             <input type="submit" value="Agregar" class="btn btn-primary">
@@ -171,7 +171,7 @@
     <div class="text-center">
         <h2>Agregar vehiculo</h2>
         <p></p>
-        <form>
+        <form name="Agregar Vehiculo" ng-submit="agregarVehiculo()">
             <p>Tipo: 
                 <select ng-model="vehiculo.tipo">
                     <option value="Vcub">Vcub</option>
@@ -181,7 +181,7 @@
             </p>
             <p>Estado: <input type="text" ng-model="vehiculo.estado"></p>
             <div ng-if="vehiculo.tipo === 'Vcub'">
-                <p>Color: <input type="text"></p>
+                <p>Color: <input type="text" ng-model="vehiculo.color"></p>
             </div>
             <div ng-if="vehiculo.tipo === 'Mobibus'">
                 <p>personas pie: <input type="number" ng-model="vehiculo.personasPie" min="1"></p>
@@ -273,15 +273,14 @@
 
 
 <!-- AGREGAR ESTACION -->
-<section id="AgregarEstacion" class="text-center">
+<section id="AgregarEstacion" class="text-center" ng-controller="estacionCtrl">
     <div id="content">
 
         <h2>Crear estación</h2>
-        <form >
-            <p>Diponibles Vcubs:  <input type="number"></p>
-            <p>Capacidad: <input type="number" ></p>
-            <p>Latitud: <input type="number"></p>
-            <p>Longitud: <input type="number"></p>
+        <form name="Agregar estacion" ng-submit="agregarEstacion()" >
+            <p>Capacidad: <input type="number" ng-model="estacion.capacidad" ></p>
+            <p>Latitud: <input type="number" ng-model="estacion.latitud"></p>
+            <p>Longitud: <input type="number" ng-model="estacion.longitud"></p>
             <input type="submit" value="Agregar" class="btn btn-primary"></p>
         </form>
     </div>

@@ -138,8 +138,7 @@
                     {
                         capacidad: "1",
                         latitud: 0,
-                        longitud: 0,
-                        disponibilidad: 0
+                        longitud: 0
                     };
             $scope.idEstacion = '1';
             $scope.currentPage = 1;
@@ -275,9 +274,9 @@
         {
             $scope.cliente = {
                 id: "1",
-                user: "user",
+                email: "user",
                 password: "",
-                nombre: "nombre",
+                name: "nombre",
                 telefono: "12345",
                 tarjetaBancaria: "67890"
             };
@@ -332,7 +331,7 @@
                     // this callback will be called asynchronously
                     // when the response is available
                     $scope.cargar();
-                    alert("Se ha agregado correctamente la estacion.");
+                    alert("Se ha agregado correctamente el cliente.");
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.

@@ -45,6 +45,7 @@
             templateUrl: 'partials/vehiculo.html'
         };
     });
+
     app.directive('cliente', function () {
         return{
             restrict: 'E',
@@ -69,6 +70,7 @@
             {
                 var user = AuthenticationService.currentUser();
                 return user ? user.role === role : false;
+                // return true;
             };
 
             $scope.cerrarSesion = function ()
@@ -117,9 +119,9 @@
                         {
                             if (response.success)
                             {
-                                console.log("Data: "+JSON.stringify(response.data));
+                                console.log("Data: " + JSON.stringify(response.data));
                                 $scope.currentUser.role = response.data.role;
-                                console.log("Current user in loginCtrl: "+ JSON.stringify($scope.currentUser));
+                                console.log("Current user in loginCtrl: " + JSON.stringify($scope.currentUser));
                                 AuthenticationService.SetCredentials($scope.currentUser.user, $scope.currentUser.password, $scope.currentUser.role);
                             }
                         });
@@ -136,8 +138,7 @@
                     {
                         capacidad: "1",
                         latitud: 0,
-                        longitud: 0,
-                        disponibilidad: 0
+                        longitud: 0
                     };
             $scope.idEstacion = '1';
             $scope.currentPage = 1;
@@ -153,22 +154,25 @@
                         }
                     ];
 
-
-            $http({
-                method: 'GET',
-                url: BASE_URL + 'estaciones'
-            }).then(function successCallback(response)
+            $scope.cargar = function ()
             {
-                // this callback will be called asynchronously
-                // when the response is available
-                alert(JSON.stringify(response.data));
-                $scope.estaciones = response.data;
-            }, function errorCallback(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                alert(JSON.stringify(response));
-            });
+                $http({
+                    method: 'GET',
+                    url: BASE_URL + 'estaciones'
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    console.log(JSON.stringify(response.data));
+                    $scope.estaciones = response.data;
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log(JSON.stringify(response));
+                });
+            };
 
+            $scope.cargar();
 
             $scope.agregarEstacion = function ()
             {
@@ -181,13 +185,17 @@
                 {
                     // this callback will be called asynchronously
                     // when the response is available
-                    alert(JSON.stringify(response.data));
+                    console.log(JSON.stringify(response.data));
+                    $scope.cargar();
+                    alert("Se ha agregado correctamente la estacion.");
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
-                    alert(JSON.stringify(response));
+                    console.log(JSON.stringify(response));
+                    alert("Se ha producido un error.");
                 });
             };
+
 
 
         }]);
@@ -196,7 +204,8 @@
         {
             $scope.vehiculo = {
                 tipo: "Vcub",
-                estado: "",
+                estado: "estado",
+                color: "color",
                 personasPie: 1,
                 personasDiscapacitadas: 1,
                 linea: "A"
@@ -216,22 +225,47 @@
                         }
                     ];
 
-
-            $http({
-                method: 'GET',
-                url: BASE_URL + 'vehiculos'
-            }).then(function successCallback(response)
+            $scope.cargar = function ()
             {
-                // this callback will be called asynchronously
-                // when the response is available
-                alert(JSON.stringify(response.data));
-                $scope.vehiculos = response.data;
-            }, function errorCallback(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                alert(JSON.stringify(response));
-            });
+                $http({
+                    method: 'GET',
+                    url: BASE_URL + 'vehiculos'
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    console.log(JSON.stringify(response.data));
+                    $scope.vehiculos = response.data;
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log(JSON.stringify(response));
+                });
 
+            };
+
+            $scope.cargar();
+
+            $scope.agregarVehiculo = function ()
+            {
+                console.log("Agregando Vehiculo: " + JSON.stringify($scope.vehiculo));
+                $http({
+                    method: 'POST',
+                    url: BASE_URL + 'vehiculos',
+                    data: $scope.vehiculo
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    $scope.cargar();
+                    alert("Se ha agregado correctamente el vehiculo.");
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log(JSON.stringify(response));
+                    alert("Se ha producido un error.");
+                });
+            };
 
         }]);
 
@@ -240,9 +274,9 @@
         {
             $scope.cliente = {
                 id: "1",
-                user: "user",
+                email: "user",
                 password: "",
-                nombre: "nombre",
+                name: "nombre",
                 telefono: "12345",
                 tarjetaBancaria: "67890"
             };
@@ -264,20 +298,47 @@
                 }
             ];
 
-            $http({
-                method: 'GET',
-                url: BASE_URL + 'clientes'
-            }).then(function successCallback(response)
+            $scope.cargar = function ()
             {
-                // this callback will be called asynchronously
-                // when the response is available
-                alert(JSON.stringify(response.data));
-                $scope.clientes = response.data;
-            }, function errorCallback(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                alert(JSON.stringify(response));
-            });
+                $http({
+                    method: 'GET',
+                    url: BASE_URL + 'clientes'
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    console.log(JSON.stringify(response.data));
+                    $scope.clientes = response.data;
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log(JSON.stringify(response));
+                });
+
+            };
+            
+            $scope.cargar();
+
+            $scope.agregarCliente = function ()
+            {
+                console.log("Agregando Cliente: " + JSON.stringify($scope.cliente));
+                $http({
+                    method: 'POST',
+                    url: BASE_URL + 'clientes',
+                    data: $scope.cliente
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    $scope.cargar();
+                    alert("Se ha agregado correctamente el cliente.");
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log(JSON.stringify(response));
+                    alert("Se ha producido un error.");
+                });
+            };
 
 
         }]);

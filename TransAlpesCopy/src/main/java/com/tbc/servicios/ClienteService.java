@@ -63,7 +63,7 @@ public class ClienteService
     
     private void cargarReservas(Cliente c)
     {
-        Query q = entityManager.createQuery("select u from Prestamo u WHERE u.cliente_id = "+c.id);
+        Query q = entityManager.createQuery("select u from Prestamo u WHERE u.cliente_id = "+c.getId());
         List<Prestamo> prestamos = q.getResultList();
         if(c.reservas == null)
             c.reservas = new ArrayList<Reserva>();
@@ -101,7 +101,7 @@ public class ClienteService
         try {
             entityManager.getTransaction().begin();
             Cliente cliente = entityManager.find(Cliente.class, id);
-           reserva.cliente_id = cliente.id;
+           reserva.cliente_id = cliente.getId();
            //reserva.vehiculo = entityManager.find(Vehiculo.class, reserva.vehiculo.id);
            entityManager.persist(reserva);
             entityManager.getTransaction().commit();

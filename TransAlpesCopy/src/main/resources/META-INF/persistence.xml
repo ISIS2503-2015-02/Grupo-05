@@ -3,7 +3,6 @@
   <persistence-unit name="AplicacionMundialPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>co.edu.uniandes.isis2503.competitors.persistence.entity.CompetitorEntity</class>
-    <class>com.tbc.modelos.Cliente</class>
     <class>com.tbc.modelos.Estacion</class>
     <class>com.tbc.modelos.Informe</class>
     <class>com.tbc.modelos.Mobibus</class>
@@ -13,6 +12,7 @@
     <class>com.tbc.modelos.Vcub</class>
     <class>com.tbc.modelos.Vehiculo</class>
     <class>com.tbc.modelos.Prestamo</class>
+    <class>com.tbc.modelos.Cliente</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.target-database" value="PostgreSQL"/>

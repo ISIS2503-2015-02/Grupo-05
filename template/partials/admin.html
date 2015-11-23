@@ -46,8 +46,8 @@
                                 <tbody>
                                     <tr dir-paginate="cliente in clientes | filter:q | itemsPerPage: pageSize" current-page="currentPage">
                                         <td align="left"> {{ cliente.id}} </td>
-                                        <td align="left"> {{ cliente.user}} </td>
-                                        <td align="left"> {{ cliente.nombre}} </td>
+                                        <td align="left"> {{ cliente.email}} </td>
+                                        <td align="left"> {{ cliente.name}} </td>
                                         <td align="left"> {{ cliente.telefono}} </td>
                                         <td align="left"> {{cliente.tarjetaBancaria}}</td>
                                     </tr>
@@ -76,14 +76,14 @@
     <div id="content">
         <h2>Agregar cliente</h2>
         <form name="Agregar Cliente" ng-submit="agregarCliente()">
-            <p>Usuario
-                <input type="text" ng-model="cliente.user">
+            <p>Email
+                <input type="email" ng-model="cliente.email">
             </p>
             <p>Contraseña:
                 <input type="password" ng-model="cliente.password">
             </p>
             <p>Nombre:
-                <input type="text" ng-model="cliente.nombre">
+                <input type="text" ng-model="cliente.name">
             </p>
             <p>Telefono:
                 <input type="text" ng-model="cliente.telefono">
@@ -278,10 +278,9 @@
 
         <h2>Crear estación</h2>
         <form name="Agregar estacion" ng-submit="agregarEstacion()" >
-            <p>Diponibles Vcubs:  <input type="number"></p>
-            <p>Capacidad: <input type="number" ></p>
-            <p>Latitud: <input type="number"></p>
-            <p>Longitud: <input type="number"></p>
+            <p>Capacidad: <input type="number" ng-model="estacion.capacidad" ></p>
+            <p>Latitud: <input type="number" ng-model="estacion.latitud"></p>
+            <p>Longitud: <input type="number" ng-model="estacion.longitud"></p>
             <input type="submit" value="Agregar" class="btn btn-primary"></p>
         </form>
     </div>
