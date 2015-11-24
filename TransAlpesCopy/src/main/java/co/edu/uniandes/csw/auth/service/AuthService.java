@@ -10,7 +10,6 @@ import com.stormpath.sdk.application.Application;
 import com.stormpath.sdk.client.Client;
 import com.stormpath.sdk.group.Group;
 import com.stormpath.sdk.group.GroupList;
-import com.stormpath.sdk.oauth.AccessTokenResult;
 import com.stormpath.sdk.resource.ResourceException;
 import com.stormpath.shiro.realm.ApplicationRealm;
 
@@ -52,19 +51,19 @@ public class AuthService {
             user.setName(userAttributes.get("givenName") + " " + userAttributes.get("surname"));
             user.setEmail(userAttributes.get("email"));
             user.setUserName(userAttributes.get("username"));
-            String role = "Estacion";
-            if (currentUser.hasRole(role));
-           else if (currentUser.hasRole("Vehiculo")) {
+            String role = null;
+            if (currentUser.hasRole("Estacion"))
+                role ="Estacion";
+            if (currentUser.hasRole("Vehiculo")) {
                 role = "Vehiculo";
-            }
-           else if (currentUser.hasRole("Cliente")) {
+            } if (currentUser.hasRole("Cliente")) {
                 role = "Cliente";
-            }
-
-          else  if (currentUser.hasRole("Admin")) {
+            }if (currentUser.hasRole("Admin")) {
                 role = "Admin";
             }
-          else role="Cliente";
+            if(role==null)
+                role="Cliente";
+            
             user.setRole(role);
             return Response.ok(user)
                     .build();
