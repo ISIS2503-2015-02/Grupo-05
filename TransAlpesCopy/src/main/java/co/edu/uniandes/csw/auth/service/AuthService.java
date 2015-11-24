@@ -54,16 +54,17 @@ public class AuthService {
             user.setUserName(userAttributes.get("username"));
             String role = "Estacion";
             if (currentUser.hasRole(role));
-            if (currentUser.hasRole("Vehiculo")) {
+           else if (currentUser.hasRole("Vehiculo")) {
                 role = "Vehiculo";
             }
-            if (currentUser.hasRole("Cliente")) {
+           else if (currentUser.hasRole("Cliente")) {
                 role = "Cliente";
             }
 
-            if (currentUser.hasRole("Admin")) {
+          else  if (currentUser.hasRole("Admin")) {
                 role = "Admin";
             }
+          else role="Cliente";
             user.setRole(role);
             return Response.ok(user)
                     .build();

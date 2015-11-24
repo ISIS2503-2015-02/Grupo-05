@@ -238,11 +238,11 @@
             {
                 var data =
                         {
-                    "cliente_id":$scope.idUsuario,
-                    "vcub_id":$scope.idVehiculo
-                };
-                console.log("cliente_id: "+$scope.idUsuario);
-                console.log("vcub_id: "+$scope.idVehiculo);
+                            "cliente_id": $scope.idUsuario,
+                            "vcub_id": $scope.idVehiculo
+                        };
+                console.log("cliente_id: " + $scope.idUsuario);
+                console.log("vcub_id: " + $scope.idVehiculo);
                 console.log("Enviado peticion de reserva:" + JSON.stringify(data));
                 $http({
                     method: 'POST',
@@ -405,6 +405,25 @@
                 });
             };
 
+            $scope.cargarReservas = function ()
+            {
+                $http({
+                    method: 'GET',
+                    url: BASE_URL + 'clientes/1/reservas'
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    console.log(JSON.stringify(response.data));
+                    $scope.reservas = response.data;
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log(JSON.stringify(response));
+                });
+            };
+            
+            $scope.cargarReservas();
 
         }]);
 
