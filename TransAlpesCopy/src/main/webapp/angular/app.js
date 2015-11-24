@@ -132,7 +132,7 @@
         }]);
 
 
-    app.controller('estacionCtrl', ['$scope', '$http', '$window', '$rootScope', function ($scope, $http, $window, $rootScope)
+    app.controller('estacionCtrl', ['$scope', '$http', '$window', '$rootScope','AuthenticationService', function ($scope, $http, $window, $rootScope,AuthenticationService)
         {
             $scope.estacion =
                     {
@@ -140,19 +140,13 @@
                         latitud: 0,
                         longitud: 0
                     };
-            $scope.idEstacion = '1';
+            $scope.idEstacion = 0;
+            $scope.idVcub = 0;
             $scope.currentPage = 1;
             $scope.pageSize = 10;
-            $scope.estaciones =
-                    [
-                        {
-                            id: 1,
-                            capacidad: "10",
-                            latitud: 1234,
-                            longitud: 5678,
-                            disponibilidad: 0
-                        }
-                    ];
+            $scope.estaciones = [];
+            $scope.vcubs = [{"id":1,"estado":"Alguno","color":"nose"}];
+                    
 
             $scope.cargar = function ()
             {
@@ -165,6 +159,25 @@
                     // when the response is available
                     console.log(JSON.stringify(response.data));
                     $scope.estaciones = response.data;
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log(JSON.stringify(response));
+                });
+            };
+
+            $scope.cargarVcubs = function ()
+            {
+                var user = AuthenticationService.currentUser();
+                $http({
+                    method: 'GET',
+                    url: BASE_URL + 'estaciones/'+1 //+user.username
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    console.log(JSON.stringify(response.data));
+                    $scope.vcubs = response.data.vcubs;
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -196,6 +209,28 @@
                 });
             };
 
+            $scope.registrarVcub = function ()
+            {
+                var data = {"vcub_id": $scope.idVcub};
+                console.log("Registrando:" + JSON.stringify(data) + " en la estacion " + JSON.stringify($scope.idEstacion));
+                $http({
+                    method: 'POST',
+                    url: BASE_URL + 'estaciones/' + JSON.stringify($scope.idEstacion) + '/vcubs',
+                    data: data
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    console.log(JSON.stringify(response.data));
+                    $scope.cargarVcubs();
+                    alert("Se ha agregado correctamente el vcub");
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log(JSON.stringify(response));
+                    alert("Se ha producido un error.");
+                });
+            };
 
 
         }]);
@@ -316,7 +351,7 @@
                 });
 
             };
-            
+
             $scope.cargar();
 
             $scope.agregarCliente = function ()

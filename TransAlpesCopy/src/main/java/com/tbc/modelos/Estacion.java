@@ -1,10 +1,14 @@
 package com.tbc.modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
 @Entity
-public class Estacion {
+public class Estacion implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +19,7 @@ public class Estacion {
     public long latitud;
 
     public long longitud;
-    
-   @OneToMany(cascade = CascadeType.ALL, mappedBy = "estacion")
+
     public List<Vcub> vcubs;
 
     public List<Vcub> getVcubs() {
@@ -27,7 +30,7 @@ public class Estacion {
         this.vcubs = vcubs;
     }
 
-  //  public static Model.Finder<Long,Estacion> find = new Model.Finder<Long, Estacion>(Estacion.class);
+    //  public static Model.Finder<Long,Estacion> find = new Model.Finder<Long, Estacion>(Estacion.class);
     public Estacion() {
 
     }
@@ -95,7 +98,7 @@ public class Estacion {
 
     public void registrarVcub(Vcub vcub) {
         vcubs.add(vcub);
-        System.out.println("Total vcubs: "+vcubs.size() );
+        System.out.println("Total vcubs: " + vcubs.size());
     }
 
     public String darUbicacion() {

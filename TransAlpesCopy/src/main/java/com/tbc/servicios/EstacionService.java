@@ -48,7 +48,7 @@ public class EstacionService {
 
     @GET
     @Path("{id}/disponibilidad")
-    @RequiresRoles( "Estacion" )
+    @RequiresRoles("Estacion")
     public Response darDisponibilidadEstacion(@PathParam("id") long id) {
         JSONObject rta = new JSONObject();
         Estacion estacion = entityManager.find(Estacion.class, id);
@@ -63,19 +63,27 @@ public class EstacionService {
 
     @POST
     @Path("{id}/vcubs")
-    @RequiresRoles( "Estacion" )
-    public Response registrarVcub(@PathParam("id") long id, Vcub vcub) {
+    @RequiresRoles("Estacion")
+    public Response registrarVcub(@PathParam("id") long id, JSONObject json) {
         JSONObject rta = new JSONObject();
         try {
-            entityManager.getTransaction().begin();
+
             Estacion estacion = entityManager.find(Estacion.class, id);
-            vcub.estacion = estacion;
-            estacion.registrarVcub(vcub);
-            
-            entityManager.getTransaction().commit();
-            entityManager.refresh(estacion);
-            rta.put("Estacion_id", estacion.getId());
-            rta.put("vcubs", JSON.toString(estacion.getVcubs()));
+            Integer vcubId = (Integer)json.get("vcub_id");
+            System.out.println("Registrando el vcub "+vcubId.longValue()+" en la estacion "+id);
+            Vcub vcub = entityManager.find(Vcub.class,vcubId.longValue());
+
+            if (vcub != null) {
+                vcub.estacion_id = estacion.id;
+                vcub.estado ="En estacion "+estacion.id;
+                estacion.registrarVcub(vcub);
+                entityManager.getTransaction().begin();
+                entityManager.getTransaction().commit();
+                entityManager.refresh(estacion);
+                rta.put("Estacion_id", estacion.getId());
+                rta.put("vcubs", JSON.toString(estacion.getVcubs()));
+            }
+            else rta.put("Error", "no se encontro ese vcub");
         } catch (Exception t) {
             rta.put("Error", t.getMessage());
             t.printStackTrace();
@@ -91,7 +99,7 @@ public class EstacionService {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    @RequiresRoles( "Estacion" )
+    @RequiresRoles("Estacion")
     public Response crearEstacion(Estacion estacion) {
         JSONObject rta = new JSONObject();
         System.out.println("Agregando estacion...");
@@ -116,7 +124,7 @@ public class EstacionService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @RequiresRoles( "Estacion" )
+    @RequiresRoles("Estacion")
     public Response darEstaciones() {
         Query q = entityManager.createQuery("select u from Estacion u");
         List<Estacion> rta = q.getResultList();
@@ -126,7 +134,7 @@ public class EstacionService {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    @RequiresRoles( "Estacion" )
+    @RequiresRoles("Estacion")
     public Response darEstacion(@PathParam("id") long id) {
         Estacion rta = entityManager.find(Estacion.class, id);
 

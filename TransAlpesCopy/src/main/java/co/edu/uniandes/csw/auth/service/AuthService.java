@@ -133,14 +133,13 @@ public class AuthService {
         }
     }
 
-    private Account createUser(UserDTO user) {
+    public static Account createUser(UserDTO user) {
         Account acct = getClient().instantiate(Account.class);
 
         acct.setUsername(user.getUserName());
         acct.setPassword(user.getPassword());
         acct.setEmail(user.getEmail());
         acct.setGivenName(user.getName());
-        acct.setSurname(user.getName());
         acct.setStatus(AccountStatus.ENABLED);
 
         Application application = getApplication();
@@ -165,15 +164,15 @@ public class AuthService {
         }
     }
 
-    private ApplicationRealm getRealm() {
+    private static ApplicationRealm getRealm() {
         return ((ApplicationRealm) ((RealmSecurityManager) SecurityUtils.getSecurityManager()).getRealms().iterator().next());
     }
 
-    private Client getClient() {
+    private static Client getClient() {
         return getRealm().getClient();
     }
 
-    private Application getApplication() {
+    private static Application getApplication() {
         return getClient().getResource(getRealm().getApplicationRestUrl(), Application.class);
     }
 

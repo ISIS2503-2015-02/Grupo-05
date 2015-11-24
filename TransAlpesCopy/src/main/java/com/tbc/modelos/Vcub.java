@@ -1,6 +1,7 @@
 package com.tbc.modelos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,21 +15,19 @@ public class Vcub extends Vehiculo
 
 
     public String color;
- 
-    
-        
-    @ManyToOne(cascade = CascadeType.ALL)
-     @JsonIgnore
-    public Estacion estacion;
-    
 
-    public Estacion getEstacion() {
-        return estacion;
+    
+    public long estacion_id;
+
+    public long getEstacion_id() {
+        return estacion_id;
     }
 
-    public void setEstacion(Estacion estacion) {
-        this.estacion = estacion;
+    public void setEstacion_id(long estacion_id) {
+        this.estacion_id = estacion_id;
     }
+    
+    
     
 
 

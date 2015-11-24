@@ -1,12 +1,83 @@
+<!-- VCUBS --->
+<section id="vcubs" class="text-center">
+    <p></p>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>Vcubs</h1>
+            <hr class="star-primary">
+        </div>
+    </div>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div ng-controller="estacionCtrl" ng-init="cargarVcubs()">
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h3>Pagina: {{ currentPage}}</h3>
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="search">Search:</label>
+                            <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="search">items per page:</label>
+                            <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <table class="table table-striped" align="center">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Color</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr dir-paginate="vcub in vcubs | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                                        <td align="left"> {{ vcub.id}} </td>
+                                        <td align="left"> {{ vcub.color}} </td>
+                                        <td align="left"> {{ vcub.estado}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="text-center">
+                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="./partials/dirPagination.tpl.html"></dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
 
 <!-- REGISTRAR VCUB -->
-<section id="RegistrarVcub">
+<section id="RegistrarVcub" ng-controller="estacionCtrl">
     <div class="text-center">
         <h2>Registrar VCubs</h2>
         <p></p>
-        <form>
-            <p>Id Vcub: <input type="number"></p>
-            <input type="submit" value="Registrar" class="btn btn-primary"></p>
+        <form name="Registrar Vcub" ng-submit="registrarVcub()">
+            <p>Id Estacion:
+                <input type="number" ng-model="idEstacion">
+            </p>
+            <p>Id Vcub:
+                <input type="number" ng-model="idVcub">
+            </p>
+            <input type="submit" value="Registrar" class="btn btn-primary">
+            </p>
         </form>
     </div>
 </section>
