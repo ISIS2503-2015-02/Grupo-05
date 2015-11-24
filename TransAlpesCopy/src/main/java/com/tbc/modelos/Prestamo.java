@@ -23,6 +23,9 @@ public class Prestamo extends Reserva
     {
         super();
         idLlegada = -1;
+        estado="Activa";
+        fecha = System.currentTimeMillis();
+        tipo= "Prestamo";
     }
 
     public long getIdSalida() {

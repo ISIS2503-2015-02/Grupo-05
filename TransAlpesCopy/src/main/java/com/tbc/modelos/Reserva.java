@@ -2,6 +2,7 @@ package com.tbc.modelos;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public  abstract class Reserva {
+public  abstract class Reserva implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public long id;
@@ -21,12 +22,18 @@ public  abstract class Reserva {
     public long fecha;
     
     public String tipo;
-
-    public long cliente_id;
-    
     
     public long vehiculo_id;
     
+    public long cliente_id;
+
+    public long getCliente_id() {
+        return cliente_id;
+    }
+
+    public void setCliente_id(long cliente_id) {
+        this.cliente_id = cliente_id;
+    }
     
     public long getId() {
         return id;
@@ -50,17 +57,7 @@ public  abstract class Reserva {
 
     public void setFecha(long fecha) {
         this.fecha = fecha;
-    }
-
-    public long getCliente_id() {
-        return cliente_id;
-    }
-
-    public void setCliente_id(long cliente_id) {
-        this.cliente_id = cliente_id;
-    }
-
-   
+    }   
 
     public String getTipo() {
         return tipo;
@@ -77,11 +74,6 @@ public  abstract class Reserva {
     public void setVehiculo_id(long vehiculo_id) {
         this.vehiculo_id = vehiculo_id;
     }
-
-
- 
-
-
 
     public Reserva()
     {

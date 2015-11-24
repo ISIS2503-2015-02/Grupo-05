@@ -5,7 +5,11 @@
  */
 package com.tbc.servicios;
 
+import com.google.gson.Gson;
+import com.tbc.modelos.Cliente;
 import com.tbc.modelos.Estacion;
+import com.tbc.modelos.Prestamo;
+import com.tbc.modelos.Reserva;
 import com.tbc.modelos.Vcub;
 import com.tbc.modelos.Vehiculo;
 import com.tbc.persistence.PersistenceManager;
@@ -69,21 +73,32 @@ public class EstacionService {
         try {
 
             Estacion estacion = entityManager.find(Estacion.class, id);
-            Integer vcubId = (Integer)json.get("vcub_id");
-            System.out.println("Registrando el vcub "+vcubId.longValue()+" en la estacion "+id);
-            Vcub vcub = entityManager.find(Vcub.class,vcubId.longValue());
+            Integer vcubId = (Integer) json.get("vcub_id");
+            System.out.println("Registrando el vcub " + vcubId.longValue() + " en la estacion " + id);
+            Vcub vcub = entityManager.find(Vcub.class, vcubId.longValue());
 
             if (vcub != null) {
                 vcub.estacion_id = estacion.id;
-                vcub.estado ="En estacion "+estacion.id;
+                vcub.estado = "En estacion " + estacion.id;
                 estacion.registrarVcub(vcub);
+
+                Query q = entityManager.createQuery("select u from Prestamo u WHERE u.vehiculo_id = "+id);
+                List<Prestamo> reservas = q.getResultList();
+                for(Prestamo r: reservas)
+                {
+                    if(r.idLlegada!=-1)continue;
+                    r.estado = "Inactiva";
+                    r.idLlegada = id;
+                }
+
                 entityManager.getTransaction().begin();
                 entityManager.getTransaction().commit();
                 entityManager.refresh(estacion);
                 rta.put("Estacion_id", estacion.getId());
-                rta.put("vcubs", JSON.toString(estacion.getVcubs()));
+                rta.put("vcubs", new Gson().toJson(estacion.getVcubs()));
+            } else {
+                rta.put("Error", "no se encontro ese vcub");
             }
-            else rta.put("Error", "no se encontro ese vcub");
         } catch (Exception t) {
             rta.put("Error", t.getMessage());
             t.printStackTrace();
@@ -128,6 +143,56 @@ public class EstacionService {
     public Response darEstaciones() {
         Query q = entityManager.createQuery("select u from Estacion u");
         List<Estacion> rta = q.getResultList();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresRoles("Estacion")
+    @Path("{id}/reservas")
+    public Response prestarVcub(@PathParam("id") long id, JSONObject json) {
+        JSONObject rta = new JSONObject();
+        Prestamo reserva = new Prestamo();
+ 
+
+        try {
+
+            Integer clienteId = (Integer) json.get("cliente_id");
+            System.out.println("cliente_id: "+clienteId);
+            Cliente cliente = entityManager.find(Cliente.class, clienteId.longValue());
+            System.out.println("Cliente: "+new Gson().toJson(cliente));
+            
+            Integer vcubId = (Integer) json.get("vcub_id");
+            System.out.println("vcub_id: "+vcubId);
+            Vcub vcub = entityManager.find(Vcub.class, vcubId.longValue());
+            System.out.println("Vcub: "+ new Gson().toJson(vcub));
+            
+            reserva.vehiculo_id = vcub.id;
+
+            reserva.idSalida = id;
+
+            reserva.cliente_id = cliente.getId();
+            //reserva.vehiculo = entityManager.find(Vehiculo.class, reserva.vehiculo.id);
+            System.out.println("Creando reserva: " + JSON.toString(reserva));
+            entityManager.getTransaction().begin();
+            entityManager.persist(reserva);
+            entityManager.getTransaction().commit();
+            entityManager.refresh(reserva);
+            rta.put("succes", true);
+            rta.put("reserva_id", reserva.id);
+            ;
+        } catch (Exception t) {
+            t.printStackTrace();
+            rta.put("success", false);
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+
+        } finally {
+            entityManager.clear();
+            entityManager.close();
+        }
+
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
     }
 

@@ -132,7 +132,7 @@
         }]);
 
 
-    app.controller('estacionCtrl', ['$scope', '$http', '$window', '$rootScope','AuthenticationService', function ($scope, $http, $window, $rootScope,AuthenticationService)
+    app.controller('estacionCtrl', ['$scope', '$http', '$window', '$rootScope', 'AuthenticationService', function ($scope, $http, $window, $rootScope, AuthenticationService)
         {
             $scope.estacion =
                     {
@@ -142,11 +142,13 @@
                     };
             $scope.idEstacion = 0;
             $scope.idVcub = 0;
+            $scope.idUsuario = 0;
             $scope.currentPage = 1;
             $scope.pageSize = 10;
+            $scope.idVehiculo = 0;
             $scope.estaciones = [];
-            $scope.vcubs = [{"id":1,"estado":"Alguno","color":"nose"}];
-                    
+            $scope.vcubs = [{"id": 1, "estado": "Alguno", "color": "nose"}];
+
 
             $scope.cargar = function ()
             {
@@ -171,7 +173,7 @@
                 var user = AuthenticationService.currentUser();
                 $http({
                     method: 'GET',
-                    url: BASE_URL + 'estaciones/'+1 //+user.username
+                    url: BASE_URL + 'estaciones/' + 1 //+user.username
                 }).then(function successCallback(response)
                 {
                     // this callback will be called asynchronously
@@ -212,7 +214,7 @@
             $scope.registrarVcub = function ()
             {
                 var data = {"vcub_id": $scope.idVcub};
-                console.log("Registrando:" + JSON.stringify(data) + " en la estacion " + JSON.stringify($scope.idEstacion));
+                console.log("Registrando vcub:" + JSON.stringify(data) + " en la estacion " + JSON.stringify($scope.idEstacion));
                 $http({
                     method: 'POST',
                     url: BASE_URL + 'estaciones/' + JSON.stringify($scope.idEstacion) + '/vcubs',
@@ -232,6 +234,34 @@
                 });
             };
 
+            $scope.prestarVcub = function ()
+            {
+                var data =
+                        {
+                    "cliente_id":$scope.idUsuario,
+                    "vcub_id":$scope.idVehiculo
+                };
+                console.log("cliente_id: "+$scope.idUsuario);
+                console.log("vcub_id: "+$scope.idVehiculo);
+                console.log("Enviado peticion de reserva:" + JSON.stringify(data));
+                $http({
+                    method: 'POST',
+                    url: BASE_URL + 'estaciones/' + JSON.stringify($scope.idEstacion) + '/reservas',
+                    data: data
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    console.log(JSON.stringify(response.data));
+                    $scope.cargarVcubs();
+                    alert("Se ha agregado correctamente el vcub");
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log(JSON.stringify(response));
+                    alert("Se ha producido un error.");
+                });
+            };
 
         }]);
 

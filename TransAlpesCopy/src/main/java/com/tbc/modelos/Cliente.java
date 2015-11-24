@@ -100,4 +100,10 @@ public class Cliente implements Serializable{
     public void setTarjetaBancaria(String tarjetaBancaria) {
         this.tarjetaBancaria = tarjetaBancaria;
     }
+    
+    
+    public void agregaReserva(Reserva reserva)
+    {
+        reservas.add(reserva);
+    }
 }

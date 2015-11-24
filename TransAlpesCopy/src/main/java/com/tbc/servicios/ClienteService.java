@@ -28,6 +28,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.eclipse.jetty.util.ajax.JSON;
 import org.json.simple.JSONObject;
 
 /**
@@ -63,7 +64,7 @@ public class ClienteService
     
     private void cargarReservas(Cliente c)
     {
-        Query q = entityManager.createQuery("select u from Prestamo u WHERE u.cliente_id = "+c.getId());
+        Query q = entityManager.createQuery("select u from Reserva u WHERE u.cliente_id = "+c.getId());
         List<Prestamo> prestamos = q.getResultList();
         if(c.reservas == null)
             c.reservas = new ArrayList<Reserva>();
@@ -101,12 +102,12 @@ public class ClienteService
         try {
             entityManager.getTransaction().begin();
             Cliente cliente = entityManager.find(Cliente.class, id);
-           reserva.cliente_id = cliente.getId();
+      
            //reserva.vehiculo = entityManager.find(Vehiculo.class, reserva.vehiculo.id);
            entityManager.persist(reserva);
             entityManager.getTransaction().commit();
             entityManager.refresh(cliente);
-           rta.put("Cliente_id", reserva.cliente_id);
+
          
         } catch (Exception t) {
             t.printStackTrace();
@@ -152,6 +153,8 @@ public class ClienteService
     {
         Query q = entityManager.createQuery("select u from Cliente u");
         List<Cliente> clientes = q.getResultList();
+        for(Cliente c: clientes)
+            cargarReservas(c);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(clientes).build();
     }
    
@@ -162,6 +165,7 @@ public class ClienteService
     {
          JSONObject rta = new JSONObject();
         int status = 200;
+        System.out.println("Agregando cliente: "+ new Gson().toJson(cliente));
          try {
                 entityManager.getTransaction().begin();
                 entityManager.persist(cliente);
