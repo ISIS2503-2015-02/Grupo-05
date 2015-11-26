@@ -150,7 +150,7 @@
             $scope.pageSize = 10;
             $scope.idVehiculo = 0;
             $scope.estaciones = [];
-            $scope.vcubs = [{"id": 1, "estado": "Alguno", "color": "nose"}];
+            $scope.vcubs = [];
 
 
             $scope.cargar = function ()
@@ -287,14 +287,6 @@
             $scope.pageSize = 10;
             $scope.vehiculos =
                     [
-                        {
-                            id: 1,
-                            tipo: "Vcub",
-                            estado: "Activo",
-                            personasPie: 1,
-                            personasDiscapacitadas: 1,
-                            linea: "A"
-                        }
                     ];
 
             $scope.cargar = function ()
@@ -358,17 +350,8 @@
             $scope.pageSize = 10;
             $scope.clientes =
                     [
-                        $scope.cliente
                     ];
             $scope.reservas = [
-                {
-                    id: 1,
-                    estado: "En espera",
-                    fecha: 12345,
-                    tipo: "Prestamo",
-                    cliente_id: 1,
-                    vehiculo_id: 2
-                }
             ];
 
             $scope.cargar = function ()
