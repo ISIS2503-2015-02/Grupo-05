@@ -1,0 +1,71 @@
+<!-- POSICIONES -->
+<section id="clientes" class="text-center">
+    <p></p>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>Posiciones</h1>
+            <hr class="star-primary">
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div ng-controller="vehiculoCtrl">
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h3>Pagina: {{ currentPage}}</h3>
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="search">Search:</label>
+                            <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+                        </div>
+                        <div class="col-xs-4">
+                            <label for="search">items per page:</label>
+                            <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <table class="table table-striped" align="center">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                            <th>Latitud</th>
+                                        <th>Longitud</th>
+                                        <th>Hora</th>
+                                        <th>Estado</th>
+                                        <th>Km</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr dir-paginate="pos in posiciones | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                                        <td align="left"> {{ pos.id}} </td>
+                                        <td align="left"> {{ pos.latitud}} </td>
+                                        <td align="left"> {{ pos.longitud}} </td>
+                                        <td align="left"> {{ pos.hora}} </td>
+                                        <td align="left"> {{pos.estado}}</td>
+                                        <td align="left"> {{pos.kilometraje}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="text-center">
+                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="./partials/dirPagination.tpl.html"></dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
