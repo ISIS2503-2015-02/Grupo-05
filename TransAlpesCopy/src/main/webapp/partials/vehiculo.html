@@ -1,5 +1,5 @@
 <!-- POSICIONES -->
-<section id="clientes" class="text-center">
+<section id="posiciones" class="text-center">
     <p></p>
     <div class="row">
         <div class="col-lg-12 text-center">
@@ -68,4 +68,32 @@
         </div>
     </div>
 
+</section>
+
+
+<!-- AGREGAR POSICION -->
+<section id="agregarPosicion" class="text-center" ng-controller="vehiculoCtrl">
+    <div id="content">
+        <h2>Agregar Posicion</h2>
+        <form name="Agregar Posicion" ng-submit="reportarPosicion()">
+            <p>latitud
+                <input type="number" ng-model="posicion.latitud">
+            </p>
+            <p>Longitud: 
+                <input type="number" ng-model="posicion.longitud">
+            </p>
+            <p>Hora:
+                <input type="number" ng-model="posicion.hora">
+            </p>
+            <p>Estado:
+                <input type="text" ng-model="posicion.estado">
+            </p>
+            <p>Kilometraje:
+                <input type="number" ng-model="posicion.kilometraje">
+            </p>
+            
+            <input type="submit" value="Agregar" class="btn btn-primary">
+            </p>
+        </form>
+    </div>
 </section>

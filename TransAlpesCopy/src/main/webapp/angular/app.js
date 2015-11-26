@@ -291,6 +291,15 @@
 
             $scope.posiciones = [];
 
+            $scope.posicion = {
+                latitud: 0,
+                longitud: 0,
+                hora: 0,
+                estado: "",
+                kilometraje: 0
+            };
+
+
             $scope.cargar = function ()
             {
                 $http({
@@ -345,6 +354,29 @@
                     // when the response is available
                     $scope.cargar();
                     alert("Se ha agregado correctamente el vehiculo.");
+                    $window.location.href = HOME;
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    console.log(JSON.stringify(response));
+                    alert("Se ha producido un error.");
+                });
+            };
+
+
+            $scope.reportarPosicion = function ()
+            {
+                console.log("Agregando Posicion: " + JSON.stringify($scope.posicion));
+                $http({
+                    method: 'POST',
+                    url: BASE_URL + 'vehiculos/1/posiciones',
+                    data: $scope.posicion
+                }).then(function successCallback(response)
+                {
+                    // this callback will be called asynchronously
+                    // when the response is available
+                    $scope.cargarPosiciones();
+                    alert("Se ha agregado correctamente la posicion.");
                     $window.location.href = HOME;
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
