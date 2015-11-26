@@ -7,8 +7,12 @@
 
 (function () {
     var app = angular.module('app', ['angularUtils.directives.dirPagination', 'ngCookies']);
-    var BASE_URL = 'http://localhost:8083/webresources/';
-    var HOME = 'http://localhost:8083';
+    //URLS LOCALES
+    // var BASE_URL = 'http://localhost:8083/webresources/';
+    // var HOME = 'http://localhost:8083';
+
+    var BASE_URL = 'http://arquisoft20152.herokuapp.com/webresources/';
+    var HOME = 'http://arquisoft20152.herokuapp.com/';
 
 
     //------------------------------------------------------------------------
