@@ -6,8 +6,9 @@
 
 
 (function () {
-    var app = angular.module('app', ['angularUtils.directives.dirPagination']);
+    var app = angular.module('app', ['angularUtils.directives.dirPagination', 'ngCookies']);
     var BASE_URL = 'http://localhost:8083/webresources/';
+    var HOME = 'http://localhost:8083';
 
 
     //------------------------------------------------------------------------
@@ -86,6 +87,8 @@
             $scope.logout = function ()
             {
                 alert("Logged out");
+                AuthenticationService.ClearCredentials();
+                $window.location.href = HOME;
             };
 
         }]);
@@ -161,6 +164,7 @@
                     // when the response is available
                     console.log(JSON.stringify(response.data));
                     $scope.estaciones = response.data;
+                    
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -203,6 +207,7 @@
                     console.log(JSON.stringify(response.data));
                     $scope.cargar();
                     alert("Se ha agregado correctamente la estacion.");
+                     $window.location.href = HOME;
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -226,6 +231,7 @@
                     console.log(JSON.stringify(response.data));
                     $scope.cargarVcubs();
                     alert("Se ha agregado correctamente el vcub");
+                     $window.location.href = HOME;
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -255,6 +261,7 @@
                     console.log(JSON.stringify(response.data));
                     $scope.cargarVcubs();
                     alert("Se ha agregado correctamente el vcub");
+                     $window.location.href = HOME;
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -324,6 +331,7 @@
                     // when the response is available
                     $scope.cargar();
                     alert("Se ha agregado correctamente el vehiculo.");
+                     $window.location.href = HOME;
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -397,6 +405,7 @@
                     // when the response is available
                     $scope.cargar();
                     alert("Se ha agregado correctamente el cliente.");
+                     $window.location.href = HOME;
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -422,7 +431,7 @@
                     console.log(JSON.stringify(response));
                 });
             };
-            
+
             $scope.cargarReservas();
 
         }]);
@@ -501,8 +510,8 @@
         /* jshint ignore:end */
     });
     app.factory('AuthenticationService',
-            ['Base64', '$http', '$rootScope', '$timeout',
-                function (Base64, $http, $rootScope, $timeout) {
+            ['Base64', '$http', '$rootScope', '$timeout', '$cookieStore',
+                function (Base64, $http, $rootScope, $timeout, $cookieStore) {
                     var service = {};
                     service.login = function (username, password, callback) {
 
@@ -540,10 +549,12 @@
 
                         console.log("Setting credentials..." + JSON.stringify($rootScope.globals.currentUser));
                         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+                        $cookieStore.put('globals', $rootScope.globals);
 
                     };
                     service.ClearCredentials = function () {
                         $rootScope.globals = {};
+                        $cookieStore.remove('globals');
                         $http.defaults.headers.common.Authorization = 'Basic ';
                     };
 
@@ -556,7 +567,32 @@
                 }]);
 
 
+    run.$inject = ['$rootScope', '$location', '$cookieStore', '$http', '$window'];
+    function run($rootScope, $location, $cookieStore, $http, $window) {
+        // keep user logged in after page refresh
+        $rootScope.globals = $cookieStore.get('globals') || {};
+        if ($rootScope.globals.currentUser)
+        {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+        }
 
+        $rootScope.onLogin = false;
+        $rootScope.$on('$locationChangeStart', function (event, next, current)
+        {
+            // redirect to login page if not logged in and trying to access a restricted page
+            var restrictedPage = $.inArray($location.path(), ['/login', '/registrar']) === -1;
+            var loggedIn = $rootScope.globals.currentUser;
+            if (restrictedPage && !loggedIn)
+            {
+                $location.path('/login');
+            }
+            else if (loggedIn && !restrictedPage)
+                $location.path('/home');
+        });
+    }
+    ;
+
+    app.run(run);
 
 })();
 
